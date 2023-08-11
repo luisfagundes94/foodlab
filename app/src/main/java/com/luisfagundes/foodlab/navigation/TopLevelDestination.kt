@@ -20,8 +20,8 @@ enum class TopLevelDestination(
     HOME(
         selectedIcon = Icons.Default.Home,
         unselectedIcon = Icons.Outlined.Home,
-        iconTextId = 1,
-        titleTextId = 1,
+        iconTextId = com.luisfagundes.foodlab.features.home.R.string.home,
+        titleTextId = com.luisfagundes.foodlab.features.home.R.string.home,
     ),
     SEARCH(
         selectedIcon = Icons.Default.Search,
