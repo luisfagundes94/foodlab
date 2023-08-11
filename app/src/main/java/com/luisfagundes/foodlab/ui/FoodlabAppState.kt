@@ -1,19 +1,3 @@
-/*
- * Copyright 2022 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.luisfagundes.foodlab.ui
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
@@ -32,13 +16,13 @@ import androidx.tracing.trace
 import com.luisfagundes.feature.favorites.navigation.favoritesNavigationRoute
 import com.luisfagundes.feature.favorites.navigation.navigateToFavorites
 import com.luisfagundes.foodlab.navigation.TopLevelDestination
-import com.luisfagundes.feature.home.navigation.homeNavigationRoute
-import com.luisfagundes.feature.home.navigation.navigateToHome
+import com.luisfagundes.home.navigation.homeNavigationRoute
+import com.luisfagundes.home.navigation.navigateToHome
 import com.luisfagundes.feature.pantry.navigation.navigateToPantry
 import com.luisfagundes.feature.pantry.navigation.pantryNavigationRoute
 import com.luisfagundes.remote.utils.NetworkMonitor
-import com.luisfagundes.feature.search.navigation.navigateToSearch
-import com.luisfagundes.feature.search.navigation.searchNavigationRoute
+import com.luisfagundes.search.navigation.navigateToSearch
+import com.luisfagundes.search.navigation.searchNavigationRoute
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -47,8 +31,8 @@ import kotlinx.coroutines.flow.stateIn
 @Stable
 class FoodlabAppState(
     val navController: NavHostController,
-    val coroutineScope: CoroutineScope,
-    val windowSizeClass: WindowSizeClass,
+    coroutineScope: CoroutineScope,
+    private val windowSizeClass: WindowSizeClass,
     networkMonitor: NetworkMonitor,
 ) {
     val currentDestination: NavDestination?

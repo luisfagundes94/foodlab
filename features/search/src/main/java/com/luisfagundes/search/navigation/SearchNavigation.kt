@@ -1,4 +1,4 @@
-package com.luisfagundes.feature.search.navigation
+package com.luisfagundes.search.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -9,7 +9,6 @@ import androidx.navigation.navArgument
 import com.luisfagundes.feature.search.presentation.SearchRoute
 
 const val searchNavigationRoute = "search/"
-const val recipeId = "recipeId"
 
 fun NavController.navigateToSearch(navOptions: NavOptions? = null) {
     navigate(searchNavigationRoute, navOptions)
@@ -20,9 +19,6 @@ fun NavGraphBuilder.searchScreen(
 ) {
     composable(
         route = searchNavigationRoute,
-        arguments = listOf(
-            navArgument(recipeId) { type = NavType.IntType },
-        )
     ) {
         SearchRoute(
             onRecipeClick = onRecipeClick
