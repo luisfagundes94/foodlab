@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.luisfagundes.components.FoodlabBackground
 import com.luisfagundes.domain.enums.DarkThemeConfig
 import com.luisfagundes.foodlab.presentation.MainUiState
 import com.luisfagundes.foodlab.presentation.MainViewModel
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var networkMonitor: NetworkMonitor
 
-    val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
