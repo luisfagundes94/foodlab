@@ -14,9 +14,9 @@ import com.luisfagundes.resources.theme.LocalBackgroundTheme
 @Composable
 fun FoodlabBackground(
     modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified,
     content: @Composable () -> Unit,
 ) {
+    val color = LocalBackgroundTheme.current.color
     val tonalElevation = LocalBackgroundTheme.current.tonalElevation
 
     Surface(

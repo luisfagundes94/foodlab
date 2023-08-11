@@ -60,9 +60,7 @@ fun FoodlabApp(
         windowSizeClass = windowSizeClass,
     ),
 ) {
-    FoodlabBackground(
-        color = MaterialTheme.colorScheme.background
-    ) {
+    FoodlabBackground {
         val snackbarHostState = remember { SnackbarHostState() }
         val isOffline by appState.isOffline.collectAsStateWithLifecycle()
         val notConnectedMessage = stringResource(R.string.not_connected)
