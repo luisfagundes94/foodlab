@@ -104,16 +104,6 @@ fun FoodlabApp(
                     ),
             ) {
                 Column(Modifier.fillMaxSize()) {
-                    val destination = appState.currentTopLevelDestination
-                    if (destination != null) {
-                        FoodlabTopAppBar(
-                            modifier = Modifier,
-                            titleRes = destination.titleTextId,
-                            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                                containerColor = Color.Transparent,
-                            )
-                        )
-                    }
                     FoodlabNavHost(appState = appState, onShowSnackbar = { message, action ->
                         snackbarHostState.showSnackbar(
                             message = message,
