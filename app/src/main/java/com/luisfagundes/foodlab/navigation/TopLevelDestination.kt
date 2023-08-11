@@ -26,19 +26,19 @@ enum class TopLevelDestination(
     SEARCH(
         selectedIcon = Icons.Default.Search,
         unselectedIcon = Icons.Outlined.Search,
-        iconTextId = 1,
-        titleTextId = 1,
+        iconTextId = com.luisfagundes.features.search.R.string.search,
+        titleTextId = com.luisfagundes.features.search.R.string.search,
     ),
     FAVORITES(
         selectedIcon = Icons.Default.Favorite,
         unselectedIcon = Icons.Outlined.Favorite,
-        iconTextId = 1,
-        titleTextId = 1,
+        iconTextId = com.luisfagundes.features.favorites.R.string.favorites,
+        titleTextId = com.luisfagundes.features.favorites.R.string.favorites,
     ),
     PANTRY(
         selectedIcon = Icons.Default.List,
         unselectedIcon = Icons.Outlined.List,
-        iconTextId = 1,
-        titleTextId = 1,
+        iconTextId = com.luisfagundes.features.pantry.R.string.pantry,
+        titleTextId = com.luisfagundes.features.pantry.R.string.pantry,
     )
 }
