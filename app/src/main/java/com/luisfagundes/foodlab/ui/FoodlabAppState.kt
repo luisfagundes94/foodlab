@@ -13,8 +13,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.tracing.trace
-import com.luisfagundes.feature.favorites.navigation.favoritesNavigationRoute
-import com.luisfagundes.feature.favorites.navigation.navigateToFavorites
+import com.luisfagundes.saved.navigation.savedNavigationRoute
+import com.luisfagundes.saved.navigation.navigateToSaved
 import com.luisfagundes.foodlab.navigation.TopLevelDestination
 import com.luisfagundes.home.navigation.homeNavigationRoute
 import com.luisfagundes.home.navigation.navigateToHome
@@ -43,7 +43,7 @@ class FoodlabAppState(
         @Composable get() = when (currentDestination?.route) {
             homeNavigationRoute -> TopLevelDestination.HOME
             searchNavigationRoute -> TopLevelDestination.SEARCH
-            favoritesNavigationRoute -> TopLevelDestination.FAVORITES
+            savedNavigationRoute -> TopLevelDestination.SAVED
             pantryNavigationRoute -> TopLevelDestination.PANTRY
             else -> null
         }
@@ -75,7 +75,7 @@ class FoodlabAppState(
             when (topLevelDestination) {
                 TopLevelDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
                 TopLevelDestination.SEARCH -> navController.navigateToSearch(topLevelNavOptions)
-                TopLevelDestination.FAVORITES -> navController.navigateToFavorites(topLevelNavOptions)
+                TopLevelDestination.SAVED -> navController.navigateToSaved(topLevelNavOptions)
                 TopLevelDestination.PANTRY -> navController.navigateToPantry(topLevelNavOptions)
             }
         }

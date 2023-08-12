@@ -2,10 +2,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
-    namespace = "com.luisfagundes.common.components"
+    namespace = "com.luisfagundes.features.saved"
     compileSdk = 34
 
     defaultConfig {
@@ -41,6 +43,8 @@ android {
 
 dependencies {
     // Modules
+    implementation(projects.domain)
+    implementation(projects.framework)
     implementation(projects.commons.resources)
 
     // Compose
@@ -48,10 +52,17 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
-    implementation(libs.compose.material.extended.icons)
-    implementation(libs.compose.coil)
 
     // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+
+    // Dependency Injection
+    implementation(libs.hilt.library)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

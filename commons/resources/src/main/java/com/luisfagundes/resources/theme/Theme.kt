@@ -107,6 +107,7 @@ fun FoodlabTheme(
 
     CompositionLocalProvider(
         LocalBackgroundTheme provides defaultBackgroundTheme,
+        LocalSpacing provides Spacing(),
     ) {
         MaterialTheme(
             colorScheme = colorScheme,

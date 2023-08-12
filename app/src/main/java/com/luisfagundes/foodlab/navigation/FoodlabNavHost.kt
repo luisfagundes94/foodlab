@@ -3,7 +3,7 @@ package com.luisfagundes.foodlab.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import com.luisfagundes.feature.favorites.navigation.favoritesScreen
+import com.luisfagundes.saved.navigation.savedScreen
 import com.luisfagundes.foodlab.ui.FoodlabAppState
 import com.luisfagundes.home.navigation.homeNavigationRoute
 import com.luisfagundes.home.navigation.homeScreen
@@ -26,7 +26,7 @@ fun FoodlabNavHost(
     ) {
         homeScreen(onRecipeClick = {})
         searchScreen(onRecipeClick = {})
-        favoritesScreen(onRecipeClick = {})
+        savedScreen(onRecipeClick = {})
         pantryScreen()
     }
 }

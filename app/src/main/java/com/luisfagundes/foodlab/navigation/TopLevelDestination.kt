@@ -29,11 +29,11 @@ enum class TopLevelDestination(
         iconTextId = com.luisfagundes.features.search.R.string.search,
         titleTextId = com.luisfagundes.features.search.R.string.search,
     ),
-    FAVORITES(
+    SAVED(
         selectedIcon = Icons.Default.Favorite,
         unselectedIcon = Icons.Outlined.Favorite,
-        iconTextId = com.luisfagundes.features.favorites.R.string.favorites,
-        titleTextId = com.luisfagundes.features.favorites.R.string.favorites,
+        iconTextId = com.luisfagundes.features.saved.R.string.saved,
+        titleTextId = com.luisfagundes.features.saved.R.string.saved,
     ),
     PANTRY(
         selectedIcon = Icons.Default.List,

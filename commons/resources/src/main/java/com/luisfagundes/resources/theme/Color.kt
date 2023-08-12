@@ -2,6 +2,9 @@ package com.luisfagundes.resources.theme
 
 import androidx.compose.ui.graphics.Color
 
+const val LIGHT_SURFACE_COLOR_VALUE = 0xFFF8FAFA
+const val DARK_SURFACE_COLOR_VALUE = 0xFF101415
+
 val md_theme_light_primary = Color(0xFF006874)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFF97F0FF)
@@ -21,7 +24,7 @@ val md_theme_light_onErrorContainer = Color(0xFF410002)
 val md_theme_light_outline = Color(0xFF6F797A)
 val md_theme_light_background = Color(0xFFFAFDFD)
 val md_theme_light_onBackground = Color(0xFF191C1D)
-val md_theme_light_surface = Color(0xFFF8FAFA)
+val md_theme_light_surface = Color(LIGHT_SURFACE_COLOR_VALUE)
 val md_theme_light_onSurface = Color(0xFF191C1D)
 val md_theme_light_surfaceVariant = Color(0xFFDBE4E6)
 val md_theme_light_onSurfaceVariant = Color(0xFF3F484A)
@@ -51,7 +54,7 @@ val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
 val md_theme_dark_outline = Color(0xFF899294)
 val md_theme_dark_background = Color(0xFF191C1D)
 val md_theme_dark_onBackground = Color(0xFFE1E3E3)
-val md_theme_dark_surface = Color(0xFF101415)
+val md_theme_dark_surface = Color(DARK_SURFACE_COLOR_VALUE)
 val md_theme_dark_onSurface = Color(0xFFC4C7C7)
 val md_theme_dark_surfaceVariant = Color(0xFF3F484A)
 val md_theme_dark_onSurfaceVariant = Color(0xFFBFC8CA)

@@ -67,7 +67,7 @@ dependencies {
 //    implementation(projects.library.testutils)
     implementation(projects.features.home)
     implementation(projects.features.search)
-    implementation(projects.features.favorites)
+    implementation(projects.features.saved)
     implementation(projects.features.pantry)
 
     // Activity
