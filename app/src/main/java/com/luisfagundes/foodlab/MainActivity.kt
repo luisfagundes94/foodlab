@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.luisfagundes.components.FoodlabBackground
 import com.luisfagundes.domain.enums.DarkThemeConfig
 import com.luisfagundes.foodlab.presentation.MainUiState
 import com.luisfagundes.foodlab.presentation.MainViewModel
