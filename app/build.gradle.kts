@@ -64,7 +64,6 @@ dependencies {
     implementation(projects.commons.resources)
     implementation(projects.commons.components)
     implementation(projects.framework)
-//    implementation(projects.library.testutils)
     implementation(projects.features.home)
     implementation(projects.features.search)
     implementation(projects.features.saved)

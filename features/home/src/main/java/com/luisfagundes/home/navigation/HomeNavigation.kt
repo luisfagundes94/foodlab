@@ -3,10 +3,8 @@ package com.luisfagundes.home.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import com.luisfagundes.feature.home.presentation.HomeRoute
+import com.luisfagundes.home.presentation.HomeRoute
 
 const val homeNavigationRoute = "home/"
 

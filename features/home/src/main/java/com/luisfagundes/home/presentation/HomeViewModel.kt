@@ -1,4 +1,4 @@
-package com.luisfagundes.feature.home.presentation
+package com.luisfagundes.home.presentation
 
 import com.luisfagundes.domain.usecases.GetFlowRecipeList
 import com.luisfagundes.framework.base.mvvm.MvvmViewModel
@@ -9,4 +9,5 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getFlowRecipeList: GetFlowRecipeList
 ): MvvmViewModel() {
+
 }

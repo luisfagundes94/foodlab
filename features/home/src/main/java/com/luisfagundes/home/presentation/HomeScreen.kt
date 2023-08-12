@@ -1,10 +1,8 @@
-package com.luisfagundes.feature.home.presentation
+package com.luisfagundes.home.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.luisfagundes.framework.base.BaseUiState
-import com.luisfagundes.recipe.domain.models.Recipe
 
 @Composable
 internal fun HomeRoute(

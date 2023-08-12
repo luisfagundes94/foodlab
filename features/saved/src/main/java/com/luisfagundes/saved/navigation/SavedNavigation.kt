@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.luisfagundes.saved.presentation.SavedRoute
 
-const val savedNavigationRoute = "favorites/"
+const val savedNavigationRoute = "saved/"
 
 fun NavController.navigateToSaved(navOptions: NavOptions? = null) {
     navigate(savedNavigationRoute, navOptions)
