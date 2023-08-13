@@ -1,4 +1,4 @@
-package com.luisfagundes.library.framework.usecase
+package com.luisfagundes.framework.usecase
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.Dispatchers

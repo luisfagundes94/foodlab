@@ -1,12 +1,12 @@
 package com.luisfagundes.recipe.domain.factory
 
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 
 object RecipeFactory {
     fun create() = Recipe(
         id = RANDOM_NUMBER,
         title = TITLE,
-        image = IMAGE,
+        imageUrl = IMAGE,
         servings = RANDOM_NUMBER,
         readyInMinutes = RANDOM_NUMBER,
         sourceUrl = "",

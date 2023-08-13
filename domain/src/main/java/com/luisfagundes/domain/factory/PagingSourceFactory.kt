@@ -2,7 +2,7 @@ package com.luisfagundes.domain.factory
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 
 class PagingSourceFactory {
     fun create(recipes: List<Recipe>) = object : PagingSource<Int, Recipe>() {

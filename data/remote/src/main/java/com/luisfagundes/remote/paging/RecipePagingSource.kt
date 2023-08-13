@@ -3,7 +3,7 @@ package com.luisfagundes.remote.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.luisfagundes.domain.datasources.RecipeDataSource
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 import retrofit2.HttpException
 import java.io.IOException
 

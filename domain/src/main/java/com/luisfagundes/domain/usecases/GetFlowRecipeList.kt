@@ -3,8 +3,8 @@ package com.luisfagundes.domain.usecases
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.luisfagundes.library.framework.usecase.FlowPagingUseCase
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.framework.usecase.FlowPagingUseCase
+import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.repositories.RecipeRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +17,6 @@ class GetFlowRecipeList @Inject constructor(
 
     data class Params(
         val pagingConfig: PagingConfig,
-        val pageSize: Int,
         val sort: String,
     )
 

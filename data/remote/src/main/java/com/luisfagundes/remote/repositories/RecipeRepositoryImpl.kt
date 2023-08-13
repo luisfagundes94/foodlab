@@ -5,10 +5,8 @@ import com.luisfagundes.domain.datasources.RecipeDataSource
 import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.domain.usecases.GetFlowRecipeList
 import com.luisfagundes.domain.usecases.GetRecipeList
-import com.luisfagundes.framework.network.safeApiCall
-import com.luisfagundes.framework.network.DataState
 import com.luisfagundes.remote.paging.RecipePagingSource
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 import javax.inject.Inject
 
 class RecipeRepositoryImpl @Inject constructor(
@@ -30,14 +28,12 @@ class RecipeRepositoryImpl @Inject constructor(
 
     override suspend fun getRecipeList(
         params: GetRecipeList.Params
-    ): DataState<List<Recipe>> = safeApiCall {
-        recipeDataSource.fetchRecipes(
-            params = mapOf(
-                NUMBER to DEFAULT_PAGE_SIZE.toString(),
-                SORT to params.sort,
-            )
-        ).results
-    }
+    ) = recipeDataSource.fetchRecipes(
+        params = mapOf(
+            NUMBER to DEFAULT_PAGE_SIZE.toString(),
+            SORT to params.sort,
+        )
+    ).results
 
     private companion object {
         const val ADD_RECIPE_INFORMATION = "addRecipeInformation"

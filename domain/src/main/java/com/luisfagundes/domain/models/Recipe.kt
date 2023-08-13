@@ -1,12 +1,9 @@
-package com.luisfagundes.recipe.domain.models
-
-import com.luisfagundes.domain.models.Ingredient
-import com.luisfagundes.domain.models.Instruction
+package com.luisfagundes.domain.models
 
 data class Recipe(
     val id: Int,
     val title: String,
-    val image: String,
+    val imageUrl: String,
     val servings: Int,
     val readyInMinutes: Int,
     val sourceUrl: String?,

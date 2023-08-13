@@ -3,7 +3,7 @@ package com.luisfagundes.remote.datasources
 import com.luisfagundes.domain.datasources.RecipeDataSource
 import com.luisfagundes.remote.mappers.RecipeAutoCompleteMapper.toDomainModel
 import com.luisfagundes.remote.mappers.RecipeMapper.toDomainModel
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.models.RecipeAutoComplete
 import com.luisfagundes.recipe.domain.models.RecipeListBody
 import com.luisfagundes.remote.service.RecipeService

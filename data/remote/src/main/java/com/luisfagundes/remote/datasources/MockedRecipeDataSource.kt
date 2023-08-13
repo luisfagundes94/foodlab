@@ -12,7 +12,7 @@ import com.luisfagundes.recipe.domain.models.RecipeListBody
 import com.luisfagundes.recipe.data.models.RecipeAutoCompleteResponse
 import com.luisfagundes.recipe.data.models.RecipeBodyResponse
 import com.luisfagundes.recipe.data.models.RecipeResponse
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 
 class MockedRecipeDataSource(
     private val appContext: Context

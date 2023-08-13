@@ -2,7 +2,7 @@ package com.luisfagundes.framework.base.mvvm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.luisfagundes.framework.network.DataState
+import com.luisfagundes.framework.network.Result
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -38,7 +38,7 @@ abstract class MvvmViewModel : ViewModel() {
     }
 
     protected suspend fun <T> execute(
-        callFlow: Flow<DataState<T>>,
+        callFlow: Flow<Result<T>>,
         completionHandler: (collect: T) -> Unit = {}
     ) {
         callFlow
@@ -46,8 +46,8 @@ abstract class MvvmViewModel : ViewModel() {
             .catch { handleError(it) }
             .collect { state ->
                 when (state) {
-                    is DataState.Error -> handleError(state.error)
-                    is DataState.Success -> completionHandler.invoke(state.result)
+                    is com.luisfagundes.framework.network.DataState.Result.Error -> handleError(state.error)
+                    is com.luisfagundes.framework.network.DataState.Result.Success -> completionHandler.invoke(state.data)
                 }
             }
     }

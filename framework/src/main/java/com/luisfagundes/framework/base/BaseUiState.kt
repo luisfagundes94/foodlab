@@ -1,6 +1,6 @@
 package com.luisfagundes.framework.base
 
-import com.luisfagundes.framework.network.DataState
+import com.luisfagundes.framework.network.Result
 
 sealed interface BaseUiState<out R> {
     data object Loading : BaseUiState<Nothing>
@@ -8,8 +8,8 @@ sealed interface BaseUiState<out R> {
     data class Error<T>(val throwable: Throwable) : BaseUiState<T>
 }
 
-fun <I, O> DataState<I>.mapToUiState(onSuccess: (I) -> BaseUiState.Success<O>): BaseUiState<O> =
+fun <I, O> Result<I>.mapToUiState(onSuccess: (I) -> BaseUiState.Success<O>): BaseUiState<O> =
     when (this) {
-        is DataState.Success -> onSuccess(result)
-        is DataState.Error -> BaseUiState.Error(error)
+        is com.luisfagundes.framework.network.DataState.Result.Success -> onSuccess(data)
+        is com.luisfagundes.framework.network.DataState.Result.Error -> BaseUiState.Error(error)
     }

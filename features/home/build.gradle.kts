@@ -46,12 +46,21 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.framework)
     implementation(projects.commons.resources)
+    implementation(projects.commons.components)
 
     // Compose
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
+
+    // Paging
+    implementation(libs.paging.common)
+    implementation(libs.paging.compose)
+
+    // Lifecycle
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
 
     // Testing
     testImplementation(libs.junit)

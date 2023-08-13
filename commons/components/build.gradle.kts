@@ -41,6 +41,7 @@ android {
 
 dependencies {
     // Modules
+    implementation(projects.domain)
     implementation(projects.commons.resources)
 
     // Compose
@@ -50,6 +51,9 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.material.extended.icons)
     implementation(libs.compose.coil)
+
+    // Paging
+    implementation(libs.paging.compose)
 
     // Testing
     testImplementation(libs.junit)

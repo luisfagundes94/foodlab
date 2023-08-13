@@ -1,12 +1,16 @@
-package com.luisfagundes.library.framework.extension
+package com.luisfagundes.framework.extension
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -46,3 +50,11 @@ fun <T> SavedStateHandle.getStateFlow(
     }
     mutableStateFlow
 }
+
+fun <T> Flow<T>.convertToHot(scope: CoroutineScope): Flow<T> =
+    this.shareIn(
+        scope,
+        SharingStarted.Lazily,
+        replay = 1
+    )
+

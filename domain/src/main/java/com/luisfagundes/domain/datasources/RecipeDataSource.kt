@@ -1,6 +1,6 @@
 package com.luisfagundes.domain.datasources
 
-import com.luisfagundes.recipe.domain.models.Recipe
+import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.models.RecipeAutoComplete
 import com.luisfagundes.recipe.domain.models.RecipeListBody
 
