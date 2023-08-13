@@ -1,5 +1,6 @@
 package com.luisfagundes.home.presentation
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luisfagundes.domain.models.RecipeSections
 import com.luisfagundes.domain.usecases.GetRecipeSections
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     getRecipeSections: GetRecipeSections,
-) : MvvmViewModel() {
+) : ViewModel() {
 
     val uiState: StateFlow<HomeUiState> =
         getRecipeSections()
