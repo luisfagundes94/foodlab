@@ -16,12 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.luisfagundes.components.FoodlabTopAppBar
 import com.luisfagundes.features.recipes.R
+import com.luisfagundes.framework.extension.fromHtml
 import com.luisfagundes.recipe.domain.factory.RecipeFactory
 import com.luisfagundes.resources.theme.FoodlabTheme
 import com.luisfagundes.resources.theme.ThemePreviews
@@ -48,26 +51,28 @@ internal fun RecipeDetailsScreen(
     modifier: Modifier,
     onBackClick: () -> Unit,
 ) {
-    Column(
-        modifier = modifier.verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+
+    FoodlabTopAppBar(
+        titleRes = R.string.recipe_details_title,
+        navigationIcon = Icons.Default.ArrowBack,
+        navigationIconContentDescription = stringResource(R.string.back),
+        actionIcon = Icons.Default.BookmarkAdd,
+        actionIconContentDescription = stringResource(R.string.save_recipe),
+        onNavigationClick = onBackClick,
     ) {
-        FoodlabTopAppBar(
-            titleRes = R.string.recipe_details_title,
-            navigationIcon = Icons.Default.ArrowBack,
-            navigationIconContentDescription = stringResource(R.string.back),
-            actionIcon = Icons.Default.BookmarkAdd,
-            actionIconContentDescription = stringResource(R.string.save_recipe),
-            onNavigationClick = onBackClick,
-        )
-        when (uiState) {
-            is RecipeDetailsUiState.Loading -> CircularProgressIndicator()
-            is RecipeDetailsUiState.Error -> Text(stringResource(R.string.recipe_details_error))
-            is RecipeDetailsUiState.Success -> RecipeDetailsScreenContent(
-                uiState = uiState,
-                modifier = Modifier.fillMaxWidth()
-            )
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+        ) {
+            when (uiState) {
+                is RecipeDetailsUiState.Loading -> CircularProgressIndicator()
+                is RecipeDetailsUiState.Error -> Text(stringResource(R.string.recipe_details_error))
+                is RecipeDetailsUiState.Success -> RecipeDetailsScreenContent(
+                    uiState = uiState,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }
@@ -83,11 +88,15 @@ internal fun RecipeDetailsScreenContent(
         modifier = modifier
     ) {
         AsyncImage(
+            modifier = Modifier.fillMaxWidth(),
             model = recipe.imageUrl,
             contentDescription = recipe.title,
+            contentScale = ContentScale.Crop,
         )
         Text(text = recipe.title)
-        Text(text = recipe.summary)
+        Text(text = buildAnnotatedString {
+            recipe.summary.fromHtml()
+        })
     }
 }
 

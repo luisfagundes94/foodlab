@@ -1,6 +1,9 @@
 package com.luisfagundes.home.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -43,8 +46,11 @@ internal fun HomeScreen(
     onFavoriteClick: (id: Int) -> Unit,
 ) {
     Column(
-        modifier = modifier.verticalScroll(rememberScrollState()),
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
         when (uiState) {
             is HomeUiState.Loading -> CircularProgressIndicator()
@@ -62,6 +68,7 @@ internal fun HomeScreen(
 @Composable
 private fun HomeScreenError() {
     Text(
+        modifier = Modifier.fillMaxSize(),
         text = stringResource(R.string.home_screen_error),
         fontWeight = FontWeight.Bold,
     )

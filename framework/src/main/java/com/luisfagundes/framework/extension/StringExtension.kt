@@ -3,6 +3,8 @@ package com.luisfagundes.framework.extension
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import androidx.compose.ui.text.AnnotatedString
+import androidx.core.text.toSpannable
 
 const val EMPTY = ""
 

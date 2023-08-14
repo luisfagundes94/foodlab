@@ -2,6 +2,7 @@ package com.luisfagundes.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,14 +40,15 @@ fun FoodlabTopAppBar(
         colors = colors,
         modifier = modifier.testTag("FoodlabTopAppBar"),
         actions = {
-            Icon(
-                modifier = Modifier
-                    .clickable { onActionClick() }
-                    .padding(horizontal = MaterialTheme.spacing.small),
-                imageVector = actionIcon,
-                contentDescription = actionIconContentDescription,
-                tint = MaterialTheme.colorScheme.onSurface,
-            )
+            IconButton(
+                onClick = onActionClick
+            ) {
+                Icon(
+                    imageVector = actionIcon,
+                    contentDescription = actionIconContentDescription,
+                    tint = MaterialTheme.colorScheme.onSurface,
+                )
+            }
         },
     )
 }
@@ -63,38 +65,40 @@ fun FoodlabTopAppBar(
     navigationIconContentDescription: String?,
     onActionClick: () -> Unit = {},
     onNavigationClick: () -> Unit = {},
+    content: @Composable () -> Unit = {},
 ) {
-    TopAppBar(
-        title = {
-            Text(
-                modifier = Modifier.padding(start = MaterialTheme.spacing.verySmall),
-                text = stringResource(id = titleRes),
-            )
-        },
-        colors = colors,
-        modifier = modifier.testTag("FoodlabTopAppBar"),
-        navigationIcon = {
-            IconButton(
-                onClick = onNavigationClick,
-                content = {
+    Column {
+        TopAppBar(
+            title = {
+                Text(
+                    text = stringResource(id = titleRes),
+                )
+            },
+            colors = colors,
+            modifier = modifier.testTag("FoodlabTopAppBar"),
+            navigationIcon = {
+                IconButton(
+                    onClick = onNavigationClick,
+                    content = {
+                        Icon(
+                            imageVector = navigationIcon,
+                            contentDescription = navigationIconContentDescription,
+                            tint = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
+                )
+            },
+            actions = {
+                IconButton(onClick = onActionClick) {
                     Icon(
-                        imageVector = navigationIcon,
-                        contentDescription = navigationIconContentDescription,
+                        modifier = Modifier,
+                        imageVector = actionIcon,
+                        contentDescription = actionIconContentDescription,
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
                 }
-            )
-        },
-        actions = {
-            IconButton(onClick = onActionClick) {
-                Icon(
-                    modifier = Modifier
-                        .padding(horizontal = MaterialTheme.spacing.small),
-                    imageVector = actionIcon,
-                    contentDescription = actionIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                )
-            }
-        },
-    )
+            },
+        )
+        content()
+    }
 }
