@@ -72,7 +72,7 @@ fun HomeRecipeSection(
                 Card(
                     modifier = Modifier
                         .width(160.dp)
-                        .heightIn(min = 190.dp)
+                        .heightIn(min = 170.dp)
                         .clickable { onRecipeClick(recipe.id) },
                     title = recipe.title,
                     imageUrl = recipe.imageUrl,
