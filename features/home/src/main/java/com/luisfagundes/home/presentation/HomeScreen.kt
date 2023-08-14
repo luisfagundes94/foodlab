@@ -51,7 +51,7 @@ internal fun HomeScreen(
             is HomeUiState.Error -> HomeScreenError()
             is HomeUiState.Success -> HomeScreenContent(
                 uiState = uiState,
-                modifier = modifier.padding(vertical = MaterialTheme.spacing.default),
+                modifier = modifier,
                 onRecipeClick = onRecipeClick,
                 onFavoriteClick = onFavoriteClick,
             )

@@ -28,6 +28,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @AndroidEntryPoint
@@ -49,10 +51,29 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        enableEdgeToEdge()
+
         setContent {
+            val darkTheme = shouldUseDarkTheme(uiState)
+
+            DisposableEffect(darkTheme) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(
+                        Color.TRANSPARENT,
+                        Color.TRANSPARENT,
+                    ) { darkTheme },
+                    navigationBarStyle = SystemBarStyle.auto(
+                        lightScrim,
+                        darkScrim,
+                    ) { darkTheme },
+                )
+                onDispose {}
+            }
+
             FoodlabTheme(
-                darkTheme = shouldUseDarkTheme(uiState),
+                darkTheme = darkTheme,
             ) {
+
                 FoodlabApp(
                     windowSizeClass = calculateWindowSizeClass(activity = this),
                     networkMonitor = networkMonitor
