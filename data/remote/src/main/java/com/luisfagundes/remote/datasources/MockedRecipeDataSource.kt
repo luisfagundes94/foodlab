@@ -14,11 +14,14 @@ import com.luisfagundes.recipe.data.models.RecipeBodyResponse
 import com.luisfagundes.recipe.data.models.RecipeResponse
 import com.luisfagundes.domain.models.Recipe
 
+private const val RECIPES_JSON = "recipes.json"
+private const val RECIPE_DETAILS_JSON = "recipe_details.json"
+
 class MockedRecipeDataSource(
     private val appContext: Context
 ) : RecipeDataSource {
     override suspend fun fetchRecipes(params: Map<String, String>): RecipeListBody {
-        val jsonFile = getJsonDataFromAsset(appContext, "recipes.json")
+        val jsonFile = getJsonDataFromAsset(appContext, RECIPES_JSON)
         val gson = Gson()
         val data = gson.fromJson(jsonFile, RecipeBodyResponse::class.java)
         val recipes = data.results.map { it.toDomainModel() }
@@ -31,7 +34,7 @@ class MockedRecipeDataSource(
     }
 
     override suspend fun fetchRecipeDetails(id: Int): Recipe {
-        val jsonFile = getJsonDataFromAsset(appContext, "recipe_detail.json")
+        val jsonFile = getJsonDataFromAsset(appContext, RECIPE_DETAILS_JSON)
         val gson = Gson()
         val data = gson.fromJson(jsonFile, RecipeResponse::class.java)
         return data.toDomainModel()

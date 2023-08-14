@@ -54,37 +54,47 @@ fun FoodlabTopAppBar(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodlabTopAppBar(
+    modifier: Modifier = Modifier,
     @StringRes titleRes: Int,
-    navigationIcon: ImageVector,
-    navigationIconContentDescription: String?,
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
     actionIcon: ImageVector,
     actionIconContentDescription: String?,
-    modifier: Modifier = Modifier,
-    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
-    onNavigationClick: () -> Unit = {},
+    navigationIcon: ImageVector,
+    navigationIconContentDescription: String?,
     onActionClick: () -> Unit = {},
+    onNavigationClick: () -> Unit = {},
 ) {
-    CenterAlignedTopAppBar(
-        title = { Text(text = stringResource(id = titleRes)) },
+    TopAppBar(
+        title = {
+            Text(
+                modifier = Modifier.padding(start = MaterialTheme.spacing.verySmall),
+                text = stringResource(id = titleRes),
+            )
+        },
+        colors = colors,
+        modifier = modifier.testTag("FoodlabTopAppBar"),
         navigationIcon = {
-            IconButton(onClick = onNavigationClick) {
-                Icon(
-                    imageVector = navigationIcon,
-                    contentDescription = navigationIconContentDescription,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                )
-            }
+            IconButton(
+                onClick = onNavigationClick,
+                content = {
+                    Icon(
+                        imageVector = navigationIcon,
+                        contentDescription = navigationIconContentDescription,
+                        tint = MaterialTheme.colorScheme.onSurface,
+                    )
+                }
+            )
         },
         actions = {
             IconButton(onClick = onActionClick) {
                 Icon(
+                    modifier = Modifier
+                        .padding(horizontal = MaterialTheme.spacing.small),
                     imageVector = actionIcon,
                     contentDescription = actionIconContentDescription,
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             }
         },
-        colors = colors,
-        modifier = modifier.testTag("FoodlabTopAppBar"),
     )
 }

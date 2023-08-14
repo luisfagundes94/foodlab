@@ -68,6 +68,7 @@ dependencies {
     implementation(projects.features.search)
     implementation(projects.features.saved)
     implementation(projects.features.pantry)
+    implementation(projects.features.recipes)
 
     // Activity
     implementation(libs.activity)

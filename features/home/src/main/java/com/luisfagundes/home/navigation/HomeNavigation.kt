@@ -4,22 +4,29 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.luisfagundes.home.presentation.HomeRoute
 
+const val homeNavigationGraph = "homeGraph/"
 const val homeNavigationRoute = "home/"
 
 fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    navigate(homeNavigationRoute, navOptions)
+    navigate(homeNavigationGraph, navOptions)
 }
 
-fun NavGraphBuilder.homeScreen(
-    onRecipeClick: (id: Int) -> Unit
+fun NavGraphBuilder.homeGraph(
+    onRecipeClick: (id: String) -> Unit,
+    nestedGraphs: NavGraphBuilder.() -> Unit,
 ) {
-    composable(
-        route = homeNavigationRoute
+    navigation(
+        route = homeNavigationGraph,
+        startDestination = homeNavigationRoute,
     ) {
-        HomeRoute(
-            onRecipeClick = onRecipeClick
-        )
+        composable(route = homeNavigationRoute) {
+            HomeRoute(
+                onRecipeClick = onRecipeClick
+            )
+        }
+        nestedGraphs()
     }
 }

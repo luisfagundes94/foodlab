@@ -21,7 +21,7 @@ import com.luisfagundes.resources.theme.spacing
 
 @Composable
 internal fun HomeRoute(
-    onRecipeClick: (id: Int) -> Unit,
+    onRecipeClick: (id: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -39,7 +39,7 @@ internal fun HomeRoute(
 internal fun HomeScreen(
     uiState: HomeUiState,
     modifier: Modifier,
-    onRecipeClick: (id: Int) -> Unit,
+    onRecipeClick: (id: String) -> Unit,
     onFavoriteClick: (id: Int) -> Unit,
 ) {
     Column(
@@ -71,7 +71,7 @@ private fun HomeScreenError() {
 private fun HomeScreenContent(
     uiState: HomeUiState.Success,
     modifier: Modifier,
-    onRecipeClick: (id: Int) -> Unit,
+    onRecipeClick: (id: String) -> Unit,
     onFavoriteClick: (id: Int) -> Unit,
 ) {
     val verticalSpacing = MaterialTheme.spacing.verySmall

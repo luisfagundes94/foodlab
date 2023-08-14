@@ -42,7 +42,7 @@ fun HomeRecipeSection(
     sectionTitle: String,
     recipes: List<Recipe>,
     onFavoriteClick: (id: Int) -> Unit,
-    onRecipeClick: (id: Int) -> Unit,
+    onRecipeClick: (id: String) -> Unit,
 ) {
     Column(
         modifier = modifier,
@@ -72,7 +72,7 @@ fun HomeRecipeSection(
                     modifier = Modifier
                         .width(160.dp)
                         .heightIn(min = 170.dp)
-                        .clickable { onRecipeClick(recipe.id) },
+                        .clickable { onRecipeClick(recipe.id.toString()) },
                     title = recipe.title,
                     imageUrl = recipe.imageUrl,
                     onFavoriteClick = { onFavoriteClick(recipe.id) },

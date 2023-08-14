@@ -6,16 +6,19 @@ import androidx.navigation.compose.NavHost
 import com.luisfagundes.saved.navigation.savedScreen
 import com.luisfagundes.foodlab.ui.FoodlabAppState
 import com.luisfagundes.home.navigation.homeNavigationRoute
-import com.luisfagundes.home.navigation.homeScreen
+import com.luisfagundes.home.navigation.homeGraph
 import com.luisfagundes.feature.pantry.navigation.pantryScreen
+import com.luisfagundes.home.navigation.homeNavigationGraph
+import com.luisfagundes.recipes.details.navigateToRecipeDetails
+import com.luisfagundes.recipes.details.recipeDetailsScreen
 import com.luisfagundes.search.navigation.searchScreen
 
 @Composable
 fun FoodlabNavHost(
     appState: FoodlabAppState,
-    onShowSnackbar: suspend(String, String?) -> Boolean,
+    onShowSnackbar: suspend (String, String?) -> Boolean,
     modifier: Modifier = Modifier,
-    startDestination: String = homeNavigationRoute
+    startDestination: String = homeNavigationGraph,
 ) {
     val navController = appState.navController
 
@@ -24,7 +27,14 @@ fun FoodlabNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        homeScreen(onRecipeClick = {})
+        homeGraph(
+            onRecipeClick = navController::navigateToRecipeDetails,
+            nestedGraphs = {
+                recipeDetailsScreen(
+                    onBackClick = navController::popBackStack,
+                )
+            }
+        )
         searchScreen(onRecipeClick = {})
         savedScreen(onRecipeClick = {})
         pantryScreen()

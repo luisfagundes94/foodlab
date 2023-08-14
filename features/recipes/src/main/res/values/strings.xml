@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recipe_details_error">Error loading recipe details.</string>
+    <string name="recipe_details_title">Recipe Details</string>
+    <string name="save_recipe">Save recipe</string>
+    <string name="back">go back</string>
+</resources>
