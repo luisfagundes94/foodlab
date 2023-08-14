@@ -3,8 +3,12 @@ package com.luisfagundes.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -45,10 +49,21 @@ fun HomeRecipeSection(
         modifier = modifier,
     ) {
         Title(
-            modifier = Modifier.padding(bottom = MaterialTheme.spacing.small),
+            modifier = Modifier.padding(
+                vertical = MaterialTheme.spacing.verySmall,
+                horizontal = MaterialTheme.spacing.default
+            ),
             title = sectionTitle,
         )
-        LazyRow {
+        LazyRow(
+            contentPadding = PaddingValues(
+                horizontal = MaterialTheme.spacing.default
+            ),
+            horizontalArrangement = Arrangement.spacedBy(
+                space = MaterialTheme.spacing.small,
+                alignment = Alignment.Start,
+            ),
+        ) {
             items(
                 count = recipes.size,
                 key = { index -> recipes[index].id }
@@ -65,7 +80,6 @@ fun HomeRecipeSection(
                 )
             }
         }
-
     }
 }
 
@@ -91,9 +105,10 @@ private fun Card(
                 )
             } else {
                 AsyncImage(
+                    modifier = Modifier.fillMaxWidth(),
                     model = imageUrl,
                     contentDescription = title,
-                    contentScale = ContentScale.FillBounds,
+                    contentScale = ContentScale.Crop,
                 )
             }
             Icon(
@@ -109,7 +124,6 @@ private fun Card(
                 contentDescription = null,
             )
         }
-
         Text(
             modifier = Modifier.padding(MaterialTheme.spacing.verySmall),
             text = title,

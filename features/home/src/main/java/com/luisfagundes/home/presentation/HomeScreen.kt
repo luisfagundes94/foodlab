@@ -2,6 +2,8 @@ package com.luisfagundes.home.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,7 +43,7 @@ internal fun HomeScreen(
     onFavoriteClick: (id: Int) -> Unit,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         when (uiState) {
@@ -49,8 +51,7 @@ internal fun HomeScreen(
             is HomeUiState.Error -> HomeScreenError()
             is HomeUiState.Success -> HomeScreenContent(
                 uiState = uiState,
-                modifier = modifier
-                    .padding(MaterialTheme.spacing.default),
+                modifier = modifier.padding(vertical = MaterialTheme.spacing.default),
                 onRecipeClick = onRecipeClick,
                 onFavoriteClick = onFavoriteClick,
             )
@@ -77,7 +78,6 @@ private fun HomeScreenContent(
 
     Column(
         modifier = modifier,
-
     ) {
         HomeRecipeSection(
             modifier = Modifier.padding(vertical = verticalSpacing),
