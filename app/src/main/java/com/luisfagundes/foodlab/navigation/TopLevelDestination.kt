@@ -1,10 +1,12 @@
 package com.luisfagundes.foodlab.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
@@ -30,8 +32,8 @@ enum class TopLevelDestination(
         titleTextId = com.luisfagundes.features.search.R.string.search,
     ),
     SAVED(
-        selectedIcon = Icons.Default.Favorite,
-        unselectedIcon = Icons.Outlined.Favorite,
+        selectedIcon = Icons.Default.Bookmarks,
+        unselectedIcon = Icons.Outlined.Bookmarks,
         iconTextId = com.luisfagundes.features.saved.R.string.saved,
         titleTextId = com.luisfagundes.features.saved.R.string.saved,
     ),
