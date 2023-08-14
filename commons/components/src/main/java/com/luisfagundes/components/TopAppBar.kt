@@ -43,7 +43,7 @@ fun FoodlabTopAppBar(
             Icon(
                 modifier = Modifier
                     .clickable { onActionClick() }
-                    .padding(end = MaterialTheme.spacing.small),
+                    .padding(horizontal = MaterialTheme.spacing.small),
                 imageVector = actionIcon,
                 contentDescription = actionIconContentDescription,
                 tint = MaterialTheme.colorScheme.onSurface,
