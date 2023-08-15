@@ -13,7 +13,7 @@ import com.luisfagundes.features.recipes.R
 import com.luisfagundes.resources.theme.spacing
 
 @Composable
-internal fun Units(
+internal fun IngredientUnits(
     onUnitChange: (IngredientUnit) -> Unit,
     unit: IngredientUnit,
 ) {

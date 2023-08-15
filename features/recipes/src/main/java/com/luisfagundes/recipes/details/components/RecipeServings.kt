@@ -17,7 +17,7 @@ import com.luisfagundes.features.recipes.R
 import com.luisfagundes.resources.theme.spacing
 
 @Composable
-internal fun Serves(
+internal fun RecipeServings(
     servings: Int,
     onRemoveClick: () -> Unit = {},
     onAddClick: () -> Unit = {},

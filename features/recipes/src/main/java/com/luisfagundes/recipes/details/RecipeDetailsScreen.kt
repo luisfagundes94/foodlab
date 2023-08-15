@@ -2,10 +2,8 @@ package com.luisfagundes.recipes.details
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +21,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -40,7 +37,7 @@ import com.luisfagundes.domain.enums.IngredientUnit
 import com.luisfagundes.features.recipes.R
 import com.luisfagundes.recipe.domain.factory.RecipeFactory
 import com.luisfagundes.recipes.details.components.Ingredients
-import com.luisfagundes.recipes.details.components.ExtraInfo
+import com.luisfagundes.recipes.details.components.RecipeFacts
 import com.luisfagundes.recipes.details.components.RecipeSteps
 import com.luisfagundes.recipes.details.components.SpanWithLink
 import com.luisfagundes.resources.theme.FoodlabTheme
@@ -130,7 +127,7 @@ internal fun RecipeDetailsScreenContent(
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
         )
-        ExtraInfo(
+        RecipeFacts(
             modifier = Modifier
                 .padding(top = MaterialTheme.spacing.small)
                 .border(

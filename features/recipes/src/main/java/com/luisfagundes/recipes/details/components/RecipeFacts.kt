@@ -14,7 +14,7 @@ import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.features.recipes.R
 
 @Composable
-internal fun ExtraInfo(
+internal fun RecipeFacts(
     modifier: Modifier = Modifier,
     recipe: Recipe,
 ) {

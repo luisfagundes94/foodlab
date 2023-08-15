@@ -51,12 +51,12 @@ internal fun Ingredients(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Serves(
+            RecipeServings(
                 servings = servings,
                 onAddClick = onAddServingsClick,
                 onRemoveClick = onRemoveServingsClick,
             )
-            Units(
+            IngredientUnits(
                 onUnitChange = onUnitChange,
                 unit = unit,
             )
