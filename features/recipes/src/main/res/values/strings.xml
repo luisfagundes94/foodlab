@@ -4,4 +4,13 @@
     <string name="recipe_details_title">Recipe Details</string>
     <string name="save_recipe">Save recipe</string>
     <string name="back">go back</string>
+    <string name="spoonacular_score">rating</string>
+    <string name="likes">likes</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="serves">Serves</string>
+    <string name="us_unit">US</string>
+    <string name="metric_unit">METRIC</string>
+    <string name="min">min</string>
+    <string name="health">healthy</string>
+    <string name="steps">Steps</string>
 </resources>

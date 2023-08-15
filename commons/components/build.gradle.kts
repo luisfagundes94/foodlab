@@ -44,6 +44,9 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.commons.resources)
 
+    // Core
+    implementation(libs.core.ktx)
+
     // Compose
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)

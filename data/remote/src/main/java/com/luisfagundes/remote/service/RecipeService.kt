@@ -2,7 +2,7 @@ package com.luisfagundes.remote.service
 
 import com.luisfagundes.recipe.data.models.RecipeAutoCompleteResponse
 import com.luisfagundes.recipe.data.models.RecipeBodyResponse
-import com.luisfagundes.recipe.data.models.RecipeResponse
+import com.luisfagundes.remote.models.RecipeResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

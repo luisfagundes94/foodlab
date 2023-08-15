@@ -1,6 +1,7 @@
-package com.luisfagundes.recipe.data.models
+package com.luisfagundes.remote.models
 
 import com.luisfagundes.data.responses.InstructionResponse
+import com.luisfagundes.recipe.data.models.IngredientResponse
 
 data class RecipeResponse(
     val id: Int,

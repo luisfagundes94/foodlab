@@ -3,7 +3,7 @@ package com.luisfagundes.remote.mappers
 import com.luisfagundes.framework.extension.empty
 import com.luisfagundes.remote.mappers.IngredientMapper.mapToDomain
 import com.luisfagundes.remote.mappers.InstructionMapper.mapToDomain
-import com.luisfagundes.recipe.data.models.RecipeResponse
+import com.luisfagundes.remote.models.RecipeResponse
 import com.luisfagundes.domain.models.Recipe
 
 object RecipeMapper {

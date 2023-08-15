@@ -3,7 +3,14 @@ package com.luisfagundes.framework.extension
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.UriHandler
+import androidx.compose.ui.semantics.SemanticsProperties.Text
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.core.text.toSpannable
 
 const val EMPTY = ""
@@ -16,12 +23,12 @@ fun String.Companion.empty() = EMPTY
 
 fun String?.isNotNullOrBlank(): Boolean = !this.isNullOrBlank()
 
-@Suppress("DEPRECATION")
 fun String.fromHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+        Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT).toSpannable()
     } else {
-        Html.fromHtml(this)
+        @Suppress("DEPRECATION")
+        Html.fromHtml(this).toSpannable()
     }
 }
 

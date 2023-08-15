@@ -20,7 +20,7 @@ object IngredientMapper {
             id = this.id,
             amount = this.amount,
             name = this.name,
-            image = BASE_IMAGE_URL + this.image,
+            imageUrl = BASE_IMAGE_URL + this.image,
             measures = this.measures.mapToDomain(),
             originalMeasure = this.original ?: String.empty()
         )

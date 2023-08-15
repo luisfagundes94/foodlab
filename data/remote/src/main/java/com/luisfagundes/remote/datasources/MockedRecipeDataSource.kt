@@ -11,7 +11,7 @@ import com.luisfagundes.domain.models.RecipeAutoComplete
 import com.luisfagundes.recipe.domain.models.RecipeListBody
 import com.luisfagundes.recipe.data.models.RecipeAutoCompleteResponse
 import com.luisfagundes.recipe.data.models.RecipeBodyResponse
-import com.luisfagundes.recipe.data.models.RecipeResponse
+import com.luisfagundes.remote.models.RecipeResponse
 import com.luisfagundes.domain.models.Recipe
 
 private const val RECIPES_JSON = "recipes.json"
