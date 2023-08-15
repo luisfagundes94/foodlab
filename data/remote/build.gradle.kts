@@ -53,7 +53,6 @@ dependencies {
     // Modules
     implementation(projects.domain)
     implementation(projects.framework)
-    //implementation(projects.common.resources)
 
     implementation(libs.lifecycle.runtime.compose)
     implementation(libs.lifecycle.viewmodel.compose)
@@ -70,4 +69,7 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.interceptor)
     implementation(libs.okhttp.mockwebserver)
+
+    // Testing
+    implementation(projects.commons.testing)
 }

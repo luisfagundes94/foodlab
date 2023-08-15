@@ -1,5 +1,5 @@
 package com.luisfagundes.framework.decoder
 
 interface StringDecoder {
-    fun decodeString(encodedString: String): String
+    fun decode(encodedString: String): String
 }

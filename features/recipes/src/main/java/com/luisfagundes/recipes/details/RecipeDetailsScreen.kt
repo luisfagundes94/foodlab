@@ -35,7 +35,7 @@ import com.luisfagundes.components.FoodlabTopAppBar
 import com.luisfagundes.components.HtmlText
 import com.luisfagundes.domain.enums.IngredientUnit
 import com.luisfagundes.features.recipes.R
-import com.luisfagundes.recipe.domain.factory.RecipeFactory
+import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.recipes.details.components.Ingredients
 import com.luisfagundes.recipes.details.components.RecipeFacts
 import com.luisfagundes.recipes.details.components.RecipeSteps
@@ -185,7 +185,7 @@ internal fun RecipeDetailsScreenContent(
 @Composable
 @ThemePreviews
 internal fun RecipeDetailsScreenPreview() {
-    val fakeRecipe = RecipeFactory.create()
+    val fakeRecipe = FakeRecipeFactory.recipe
     val uiState = RecipeDetailsUiState.Success(fakeRecipe)
 
     FoodlabTheme {

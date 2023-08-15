@@ -30,6 +30,9 @@ dependencies {
     // Paging
     implementation(libs.paging.common)
 
+    // Logging
+    implementation(libs.timber)
+
     // Dependency Injection
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)

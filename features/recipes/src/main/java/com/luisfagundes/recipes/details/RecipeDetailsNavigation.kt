@@ -17,7 +17,7 @@ internal class RecipeDetailsArg(val recipeId: String) {
     constructor(
         savedStateHandle: SavedStateHandle,
         stringDecoder: StringDecoder
-    ) : this(stringDecoder.decodeString(checkNotNull(savedStateHandle[recipeIdArg])))
+    ) : this(stringDecoder.decode(checkNotNull(savedStateHandle[recipeIdArg])))
 }
 
 fun NavController.navigateToRecipeDetails(recipeId: String) {

@@ -5,10 +5,12 @@ import com.luisfagundes.domain.models.RecipeSections
 import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.framework.coroutines.IoDispatcher
 import com.luisfagundes.framework.network.Result
+import com.luisfagundes.framework.network.getResultOrThrow
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -24,9 +26,9 @@ class GetRecipeSections @Inject constructor(
             val healthyParams = createGetRecipeListParams(RecipeSortingOptions.HEALTHY.value)
             val quickParams = createGetRecipeListParams(RecipeSortingOptions.QUICK.value)
 
-            val popularRecipes = repository.getRecipeList(popularParams)
-            val healthyRecipes = repository.getRecipeList(healthyParams)
-            val quickRecipes = repository.getRecipeList(quickParams)
+            val popularRecipes = repository.getRecipeList(popularParams).getResultOrThrow()
+            val healthyRecipes = repository.getRecipeList(healthyParams).getResultOrThrow()
+            val quickRecipes = repository.getRecipeList(quickParams).getResultOrThrow()
 
             emit(
                 Result.Success(
@@ -38,6 +40,7 @@ class GetRecipeSections @Inject constructor(
                 )
             )
         } catch (e: Exception) {
+            Timber.d(e)
             emit(Result.Error(e))
         }
     }.flowOn(dispatcher)

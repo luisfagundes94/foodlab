@@ -21,3 +21,12 @@ fun <T> Flow<T>.asResult(): Flow<Result<T>> {
         .onStart { emit(Result.Loading) }
         .catch { emit(Result.Error(it)) }
 }
+
+fun <T> Result<T>.getResultOrThrow(): T {
+    return when (this) {
+        is Result.Success -> data
+        is Result.Error -> throw Exception(exception)
+        is Result.Loading -> throw IllegalStateException("Result is still loading")
+    }
+}
+

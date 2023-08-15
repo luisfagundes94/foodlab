@@ -30,12 +30,14 @@ class RecipeRepositoryImpl @Inject constructor(
 
     override suspend fun getRecipeList(
         params: GetRecipeList.Params
-    ) = recipeDataSource.fetchRecipes(
-        params = mapOf(
-            NUMBER to DEFAULT_PAGE_SIZE.toString(),
-            SORT to params.sort,
-        )
-    ).results
+    ) = safeApiCall {
+        recipeDataSource.fetchRecipes(
+            params = mapOf(
+                NUMBER to DEFAULT_PAGE_SIZE.toString(),
+                SORT to params.sort,
+            )
+        ).results
+    }
 
     override suspend fun getRecipeDetails(id: Int) = safeApiCall {
         recipeDataSource.fetchRecipeDetails(id)

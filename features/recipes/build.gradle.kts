@@ -61,19 +61,10 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
 
     // Testing
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    implementation(projects.commons.testing)
 
     // Dependency Injection
     implementation(libs.hilt.library)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
 }

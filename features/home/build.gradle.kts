@@ -63,9 +63,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
 
     // Testing
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    implementation(projects.commons.testing)
 
     // Dependency Injection
     implementation(libs.hilt.library)

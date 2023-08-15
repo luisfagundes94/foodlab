@@ -8,6 +8,6 @@ import com.luisfagundes.framework.network.Result
 
 interface RecipeRepository {
     fun getFlowRecipeList(params: GetFlowRecipeList.Params): PagingSource<Int, Recipe>
-    suspend fun getRecipeList(params: GetRecipeList.Params): List<Recipe>
+    suspend fun getRecipeList(params: GetRecipeList.Params): Result<List<Recipe>>
     suspend fun getRecipeDetails(id: Int): Result<Recipe>
 }

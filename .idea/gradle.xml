@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/commons" />
             <option value="$PROJECT_DIR$/commons/components" />
             <option value="$PROJECT_DIR$/commons/resources" />
+            <option value="$PROJECT_DIR$/commons/testing" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/local" />

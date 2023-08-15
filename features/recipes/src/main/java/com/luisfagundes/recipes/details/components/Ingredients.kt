@@ -76,7 +76,9 @@ private fun IngredientItem(
     ingredient: Ingredient,
     ingredientUnit: IngredientUnit,
 ) {
-    val unit = if (ingredientUnit == IngredientUnit.US) ingredient.measures.us.unitLong else ingredient.measures.metric.unitLong
+    val unit = if (ingredientUnit == IngredientUnit.US) ingredient.measures.us.unitLong
+    else ingredient.measures.metric.unitLong
+
     Row(
         modifier = modifier
             .padding(top = MaterialTheme.spacing.small)
