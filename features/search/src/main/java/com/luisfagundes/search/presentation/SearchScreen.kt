@@ -1,4 +1,4 @@
-package com.luisfagundes.feature.search.presentation
+package com.luisfagundes.search.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
