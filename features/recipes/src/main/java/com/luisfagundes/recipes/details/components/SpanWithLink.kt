@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextDecoration
@@ -20,7 +19,7 @@ fun SpanWithLink(
 ) {
     val uriHandler = LocalUriHandler.current
 
-    val text = buildAnnotatedString {
+    val formattedText = buildAnnotatedString {
         pushStringAnnotation(
             tag = "URL",
             annotation = url
@@ -37,9 +36,9 @@ fun SpanWithLink(
     }
     ClickableText(
         modifier = modifier,
-        text = text,
+        text = formattedText,
         onClick = { offset ->
-            text.getStringAnnotations(tag = "URL", start = offset, end = offset)
+            formattedText.getStringAnnotations(tag = "URL", start = offset, end = offset)
                 .firstOrNull()?.let { annotation ->
                     uriHandler.openUri(annotation.item)
                 }
