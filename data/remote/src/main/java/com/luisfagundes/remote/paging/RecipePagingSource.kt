@@ -4,13 +4,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.luisfagundes.domain.datasources.RecipeDataSource
 import com.luisfagundes.domain.models.Recipe
+import com.luisfagundes.domain.pagingsource.RecipePagingSource
 import retrofit2.HttpException
 import java.io.IOException
 
 class RecipePagingSource(
     private val recipeDataSource: RecipeDataSource,
     private val queryMap: Map<String, String>
-) : PagingSource<Int, Recipe>() {
+) : PagingSource<Int, Recipe>(), RecipePagingSource {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Recipe> {
         return try {
@@ -39,7 +40,7 @@ class RecipePagingSource(
         )
     }
 
-    private fun calculateNextKey(responseOffset: Int, totalRecipes: Int) =
+    override fun calculateNextKey(responseOffset: Int, totalRecipes: Int) =
         if (responseOffset < totalRecipes) responseOffset + RESULTS_PER_PAGE
         else null
 
