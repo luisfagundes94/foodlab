@@ -2,6 +2,7 @@ package com.luisfagundes.domain.factory
 
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.models.RecipeSections
+import com.luisfagundes.recipe.domain.models.RecipeListBody
 
 private const val RANDOM_NUMBER = 1
 private const val TITLE = "Omelete de Queijo"
@@ -40,9 +41,15 @@ object FakeRecipeFactory {
         instructions = emptyList()
     )
 
-    fun createSections() = RecipeSections(
+    val sections = RecipeSections(
         popularRecipes = listOf(recipe, recipe),
         healthyRecipes = listOf(recipe, recipe),
         quickRecipes = listOf(recipe, recipe),
+    )
+
+    val recipeListBody = RecipeListBody(
+        offset = RANDOM_NUMBER,
+        totalResults = 2,
+        results = listOf(recipe, recipe)
     )
 }

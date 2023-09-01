@@ -58,7 +58,7 @@ class HomeViewModelTest {
     @Test
     fun `uiState emits Success when result is Success`() = runTest {
         // Given
-        val recipeSections = FakeRecipeFactory.createSections()
+        val recipeSections = FakeRecipeFactory.sections
         coEvery { getRecipeSections.invoke() } returns flowOf(Result.Success(recipeSections))
 
         // When
