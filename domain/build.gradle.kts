@@ -33,6 +33,9 @@ dependencies {
     // Logging
     implementation(libs.timber)
 
+    // Testing
+    implementation(projects.commons.testing)
+
     // Dependency Injection
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)

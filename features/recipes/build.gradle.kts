@@ -49,10 +49,7 @@ dependencies {
     implementation(projects.commons.components)
 
     // Compose
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.material3)
+    implementation(libs.bundles.compose)
     implementation(libs.compose.material.extended.icons)
     implementation(libs.compose.coil)
 
