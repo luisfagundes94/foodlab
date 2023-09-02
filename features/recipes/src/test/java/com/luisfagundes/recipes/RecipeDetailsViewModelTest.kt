@@ -5,9 +5,8 @@ import app.cash.turbine.test
 import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.framework.decoder.StringDecoder
-import com.luisfagundes.framework.extension.empty
 import com.luisfagundes.recipes.details.RecipeDetailsViewModel
-import com.luisfagundes.testing.TestCoroutinesRule
+import com.luisfagundes.testing.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import com.luisfagundes.framework.network.Result
@@ -32,7 +31,7 @@ class RecipeDetailsViewModelTest {
     private val params = GetRecipeDetails.Params(FAKE_ID.toInt())
 
     @get:Rule
-    val testCoroutinesRule = TestCoroutinesRule()
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Before
     fun setUp() {

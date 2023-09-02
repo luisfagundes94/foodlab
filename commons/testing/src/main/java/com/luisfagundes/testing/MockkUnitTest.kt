@@ -14,7 +14,7 @@ open class MockkUnitTest {
     open fun onDestroy() {}
 
     @get:Rule
-    var testCoroutineRule = TestCoroutinesRule()
+    var testCoroutineRule = MainDispatcherRule()
 
     @Before
     fun setUp() {

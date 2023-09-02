@@ -6,7 +6,7 @@ import com.luisfagundes.domain.usecases.GetRecipeSections
 import com.luisfagundes.framework.network.Result
 import com.luisfagundes.home.presentation.HomeUiState
 import com.luisfagundes.home.presentation.HomeViewModel
-import com.luisfagundes.testing.TestCoroutinesRule
+import com.luisfagundes.testing.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
@@ -21,7 +21,7 @@ class HomeViewModelTest {
     private lateinit var viewModel: HomeViewModel
 
     @get:Rule
-    val testCoroutinesRule = TestCoroutinesRule()
+    val mainDispatcherRule = MainDispatcherRule()
 
     @Test
     fun `uiState emits Loading when result is Loading`() = runTest {

@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.remote.datasources.RemoteRecipeDataSource
-import com.luisfagundes.testing.TestCoroutinesRule
+import com.luisfagundes.testing.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
@@ -16,7 +16,7 @@ import org.junit.Test
 internal class RecipePagingSourceTest {
 
     @get:Rule
-    val testCoroutinesRule = TestCoroutinesRule()
+    val mainDispatcherRule = MainDispatcherRule()
 
     private val remoteDataSource: RemoteRecipeDataSource = mockk()
     private val defaultQueryMap = mapOf("" to "")
