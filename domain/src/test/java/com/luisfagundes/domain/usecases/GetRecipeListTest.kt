@@ -4,9 +4,11 @@ import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.testing.MockkUnitTest
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class GetRecipeListTest : MockkUnitTest() {
 
     private val repository = mockk<RecipeRepository>(relaxed = true)

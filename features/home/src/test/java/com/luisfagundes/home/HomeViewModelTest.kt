@@ -9,12 +9,14 @@ import com.luisfagundes.home.presentation.HomeViewModel
 import com.luisfagundes.testing.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
+@ExperimentalCoroutinesApi
 class HomeViewModelTest {
 
     private val getRecipeSections: GetRecipeSections = mockk()

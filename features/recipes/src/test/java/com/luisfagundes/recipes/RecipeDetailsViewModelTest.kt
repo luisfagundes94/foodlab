@@ -12,6 +12,7 @@ import io.mockk.mockk
 import com.luisfagundes.framework.network.Result
 import com.luisfagundes.recipes.details.RecipeDetailsUiState
 import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -20,6 +21,7 @@ import org.junit.Test
 
 private const val FAKE_ID = "1"
 
+@ExperimentalCoroutinesApi
 class RecipeDetailsViewModelTest {
 
     private val getRecipeDetails: GetRecipeDetails = mockk()
