@@ -87,7 +87,7 @@ private fun HomeScreenContent(
         modifier = modifier,
     ) {
         HomeRecipeSection(
-            modifier = Modifier.padding(vertical = verticalSpacing),
+            modifier = Modifier.padding(bottom = verticalSpacing),
             sectionTitle = stringResource(R.string.home_screen_popular_recipes),
             recipes = uiState.recipeSections.popularRecipes,
             onFavoriteClick = onFavoriteClick,
