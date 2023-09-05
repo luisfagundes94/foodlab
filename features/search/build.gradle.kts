@@ -49,6 +49,11 @@ dependencies {
 
     // Compose
     implementation(libs.bundles.compose)
+    implementation(libs.compose.coil)
+
+    // Lifecycle
+    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
 
     // Testing
     testImplementation(libs.junit)
