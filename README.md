@@ -1,4 +1,4 @@
-# Spooki
+# Foodlab
 An Android application for browsing recipes.
 
 Features:
