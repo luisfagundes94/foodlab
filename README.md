@@ -7,6 +7,12 @@ Features:
 - Search recipes by meal
 - Watch recipe preparation videos
 
+## Screenshots
+<p float="left">
+  <img src="https://github.com/luisfagundes94/parrot/blob/master/screenshots/screenshot2.jpg?raw=true" width="200" /> 
+  <img src="https://github.com/luisfagundes94/parrot/blob/master/screenshots/screenshot1.jpg?raw=true" width="200" />
+</p>
+
 ## Architecture
 Architecture that is meticulously planned is paramount for an application's scalability, and all architectural designs share a universal aim - to handle the complexity of your application. This might not be a concern for smaller-scale apps, but it can be incredibly advantageous when working on apps with an extended development timeline and a bigger team.
 
