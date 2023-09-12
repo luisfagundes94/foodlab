@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.transform
+import timber.log.Timber
 
 sealed interface Result<out T> {
     data class Success<T>(val data: T) : Result<T>
@@ -25,7 +26,10 @@ fun <T> Flow<T>.asResult(): Flow<Result<T>> {
 fun <T> Result<T>.getResultOrThrow(): T {
     return when (this) {
         is Result.Success -> data
-        is Result.Error -> throw Exception(exception)
+        is Result.Error -> {
+            Timber.d(exception)
+            throw Exception(exception)
+        }
         is Result.Loading -> throw IllegalStateException("Result is still loading")
     }
 }

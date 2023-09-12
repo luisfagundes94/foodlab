@@ -2,7 +2,7 @@ package com.luisfagundes.foodlab.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.luisfagundes.domain.repositories.UserDataRepository
-import com.luisfagundes.framework.base.mvvm.MvvmViewModel
+import com.luisfagundes.framework.base.mvvm.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val userDataRepository: UserDataRepository,
-) : MvvmViewModel() {
+) : BaseViewModel() {
 
     val uiState = userDataRepository.userData.map {
         MainUiState.Success(it)

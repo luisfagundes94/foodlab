@@ -2,7 +2,7 @@ package com.luisfagundes.framework.base.mvvm
 
 import androidx.paging.PagingConfig
 
-abstract class PagingViewModel: MvvmViewModel() {
+abstract class PagingViewModel: BaseViewModel() {
     open fun createPagingConfig() = PagingConfig(
         pageSize = PAGE_SIZE,
         prefetchDistance = PREFETCH_DISTANCE

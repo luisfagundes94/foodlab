@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="popular">Popular</string>
+    <string name="generic_error_message">Ops! Something went wrong</string>
+    <string name="clear_search">clear search</string>
+    <string name="search">Search\n</string>
 </resources>

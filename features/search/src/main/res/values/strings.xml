@@ -10,4 +10,9 @@
     <string name="side_dish">Side Dish</string>
     <string name="salad">Salad</string>
     <string name="appetizer">Appetizer</string>
+    <string name="search_by_category">Search by category</string>
+    <string name="video_guides">Video Guides</string>
+    <string name="error">Ops! Something went wrong</string>
+    <string name="clear_search">Clear search</string>
+    <string name="play_video">Play video</string>
 </resources>

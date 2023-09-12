@@ -1,9 +1,11 @@
 package com.luisfagundes.search.presentation
 
 import com.luisfagundes.domain.models.Recipe
+import com.luisfagundes.domain.models.VideoGuide
 
-sealed interface SearchUiState {
-    data object Loading : SearchUiState
-    data class Success(val recipes: List<Recipe>) : SearchUiState
-    data object Error : SearchUiState
-}
+data class SearchUiState(
+    val recipes: List<Recipe> = emptyList(),
+    val videoGuides: List<VideoGuide> = emptyList(),
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
+)

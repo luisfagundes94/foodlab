@@ -93,6 +93,9 @@ dependencies {
     implementation(libs.hilt.library)
     kapt(libs.hilt.compiler)
 
+    // Logging
+    implementation(libs.timber)
+
     // Other
     implementation(libs.androidx.tracing.ktx)
 }
