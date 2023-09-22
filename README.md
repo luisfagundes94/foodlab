@@ -24,7 +24,7 @@ This app uses [_**MVVM (Model-View-ViewModel)**_]([https://proandroiddev.com/mvi
  
 <img src="https://github.com/MuhammadKhoshnaw/BasicMVIApp/blob/master/.github/res/ComponentDiagram.svg" width=500 />
 
-# Tech Stacks
+# Tech Stack
 This project uses many of the popular libraries, plugins and tools of the android ecosystem.
 
 ### Compose
