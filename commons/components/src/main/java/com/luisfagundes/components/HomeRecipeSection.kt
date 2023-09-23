@@ -68,7 +68,7 @@ fun HomeRecipeSection(
                 key = { index -> recipes[index].id }
             ) { index ->
                 val recipe = recipes[index]
-                Card(
+                RecipeItem(
                     modifier = Modifier
                         .width(160.dp)
                         .heightIn(min = 170.dp)
@@ -79,57 +79,6 @@ fun HomeRecipeSection(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun Card(
-    modifier: Modifier = Modifier,
-    title: String,
-    imageUrl: String,
-    onFavoriteClick: () -> Unit,
-) {
-    val isPreview = LocalInspectionMode.current
-
-    ElevatedCard(
-        modifier = modifier,
-    ) {
-        Box(
-            contentAlignment = Alignment.TopEnd
-        ) {
-            if (isPreview) {
-                Image(
-                    painter = painterResource(id = R.drawable.recipe),
-                    contentDescription = null
-                )
-            } else {
-                AsyncImage(
-                    modifier = Modifier.fillMaxWidth(),
-                    model = imageUrl,
-                    contentDescription = title,
-                    contentScale = ContentScale.Crop,
-                )
-            }
-            Icon(
-                modifier = Modifier
-                    .padding(MaterialTheme.spacing.extraSmall)
-                    .background(
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = .8f),
-                        shape = CircleShape,
-                    )
-                    .padding(MaterialTheme.spacing.extraSmall)
-                    .clickable { onFavoriteClick() },
-                imageVector = Icons.Default.BookmarkAdd,
-                contentDescription = null,
-            )
-        }
-        Text(
-            modifier = Modifier.padding(MaterialTheme.spacing.verySmall),
-            text = title,
-            style = MaterialTheme.typography.bodySmall,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-        )
     }
 }
 

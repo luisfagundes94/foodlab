@@ -100,7 +100,9 @@ internal fun SearchScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = MaterialTheme.spacing.default),
-                recipes = searchUiState.recipes
+                recipes = searchUiState.recipes,
+                onRecipeClick = onRecipeClick,
+                onFavoriteClick = {},
             )
             is SearchUiState.Loading -> LoadingView(
                 modifier = Modifier
