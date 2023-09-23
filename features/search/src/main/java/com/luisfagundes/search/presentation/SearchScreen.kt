@@ -2,19 +2,11 @@ package com.luisfagundes.search.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.DockedSearchBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,19 +15,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.FoodlabSearchBar
+import com.luisfagundes.components.LoadingView
 import com.luisfagundes.domain.models.MealCategory
 import com.luisfagundes.domain.models.Recipe
-import com.luisfagundes.domain.models.VideoGuide
 import com.luisfagundes.features.search.R
 import com.luisfagundes.resources.theme.spacing
 import com.luisfagundes.search.components.MealCategoryGrid
 import com.luisfagundes.search.components.VideoGuides
+
+private const val YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v="
 
 
 @Composable
@@ -44,7 +39,8 @@ internal fun SearchRoute(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val searchUiState by viewModel.searchUiState.collectAsStateWithLifecycle()
+    val videoGuideUiState by viewModel.videoGuideUiState.collectAsStateWithLifecycle()
 
     SearchScreen(
         onRecipeClick = onRecipeClick,
@@ -52,7 +48,8 @@ internal fun SearchRoute(
             .fillMaxSize()
             .padding(horizontal = MaterialTheme.spacing.default)
             .padding(top = MaterialTheme.spacing.verySmall),
-        uiState = uiState,
+        searchUiState = searchUiState,
+        videoGuideUiState = videoGuideUiState,
     )
 
     LaunchedEffect(Unit) {
@@ -64,7 +61,8 @@ internal fun SearchRoute(
 internal fun SearchScreen(
     onRecipeClick: (id: Int) -> Unit,
     modifier: Modifier = Modifier,
-    uiState: SearchUiState
+    searchUiState: SearchUiState,
+    videoGuideUiState: VideoGuideUiState,
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     var searching by rememberSaveable { mutableStateOf(false) }
@@ -87,16 +85,24 @@ internal fun SearchScreen(
             onSearch = {}
         )
 
-        if (searching) {
-            SearchScreenResults(
+        when (searchUiState) {
+            is SearchUiState.Searching -> SearchScreenResults(
                 modifier = modifier,
-                recipes = uiState.recipes
+                recipes = searchUiState.recipes
             )
-        } else {
-            SearchScreenContent(
+
+            is SearchUiState.Empty -> Text(
+                text = stringResource(R.string.empty)
+            )
+
+            is SearchUiState.Error -> Text(
+                text = stringResource(R.string.error)
+            )
+
+            is SearchUiState.NotSearching -> SearchScreenContent(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState()),
-                videoGuideList = uiState.videoGuides,
+                videoGuideUiState = videoGuideUiState,
                 onRecipeClick = onRecipeClick
             )
         }
@@ -107,28 +113,40 @@ internal fun SearchScreen(
 @Composable
 private fun SearchScreenContent(
     modifier: Modifier = Modifier,
-    videoGuideList: List<VideoGuide>,
+    videoGuideUiState: VideoGuideUiState,
     onRecipeClick: (id: Int) -> Unit,
 ) {
     val mealCategories = MealCategory.entries
     val uriHandler = LocalUriHandler.current
 
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
         MealCategoryGrid(
             mealCategories = mealCategories,
             onClick = {}
         )
-        VideoGuides(
-            title = stringResource(R.string.video_guides),
-            videoGuideList = videoGuideList,
-            onVideoClick = {
-                if (it.isNotEmpty()) {
-                    uriHandler.openUri("https://www.youtube.com/watch?v=$it")
+        when (videoGuideUiState) {
+            is VideoGuideUiState.Loading -> LoadingView(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = MaterialTheme.spacing.default)
+            )
+
+            is VideoGuideUiState.Error -> Text(
+                text = stringResource(R.string.error)
+            )
+
+            is VideoGuideUiState.Success -> VideoGuides(
+                title = stringResource(R.string.video_guides),
+                videoGuideList = videoGuideUiState.videoGuideList,
+                onVideoClick = {
+                    if (it.isNotEmpty()) {
+                        uriHandler.openUri("$YOUTUBE_BASE_URL$it")
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }
 

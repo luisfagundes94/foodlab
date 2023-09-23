@@ -14,21 +14,25 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(
     private val getVideoGuides: GetVideoGuides
 ) : BaseViewModel() {
-    private val _uiState = MutableStateFlow(SearchUiState())
-    val uiState = _uiState.asStateFlow()
+
+    private val _searchUiState = MutableStateFlow<SearchUiState>(SearchUiState.NotSearching)
+    val searchUiState = _searchUiState.asStateFlow()
+
+    private val _videoGuideUiState = MutableStateFlow<VideoGuideUiState>(VideoGuideUiState.Loading)
+    val videoGuideUiState = _videoGuideUiState.asStateFlow()
 
     fun fetchVideoGuides() = safeLaunch {
-        _uiState.update { it.copy(isLoading = true) }
+        _videoGuideUiState.update { VideoGuideUiState.Loading }
         val result = getVideoGuides.invoke()
         handleVideoResult(result)
     }
 
     private fun handleVideoResult(result: Result<List<VideoGuide>>) {
-        _uiState.update {
+        _videoGuideUiState.update {
             when (result) {
-                is Result.Loading -> it.copy(isLoading = true, isError = false)
-                is Result.Success -> it.copy(videoGuides = result.data)
-                is Result.Error -> it.copy(isError = true, isLoading = false)
+                is Result.Loading -> VideoGuideUiState.Loading
+                is Result.Success -> VideoGuideUiState.Success(result.data)
+                is Result.Error -> VideoGuideUiState.Error
             }
         }
     }

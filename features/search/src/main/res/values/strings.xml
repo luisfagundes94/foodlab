@@ -15,4 +15,5 @@
     <string name="error">Ops! Something went wrong</string>
     <string name="clear_search">Clear search</string>
     <string name="play_video">Play video</string>
+    <string name="empty">No recipes found</string>
 </resources>
