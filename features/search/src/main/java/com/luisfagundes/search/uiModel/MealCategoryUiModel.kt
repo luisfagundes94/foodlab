@@ -1,4 +1,4 @@
-package com.luisfagundes.search.uimodel
+package com.luisfagundes.search.uiModel
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

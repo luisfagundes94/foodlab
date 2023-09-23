@@ -2,7 +2,7 @@ package com.luisfagundes.search.mapper
 
 import com.luisfagundes.domain.models.MealCategory
 import com.luisfagundes.features.search.R
-import com.luisfagundes.search.uimodel.MealCategoryUiModel
+import com.luisfagundes.search.uiModel.MealCategoryUiModel
 
 object MealCategoryMapper {
     fun MealCategory.mapToUiModel(): MealCategoryUiModel {

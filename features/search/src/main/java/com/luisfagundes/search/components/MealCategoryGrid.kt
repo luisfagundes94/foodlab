@@ -24,7 +24,7 @@ import com.luisfagundes.domain.models.MealCategory
 import com.luisfagundes.features.search.R
 import com.luisfagundes.resources.theme.spacing
 import com.luisfagundes.search.mapper.MealCategoryMapper.mapToUiModel
-import com.luisfagundes.search.uimodel.MealCategoryUiModel
+import com.luisfagundes.search.uiModel.MealCategoryUiModel
 
 private const val MEAL_CATEGORY_GRID_COLUMNS = 2
 
