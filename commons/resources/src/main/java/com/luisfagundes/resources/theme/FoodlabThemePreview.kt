@@ -15,4 +15,4 @@ import androidx.compose.ui.tooling.preview.Preview
     showBackground = true,
     backgroundColor = DARK_SURFACE_COLOR_VALUE,
 )
-annotation class ThemePreviews
+annotation class FoodlabThemePreview

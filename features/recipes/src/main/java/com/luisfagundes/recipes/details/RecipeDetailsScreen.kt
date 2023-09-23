@@ -41,7 +41,7 @@ import com.luisfagundes.recipes.details.components.RecipeFacts
 import com.luisfagundes.recipes.details.components.RecipeSteps
 import com.luisfagundes.recipes.details.components.SpanWithLink
 import com.luisfagundes.resources.theme.FoodlabTheme
-import com.luisfagundes.resources.theme.ThemePreviews
+import com.luisfagundes.resources.theme.FoodlabThemePreview
 import com.luisfagundes.resources.theme.spacing
 
 private const val BOTTOM_CORNER_PERCENT = 5
@@ -183,7 +183,7 @@ internal fun RecipeDetailsScreenContent(
 }
 
 @Composable
-@ThemePreviews
+@FoodlabThemePreview
 internal fun RecipeDetailsScreenPreview() {
     val fakeRecipe = FakeRecipeFactory.recipe
     val uiState = RecipeDetailsUiState.Success(fakeRecipe)

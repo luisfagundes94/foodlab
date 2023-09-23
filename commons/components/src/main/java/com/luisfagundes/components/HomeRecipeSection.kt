@@ -33,7 +33,7 @@ import com.luisfagundes.common.components.R
 import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.resources.theme.FoodlabTheme
-import com.luisfagundes.resources.theme.ThemePreviews
+import com.luisfagundes.resources.theme.FoodlabThemePreview
 import com.luisfagundes.resources.theme.spacing
 
 @Composable
@@ -147,7 +147,7 @@ private fun Title(
     )
 }
 
-@ThemePreviews
+@FoodlabThemePreview
 @Composable
 fun HomeRecipeSectionPreview() {
     FoodlabTheme {
