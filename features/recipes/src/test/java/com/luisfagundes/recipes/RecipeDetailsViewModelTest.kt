@@ -5,12 +5,12 @@ import app.cash.turbine.test
 import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.framework.decoder.StringDecoder
-import com.luisfagundes.recipes.details.RecipeDetailsViewModel
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsViewModel
 import com.luisfagundes.testing.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import com.luisfagundes.framework.network.Result
-import com.luisfagundes.recipes.details.RecipeDetailsUiState
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf

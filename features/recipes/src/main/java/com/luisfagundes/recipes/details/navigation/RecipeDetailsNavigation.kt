@@ -1,4 +1,4 @@
-package com.luisfagundes.recipes.details
+package com.luisfagundes.recipes.details.navigation
 
 import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.luisfagundes.framework.decoder.StringDecoder
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsRoute
 import org.jetbrains.annotations.VisibleForTesting
 
 @VisibleForTesting

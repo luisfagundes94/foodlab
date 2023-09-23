@@ -1,4 +1,4 @@
-package com.luisfagundes.recipes.details
+package com.luisfagundes.recipes.details.presentation
 
 import com.luisfagundes.domain.models.Recipe
 

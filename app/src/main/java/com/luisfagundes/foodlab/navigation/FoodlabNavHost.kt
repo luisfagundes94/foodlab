@@ -5,12 +5,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.luisfagundes.saved.navigation.savedScreen
 import com.luisfagundes.foodlab.ui.FoodlabAppState
-import com.luisfagundes.home.navigation.homeNavigationRoute
 import com.luisfagundes.home.navigation.homeGraph
 import com.luisfagundes.feature.pantry.navigation.pantryScreen
 import com.luisfagundes.home.navigation.homeNavigationGraph
-import com.luisfagundes.recipes.details.navigateToRecipeDetails
-import com.luisfagundes.recipes.details.recipeDetailsScreen
+import com.luisfagundes.recipes.details.navigation.navigateToRecipeDetails
+import com.luisfagundes.recipes.details.navigation.recipeDetailsScreen
 import com.luisfagundes.search.navigation.searchScreen
 
 @Composable

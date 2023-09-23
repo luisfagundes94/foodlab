@@ -1,4 +1,4 @@
-package com.luisfagundes.recipes.details
+package com.luisfagundes.recipes.details.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -7,6 +7,7 @@ import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.framework.decoder.StringDecoder
 import com.luisfagundes.framework.network.Result
+import com.luisfagundes.recipes.details.navigation.RecipeDetailsArg
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
