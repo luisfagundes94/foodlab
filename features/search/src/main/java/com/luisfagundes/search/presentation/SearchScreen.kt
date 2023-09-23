@@ -23,11 +23,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.FoodlabSearchBar
 import com.luisfagundes.components.LoadingView
+import com.luisfagundes.core.utils.doNothing
 import com.luisfagundes.domain.models.MealCategory
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.features.search.R
 import com.luisfagundes.resources.theme.spacing
 import com.luisfagundes.search.components.MealCategoryGrid
+import com.luisfagundes.search.components.SearchResults
 import com.luisfagundes.search.components.VideoGuides
 
 private const val YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v="
@@ -50,6 +52,9 @@ internal fun SearchRoute(
             .padding(top = MaterialTheme.spacing.verySmall),
         searchUiState = searchUiState,
         videoGuideUiState = videoGuideUiState,
+        onQueryChange = viewModel::fetchSearchResults,
+        onSearch = viewModel::fetchSearchResults,
+        onClear = viewModel::setNotSearchingState,
     )
 
     LaunchedEffect(Unit) {
@@ -63,32 +68,51 @@ internal fun SearchScreen(
     modifier: Modifier = Modifier,
     searchUiState: SearchUiState,
     videoGuideUiState: VideoGuideUiState,
+    onQueryChange: (query: String) -> Unit = {},
+    onSearch: (query: String) -> Unit = {},
+    onClear: () -> Unit = {},
 ) {
     var query by rememberSaveable { mutableStateOf("") }
-    var searching by rememberSaveable { mutableStateOf(false) }
+    var showClearButton by rememberSaveable { mutableStateOf(false) }
 
     Column(
         modifier = modifier,
     ) {
         FoodlabSearchBar(
             query = query,
-            searching = searching,
+            searching = showClearButton,
             placeholderHint = stringResource(R.string.search_recipes),
             onQueryChange = {
-                searching = true
+                onQueryChange(it)
                 query = it
+                showClearButton = it.isNotEmpty()
             },
             onClear = {
-                searching = false
+                onClear()
                 query = ""
+                showClearButton = false
             },
-            onSearch = {}
+            onSearch = onSearch
         )
 
         when (searchUiState) {
-            is SearchUiState.Searching -> SearchScreenResults(
-                modifier = modifier,
+            is SearchUiState.Success -> SearchResults(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = MaterialTheme.spacing.default),
                 recipes = searchUiState.recipes
+            )
+            is SearchUiState.Loading -> LoadingView(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = MaterialTheme.spacing.default)
+            )
+            is SearchUiState.Searching -> doNothing()
+
+            is SearchUiState.NotSearching -> SearchScreenContent(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                videoGuideUiState = videoGuideUiState,
+                onRecipeClick = onRecipeClick
             )
 
             is SearchUiState.Empty -> Text(
@@ -97,13 +121,6 @@ internal fun SearchScreen(
 
             is SearchUiState.Error -> Text(
                 text = stringResource(R.string.error)
-            )
-
-            is SearchUiState.NotSearching -> SearchScreenContent(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState()),
-                videoGuideUiState = videoGuideUiState,
-                onRecipeClick = onRecipeClick
             )
         }
     }
@@ -146,20 +163,6 @@ private fun SearchScreenContent(
                     }
                 }
             )
-        }
-    }
-}
-
-@Composable
-internal fun SearchScreenResults(
-    modifier: Modifier = Modifier,
-    recipes: List<Recipe>,
-) {
-    LazyColumn(
-        modifier = modifier,
-    ) {
-        items(recipes) { recipe ->
-            Text(text = recipe.title)
         }
     }
 }

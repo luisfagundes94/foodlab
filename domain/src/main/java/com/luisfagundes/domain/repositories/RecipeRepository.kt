@@ -10,4 +10,5 @@ interface RecipeRepository {
     fun getFlowRecipeList(params: GetFlowRecipeList.Params): PagingSource<Int, Recipe>
     suspend fun getRecipeList(params: GetRecipeList.Params): Result<List<Recipe>>
     suspend fun getRecipeDetails(id: Int): Result<Recipe>
+    suspend fun searchRecipes(query: String): Result<List<Recipe>>
 }

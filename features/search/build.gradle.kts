@@ -44,6 +44,7 @@ android {
 dependencies {
     // Modules
     implementation(projects.domain)
+    implementation(projects.core)
     implementation(projects.framework)
     implementation(projects.commons.resources)
     implementation(projects.commons.components)

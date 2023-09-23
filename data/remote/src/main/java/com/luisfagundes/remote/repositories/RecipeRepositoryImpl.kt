@@ -43,6 +43,14 @@ class RecipeRepositoryImpl @Inject constructor(
         recipeDataSource.fetchRecipeDetails(id)
     }
 
+    override suspend fun searchRecipes(query: String) = safeApiCall {
+        recipeDataSource.fetchRecipes(
+            params = mapOf(
+                QUERY to query,
+            )
+        ).results
+    }
+
     private companion object {
         const val ADD_RECIPE_INFORMATION = "addRecipeInformation"
         const val LIMIT_LICENSE = "limitLicense"
@@ -50,5 +58,6 @@ class RecipeRepositoryImpl @Inject constructor(
         const val DEFAULT_PAGE_SIZE = 20
         const val INSTRUCTIONS_REQUIRED = "instructionsRequired"
         const val SORT = "sort"
+        const val QUERY = "query"
     }
 }
