@@ -57,15 +57,15 @@ object NetworkModule {
     @Singleton
     fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
 
-//    @Provides
-//    @Singleton
-//    fun provideRemoteRecipeDataSource(
-//        apiService: RecipeService
-//    ): RecipeDataSource = RemoteRecipeDataSource(apiService)
-
     @Provides
     @Singleton
-    fun provideMockedRecipeDataSource(
-        @ApplicationContext appContext: Context
-    ): RecipeDataSource = MockedRecipeDataSource(appContext)
+    fun provideRemoteRecipeDataSource(
+        apiService: RecipeService
+    ): RecipeDataSource = RemoteRecipeDataSource(apiService)
+
+//    @Provides
+//    @Singleton
+//    fun provideMockedRecipeDataSource(
+//        @ApplicationContext appContext: Context
+//    ): RecipeDataSource = MockedRecipeDataSource(appContext)
 }

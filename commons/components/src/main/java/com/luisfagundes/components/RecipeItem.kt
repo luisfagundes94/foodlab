@@ -3,6 +3,7 @@ package com.luisfagundes.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,6 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
 import com.luisfagundes.common.components.R
 import com.luisfagundes.resources.theme.spacing
+import com.luisfagundes.common.resources.R.drawable.placeholder as placeholder_dark
+import com.luisfagundes.common.resources.R.drawable.placeholder_white as placeholder_light
 
 @Composable
 fun RecipeItem(
@@ -34,6 +37,7 @@ fun RecipeItem(
     onFavoriteClick: () -> Unit,
 ) {
     val isPreview = LocalInspectionMode.current
+    val placeholder = if (isSystemInDarkTheme()) placeholder_light else placeholder_dark
 
     ElevatedCard(
         modifier = modifier,
@@ -50,6 +54,7 @@ fun RecipeItem(
                 AsyncImage(
                     modifier = Modifier.fillMaxWidth(),
                     model = imageUrl,
+                    placeholder = painterResource(id = placeholder),
                     contentDescription = title,
                     contentScale = ContentScale.Crop,
                 )
