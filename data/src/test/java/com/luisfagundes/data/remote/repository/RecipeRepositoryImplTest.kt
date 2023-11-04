@@ -1,6 +1,7 @@
 package com.luisfagundes.data.remote.repository
 
 import androidx.paging.PagingConfig
+import com.luisfagundes.data.local.database.FoodlabDatabase
 import com.luisfagundes.data.remote.paging.RecipePagingSource
 import com.luisfagundes.data.repositories.RecipeRepositoryImpl
 import com.luisfagundes.domain.datasources.RecipeDataSource
@@ -22,13 +23,14 @@ private const val SORT = "sort"
 
 class RecipeRepositoryImplTest {
 
-    private val recipeDataSource: RecipeDataSource = mockk()
+    private val dataSource: RecipeDataSource = mockk()
+    private val database: FoodlabDatabase = mockk()
 
     private lateinit var recipeRepository: RecipeRepositoryImpl
 
     @Before
     fun setUp() {
-        recipeRepository = RecipeRepositoryImpl(recipeDataSource)
+        recipeRepository = RecipeRepositoryImpl(dataSource, database)
     }
 
     @Test
@@ -46,14 +48,14 @@ class RecipeRepositoryImplTest {
         )
         val params = GetRecipeList.Params(sort = "popular")
 
-        coEvery { recipeDataSource.fetchRecipes(any()) } returns recipeListBody
+        coEvery { dataSource.fetchRecipes(any()) } returns recipeListBody
 
         // When
         val result = recipeRepository.getRecipeList(params)
 
         // Then
         assertEquals(expectedResult, result)
-        coVerify { recipeDataSource.fetchRecipes(any()) }
+        coVerify { dataSource.fetchRecipes(any()) }
     }
 
     @Test
@@ -62,7 +64,7 @@ class RecipeRepositoryImplTest {
         val expectedRecipe = FakeRecipeFactory.recipe
         val recipeId = 1
 
-        coEvery { recipeDataSource.fetchRecipeDetails(recipeId) } returns expectedRecipe
+        coEvery { dataSource.fetchRecipeDetails(recipeId) } returns expectedRecipe
 
         // When
         val result = recipeRepository.getRecipeDetails(recipeId)
@@ -70,7 +72,7 @@ class RecipeRepositoryImplTest {
         // Then
         assertTrue(result is Result.Success)
         assertEquals(expectedRecipe, (result as Result.Success).data)
-        coVerify { recipeDataSource.fetchRecipeDetails(recipeId) }
+        coVerify { dataSource.fetchRecipeDetails(recipeId) }
     }
 
     @Test
@@ -98,7 +100,7 @@ class RecipeRepositoryImplTest {
         val params1 = GetRecipeList.Params(sort = "popular")
         val params2 = GetRecipeList.Params(sort = "time")
 
-        coEvery { recipeDataSource.fetchRecipes(any()) } returns RecipeListBody(0, 0, listOf())
+        coEvery { dataSource.fetchRecipes(any()) } returns RecipeListBody(0, 0, listOf())
 
         // When
         recipeRepository.getRecipeList(params1)
@@ -106,10 +108,10 @@ class RecipeRepositoryImplTest {
 
         // Then
         coVerify(exactly = 1) {
-            recipeDataSource.fetchRecipes(match { it[SORT] == params1.sort })
+            dataSource.fetchRecipes(match { it[SORT] == params1.sort })
         }
         coVerify(exactly = 1) {
-            recipeDataSource.fetchRecipes(match { it[SORT] == params2.sort })
+            dataSource.fetchRecipes(match { it[SORT] == params2.sort })
         }
     }
 
@@ -118,7 +120,7 @@ class RecipeRepositoryImplTest {
         // Given
         val params = GetRecipeList.Params(sort = "popular")
 
-        coEvery { recipeDataSource.fetchRecipes(any()) } throws Exception()
+        coEvery { dataSource.fetchRecipes(any()) } throws Exception()
 
         // When
         val result = recipeRepository.getRecipeList(params)
@@ -133,7 +135,7 @@ class RecipeRepositoryImplTest {
         // Given
         val recipeId = 1
 
-        coEvery { recipeDataSource.fetchRecipeDetails(recipeId) } throws Exception()
+        coEvery { dataSource.fetchRecipeDetails(recipeId) } throws Exception()
 
         // When
         val result = recipeRepository.getRecipeDetails(recipeId)

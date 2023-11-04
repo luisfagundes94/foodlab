@@ -50,6 +50,9 @@ dependencies {
     // Compose
     implementation(libs.bundles.compose)
 
+    // Lifecycle
+    implementation(libs.lifecycle.runtime.compose)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

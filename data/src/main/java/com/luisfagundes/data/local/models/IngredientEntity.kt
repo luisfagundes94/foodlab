@@ -10,7 +10,7 @@ data class IngredientEntity(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "amount") val amount: Float,
     @ColumnInfo(name = "image_url") val imageUrl: String?,
-    @ColumnInfo(name = "measures") val measures: String,
+    @ColumnInfo(name = "measures") val measures: MeasuresEntity,
     @ColumnInfo(name = "original_measure") val originalMeasure: String
 )
 

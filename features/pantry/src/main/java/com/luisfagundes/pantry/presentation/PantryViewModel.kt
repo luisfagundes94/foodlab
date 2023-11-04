@@ -1,4 +1,4 @@
-package com.luisfagundes.feature.pantry.presentation
+package com.luisfagundes.pantry.presentation
 
 import com.luisfagundes.framework.base.mvvm.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
