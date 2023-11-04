@@ -23,20 +23,20 @@ internal fun RecipeFacts(
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         Item(
-            title = stringResource(R.string.spoonacular_score),
-            count = "${recipe.spoonacularScore}%",
-        )
-        Item(
-            title = stringResource(R.string.likes),
-            count = recipe.aggregateLikes.toString(),
-        )
-        Item(
             title = stringResource(R.string.min),
-            count = recipe.readyInMinutes.toString(),
+            value = recipe.readyInMinutes.toString(),
         )
         Item(
             title = stringResource(id = R.string.health),
-            count = "${recipe.healthScore}%",
+            value = "${recipe.healthScore}%",
+        )
+        Item(
+            title = stringResource(R.string.serves),
+            value = "${recipe.serves}",
+        )
+        Item(
+            title = stringResource(R.string.likes),
+            value = recipe.aggregateLikes.toString(),
         )
     }
 }
@@ -44,13 +44,13 @@ internal fun RecipeFacts(
 @Composable
 private fun Item(
     title: String,
-    count: String
+    value: String
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = count,
+            text = value,
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Bold,
         )

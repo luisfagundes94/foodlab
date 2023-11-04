@@ -18,9 +18,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.luisfagundes.data.remote.utils.NetworkMonitor
 import com.luisfagundes.domain.enums.DarkThemeConfig
 import com.luisfagundes.foodlab.ui.FoodlabApp
-import com.luisfagundes.remote.utils.NetworkMonitor
 import com.luisfagundes.resources.theme.FoodlabTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect

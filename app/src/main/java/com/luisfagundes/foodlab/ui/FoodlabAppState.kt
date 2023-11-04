@@ -13,6 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import androidx.tracing.trace
+import com.luisfagundes.data.remote.utils.NetworkMonitor
 import com.luisfagundes.saved.navigation.savedNavigationRoute
 import com.luisfagundes.saved.navigation.navigateToSaved
 import com.luisfagundes.foodlab.navigation.TopLevelDestination
@@ -20,7 +21,6 @@ import com.luisfagundes.home.navigation.homeNavigationRoute
 import com.luisfagundes.home.navigation.navigateToHome
 import com.luisfagundes.feature.pantry.navigation.navigateToPantry
 import com.luisfagundes.feature.pantry.navigation.pantryNavigationRoute
-import com.luisfagundes.remote.utils.NetworkMonitor
 import com.luisfagundes.search.navigation.navigateToSearch
 import com.luisfagundes.search.navigation.searchNavigationRoute
 import kotlinx.coroutines.CoroutineScope

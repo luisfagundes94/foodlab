@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Foodlab"
         tools:targetApi="31">
         <activity
-            android:name="com.luisfagundes.foodlab.MainActivity"
+            android:name="com.luisfagundes.foodlab.presentation.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Foodlab">
             <intent-filter>

@@ -43,14 +43,13 @@ import com.luisfagundes.components.FoodlabBackground
 import com.luisfagundes.components.FoodlabNavigationBar
 import com.luisfagundes.components.FoodlabNavigationBarItem
 import com.luisfagundes.components.FoodlabTopAppBar
+import com.luisfagundes.data.remote.utils.NetworkMonitor
 import com.luisfagundes.foodlab.app.R
 import com.luisfagundes.foodlab.navigation.FoodlabNavHost
 import com.luisfagundes.foodlab.navigation.TopLevelDestination
-import com.luisfagundes.remote.utils.NetworkMonitor
 
 @OptIn(
     ExperimentalMaterial3Api::class,
-    ExperimentalLayoutApi::class,
     ExperimentalComposeUiApi::class,
 )
 @Composable

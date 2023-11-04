@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -16,41 +15,38 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
+import com.luisfagundes.components.ErrorView
 import com.luisfagundes.components.FoodlabTopAppBar
 import com.luisfagundes.components.HtmlText
 import com.luisfagundes.domain.enums.IngredientUnit
 import com.luisfagundes.features.recipes.R
-import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.recipes.details.components.Ingredients
 import com.luisfagundes.recipes.details.components.RecipeFacts
+import com.luisfagundes.recipes.details.components.RecipeImage
 import com.luisfagundes.recipes.details.components.RecipeSteps
 import com.luisfagundes.recipes.details.components.SpanWithLink
-import com.luisfagundes.resources.theme.FoodlabTheme
-import com.luisfagundes.resources.theme.FoodlabThemePreview
 import com.luisfagundes.resources.theme.spacing
-
-private const val BOTTOM_CORNER_PERCENT = 5
 
 @Composable
 fun RecipeDetailsRoute(
-    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: RecipeDetailsViewModel = hiltViewModel()
+    viewModel: RecipeDetailsViewModel = hiltViewModel(),
+    onBackClick: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -58,7 +54,12 @@ fun RecipeDetailsRoute(
         uiState = uiState,
         modifier = modifier.fillMaxSize(),
         onBackClick = onBackClick,
+        onRetryClick = viewModel::refreshRecipeDetails,
     )
+
+    LaunchedEffect(Unit) {
+        viewModel.refreshRecipeDetails()
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,6 +68,7 @@ internal fun RecipeDetailsScreen(
     uiState: RecipeDetailsUiState,
     modifier: Modifier,
     onBackClick: () -> Unit,
+    onRetryClick: () -> Unit = {},
 ) {
 
     FoodlabTopAppBar(
@@ -77,14 +79,28 @@ internal fun RecipeDetailsScreen(
         actionIconContentDescription = stringResource(R.string.save_recipe),
         onNavigationClick = onBackClick,
     ) {
+
         Column(
             modifier = modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
         ) {
+            val internalModifier = Modifier
+                .padding(MaterialTheme.spacing.default)
+                .align(Alignment.CenterHorizontally)
+
             when (uiState) {
-                is RecipeDetailsUiState.Loading -> CircularProgressIndicator()
-                is RecipeDetailsUiState.Error -> Text(stringResource(R.string.recipe_details_error))
+                is RecipeDetailsUiState.Idle -> Unit
+                is RecipeDetailsUiState.Loading -> CircularProgressIndicator(
+                    modifier = internalModifier
+                )
+
+                is RecipeDetailsUiState.Error -> ErrorView(
+                    modifier = internalModifier,
+                    message = stringResource(R.string.recipe_details_error),
+                    onRetryClick = onRetryClick
+                )
+
                 is RecipeDetailsUiState.Success -> RecipeDetailsScreenContent(
                     uiState = uiState,
                     modifier = Modifier
@@ -103,23 +119,16 @@ internal fun RecipeDetailsScreenContent(
 ) {
     val recipe = uiState.recipe
     var ingredientUnit by remember { mutableStateOf(IngredientUnit.US) }
-    var servings by remember { mutableIntStateOf(recipe.servings) }
+    var servings by remember { mutableIntStateOf(recipe.serves) }
+
+    val isPreview = LocalInspectionMode.current
 
     Column(
         modifier = modifier
     ) {
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(
-                    shape = RoundedCornerShape(
-                        bottomEndPercent = BOTTOM_CORNER_PERCENT,
-                        bottomStartPercent = BOTTOM_CORNER_PERCENT,
-                    )
-                ),
-            model = recipe.imageUrl,
-            contentDescription = recipe.title,
-            contentScale = ContentScale.Crop,
+        RecipeImage(
+            isPreview = isPreview,
+            recipe = recipe
         )
         Text(
             modifier = Modifier.padding(top = MaterialTheme.spacing.small),
@@ -129,6 +138,7 @@ internal fun RecipeDetailsScreenContent(
         )
         RecipeFacts(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = MaterialTheme.spacing.small)
                 .border(
                     width = 1.dp,
@@ -140,8 +150,7 @@ internal fun RecipeDetailsScreenContent(
                     ),
                     shape = MaterialTheme.shapes.medium,
                 )
-                .padding(vertical = MaterialTheme.spacing.verySmall)
-                .fillMaxSize(),
+                .padding(vertical = MaterialTheme.spacing.verySmall),
             recipe = recipe,
         )
         HtmlText(
@@ -178,20 +187,6 @@ internal fun RecipeDetailsScreenContent(
         )
         RecipeSteps(
             steps = recipe.instructions.first().steps
-        )
-    }
-}
-
-@Composable
-@FoodlabThemePreview
-internal fun RecipeDetailsScreenPreview() {
-    val fakeRecipe = FakeRecipeFactory.recipe
-    val uiState = RecipeDetailsUiState.Success(fakeRecipe)
-
-    FoodlabTheme {
-        RecipeDetailsScreenContent(
-            uiState = uiState,
-            modifier = Modifier.fillMaxWidth()
         )
     }
 }

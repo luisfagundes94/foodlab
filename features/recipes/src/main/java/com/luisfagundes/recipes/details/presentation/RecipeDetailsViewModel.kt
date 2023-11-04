@@ -8,16 +8,19 @@ import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.framework.decoder.StringDecoder
 import com.luisfagundes.framework.network.Result
 import com.luisfagundes.recipes.details.navigation.RecipeDetailsArg
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Error
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Idle
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Loading
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailsViewModel @Inject constructor(
-    getRecipeDetails: GetRecipeDetails,
+    private val getRecipeDetails: GetRecipeDetails,
     stringDecoder: StringDecoder,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
@@ -25,21 +28,19 @@ class RecipeDetailsViewModel @Inject constructor(
     private val recipeDetailsArg = RecipeDetailsArg(savedStateHandle, stringDecoder)
     private val recipeId = recipeDetailsArg.recipeId
 
-    val uiState: StateFlow<RecipeDetailsUiState> =
-        getRecipeDetails(
-            GetRecipeDetails.Params(recipeId.toInt())
-        )
-            .map { result -> handleResult(result) }
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.Lazily,
-                initialValue = RecipeDetailsUiState.Loading,
-            )
+    private val _uiState = MutableStateFlow<RecipeDetailsUiState>(Idle)
+    val uiState = _uiState.asStateFlow()
 
-    private fun handleResult(result: Result<Recipe>) =
-        when (result) {
-            is Result.Success -> RecipeDetailsUiState.Success(result.data)
-            is Result.Error -> RecipeDetailsUiState.Error
-            is Result.Loading -> RecipeDetailsUiState.Loading
+    fun refreshRecipeDetails() = viewModelScope.launch {
+        val params = GetRecipeDetails.Params(recipeId.toInt())
+        getRecipeDetails(params).collect { result ->
+            _uiState.value = handleResult(result)
         }
+    }
+
+    private fun handleResult(result: Result<Recipe>) = when (result) {
+        is Result.Success -> Success(result.data)
+        is Result.Error -> Error
+        is Result.Loading -> Loading
+    }
 }

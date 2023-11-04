@@ -39,6 +39,12 @@ class RecipeDetailsViewModelTest {
     fun setUp() {
         coEvery { stringDecoder.decode(any()) } returns "1"
         coEvery { savedStateHandle.get<String>(any()) } returns FAKE_ID
+
+        viewModel = RecipeDetailsViewModel(
+            getRecipeDetails = getRecipeDetails,
+            stringDecoder = stringDecoder,
+            savedStateHandle = savedStateHandle,
+        )
     }
 
     @Test
@@ -47,11 +53,7 @@ class RecipeDetailsViewModelTest {
         coEvery { getRecipeDetails.invoke(params) } returns flowOf(Result.Loading)
 
         // When
-        viewModel = RecipeDetailsViewModel(
-            getRecipeDetails = getRecipeDetails,
-            stringDecoder = stringDecoder,
-            savedStateHandle = savedStateHandle,
-        )
+        viewModel.refreshRecipeDetails()
 
         // Then
         viewModel.uiState.test {
@@ -67,11 +69,7 @@ class RecipeDetailsViewModelTest {
         coEvery { getRecipeDetails.invoke(params) } returns flowOf(Result.Error(Exception()))
 
         // When
-        viewModel = RecipeDetailsViewModel(
-            getRecipeDetails = getRecipeDetails,
-            stringDecoder = stringDecoder,
-            savedStateHandle = savedStateHandle,
-        )
+        viewModel.refreshRecipeDetails()
 
         // Then
         viewModel.uiState.test {
@@ -88,11 +86,7 @@ class RecipeDetailsViewModelTest {
         coEvery { getRecipeDetails.invoke(params) } returns flowOf(Result.Success(recipe))
 
         // When
-        viewModel = RecipeDetailsViewModel(
-            getRecipeDetails = getRecipeDetails,
-            stringDecoder = stringDecoder,
-            savedStateHandle = savedStateHandle,
-        )
+        viewModel.refreshRecipeDetails()
 
         // Then
         viewModel.uiState.test {

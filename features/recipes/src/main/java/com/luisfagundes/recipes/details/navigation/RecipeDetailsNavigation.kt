@@ -37,6 +37,8 @@ fun NavGraphBuilder.recipeDetailsScreen(
             navArgument(recipeIdArg) { type = NavType.StringType },
         ),
     ) {
-        RecipeDetailsRoute(onBackClick = onBackClick)
+        RecipeDetailsRoute(
+            onBackClick = onBackClick,
+        )
     }
 }

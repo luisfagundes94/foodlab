@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -44,7 +44,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packaging {
         resources {
@@ -59,8 +59,7 @@ dependencies {
     // Modules
     implementation(projects.domain)
     implementation(projects.core)
-    implementation(projects.data.remote)
-    implementation(projects.data.local)
+    implementation(projects.data)
     implementation(projects.commons.resources)
     implementation(projects.commons.components)
     implementation(projects.framework)
@@ -91,7 +90,7 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.hilt.library)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Logging
     implementation(libs.timber)
