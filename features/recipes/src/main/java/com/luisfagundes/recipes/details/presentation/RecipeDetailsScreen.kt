@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.ErrorView
 import com.luisfagundes.components.FoodlabTopAppBar
 import com.luisfagundes.components.HtmlText
+import com.luisfagundes.components.RecipeSavingToast
 import com.luisfagundes.components.showToast
 import com.luisfagundes.domain.enums.IngredientUnit
 import com.luisfagundes.domain.models.Recipe
@@ -54,18 +55,7 @@ fun RecipeDetailsRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val context = LocalContext.current
-    val successDeletingRecipeMsg = stringResource(CommonsRes.string.recipe_saved_successfully)
-    val errorDeletingRecipeMsg = stringResource(CommonsRes.string.error_saving_recipe)
-
-    LaunchedEffect(Unit) {
-        viewModel.saveRecipeEvent.collect { deleted ->
-            showToast(
-                context = context,
-                message = if (deleted) successDeletingRecipeMsg else errorDeletingRecipeMsg,
-            )
-        }
-    }
+    RecipeSavingToast(viewModel.saveRecipeEvent)
 
     RecipeDetailsScreen(
         uiState = uiState,

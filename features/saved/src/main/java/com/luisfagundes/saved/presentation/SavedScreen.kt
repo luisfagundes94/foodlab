@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.luisfagundes.components.RecipeDeletionToast
 import com.luisfagundes.components.RecipeItem
 import com.luisfagundes.components.showToast
 import com.luisfagundes.domain.models.Recipe
@@ -32,18 +33,7 @@ internal fun SavedRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val context = LocalContext.current
-    val successDeletingRecipeMsg = stringResource(CommonsRes.string.recipe_deleted_successfully)
-    val errorDeletingRecipeMsg = stringResource(CommonsRes.string.recipe_deleted_error)
-
-    LaunchedEffect(Unit) {
-        viewModel.deleteEvent.collect { deleted ->
-            showToast(
-                context = context,
-                message = if (deleted) successDeletingRecipeMsg else errorDeletingRecipeMsg,
-            )
-        }
-    }
+    RecipeDeletionToast(viewModel.deleteEvent)
 
     SavedScreen(
         modifier = Modifier.fillMaxSize(),

@@ -3,6 +3,7 @@ package com.luisfagundes.home.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -10,21 +11,18 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.HomeRecipeSection
-import com.luisfagundes.components.showToast
+import com.luisfagundes.components.RecipeSavingToast
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.foodlab.features.home.R
 import com.luisfagundes.resources.theme.spacing
-import com.luisfagundes.commons.resources.R as CommonsRes
 
 @Composable
 internal fun HomeRoute(
@@ -34,18 +32,7 @@ internal fun HomeRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val context = LocalContext.current
-    val successDeletingRecipeMsg = stringResource(CommonsRes.string.recipe_saved_successfully)
-    val errorDeletingRecipeMsg = stringResource(CommonsRes.string.error_saving_recipe)
-
-    LaunchedEffect(Unit) {
-        viewModel.saveRecipeEvent.collect { deleted ->
-            showToast(
-                context = context,
-                message = if (deleted) successDeletingRecipeMsg else errorDeletingRecipeMsg,
-            )
-        }
-    }
+    RecipeSavingToast(viewModel.saveRecipeEvent)
 
     HomeScreen(
         uiState = uiState,
@@ -71,7 +58,9 @@ internal fun HomeScreen(
     ) {
         when (uiState) {
             is HomeUiState.Loading -> CircularProgressIndicator()
-            is HomeUiState.Error -> HomeScreenError()
+            is HomeUiState.Error -> HomeScreenError(
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
             is HomeUiState.Success -> HomeScreenContent(
                 uiState = uiState,
                 modifier = modifier,
@@ -83,9 +72,11 @@ internal fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenError() {
+private fun HomeScreenError(
+    modifier: Modifier = Modifier,
+) {
     Text(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         text = stringResource(R.string.home_screen_error),
         fontWeight = FontWeight.Bold,
     )
