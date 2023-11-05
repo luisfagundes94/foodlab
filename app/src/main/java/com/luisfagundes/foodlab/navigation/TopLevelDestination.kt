@@ -1,6 +1,8 @@
 package com.luisfagundes.foodlab.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.outlined.List
 import androidx.compose.material.icons.filled.Bookmarks
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -38,8 +40,8 @@ enum class TopLevelDestination(
         titleTextId = com.luisfagundes.features.saved.R.string.saved,
     ),
     PANTRY(
-        selectedIcon = Icons.Default.List,
-        unselectedIcon = Icons.Outlined.List,
+        selectedIcon = Icons.AutoMirrored.Filled.List,
+        unselectedIcon = Icons.AutoMirrored.Outlined.List,
         iconTextId = com.luisfagundes.features.pantry.R.string.pantry,
         titleTextId = com.luisfagundes.features.pantry.R.string.pantry,
     )
