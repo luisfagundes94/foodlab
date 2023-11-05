@@ -11,11 +11,14 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import android.graphics.Color
+import android.view.View
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.luisfagundes.foodlab.ui.theme.Typography
 
 
@@ -105,6 +108,16 @@ fun FoodlabTheme(
         tonalElevation = 0.dp,
     )
 
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            setUpStatusBar(
+                view = view,
+                darkTheme = darkTheme
+            )
+        }
+    }
+
     CompositionLocalProvider(
         LocalBackgroundTheme provides defaultBackgroundTheme,
         LocalSpacing provides Spacing(),
@@ -115,4 +128,15 @@ fun FoodlabTheme(
             content = content
         )
     }
+}
+
+private fun setUpStatusBar(view: View, darkTheme: Boolean) {
+    val window = (view.context as Activity).window
+    window.statusBarColor = if (darkTheme) {
+        md_theme_dark_surface.toArgb()
+    } else {
+        md_theme_light_surface.toArgb()
+    }
+
+    WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
 }

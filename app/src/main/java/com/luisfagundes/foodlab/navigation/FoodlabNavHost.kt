@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.luisfagundes.saved.navigation.savedGraph
 import com.luisfagundes.foodlab.ui.FoodlabAppState
 import com.luisfagundes.home.navigation.homeGraph
-import com.luisfagundes.feature.pantry.navigation.pantryGraph
+import com.luisfagundes.pantry.navigation.pantryGraph
 import com.luisfagundes.home.navigation.homeNavigationGraph
 import com.luisfagundes.recipes.details.navigation.navigateToRecipeDetails
 import com.luisfagundes.recipes.details.navigation.recipeDetailsScreen

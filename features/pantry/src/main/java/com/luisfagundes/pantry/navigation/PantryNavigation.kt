@@ -1,4 +1,4 @@
-package com.luisfagundes.feature.pantry.navigation
+package com.luisfagundes.pantry.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder

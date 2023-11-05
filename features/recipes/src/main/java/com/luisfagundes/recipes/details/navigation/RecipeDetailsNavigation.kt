@@ -14,6 +14,7 @@ import timber.log.Timber
 
 @VisibleForTesting
 internal const val recipeIdArg = "recipeId"
+internal const val recipeDetailsRoute = "recipeDetails/"
 
 internal class RecipeDetailsArg(val recipeId: String) {
     constructor(
@@ -24,7 +25,7 @@ internal class RecipeDetailsArg(val recipeId: String) {
 
 fun NavController.navigateToRecipeDetails(recipeId: String) {
     val encodedId = Uri.encode(recipeId)
-    this.navigate("recipeDetailsRoute/$encodedId") {
+    this.navigate("$recipeDetailsRoute$encodedId") {
         launchSingleTop = true
     }
     Timber.d("RecipeDetailsRoute: ${this.currentDestination?.route}")
@@ -34,7 +35,7 @@ fun NavGraphBuilder.recipeDetailsScreen(
     onBackClick: () -> Unit,
 ) {
     composable(
-        route = "recipeDetailsRoute/{$recipeIdArg}",
+        route = "$recipeDetailsRoute{$recipeIdArg}",
         arguments = listOf(
             navArgument(recipeIdArg) { type = NavType.StringType },
         ),

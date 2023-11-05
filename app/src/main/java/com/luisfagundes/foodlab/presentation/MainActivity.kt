@@ -51,29 +51,12 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        enableEdgeToEdge()
-
         setContent {
             val darkTheme = shouldUseDarkTheme(uiState)
-
-            DisposableEffect(darkTheme) {
-                enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        Color.TRANSPARENT,
-                        Color.TRANSPARENT,
-                    ) { darkTheme },
-                    navigationBarStyle = SystemBarStyle.auto(
-                        lightScrim,
-                        darkScrim,
-                    ) { darkTheme },
-                )
-                onDispose {}
-            }
 
             FoodlabTheme(
                 darkTheme = darkTheme,
             ) {
-
                 FoodlabApp(
                     windowSizeClass = calculateWindowSizeClass(activity = this),
                     networkMonitor = networkMonitor

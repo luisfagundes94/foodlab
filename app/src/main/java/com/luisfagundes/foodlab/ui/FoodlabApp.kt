@@ -47,6 +47,7 @@ import com.luisfagundes.data.remote.utils.NetworkMonitor
 import com.luisfagundes.foodlab.app.R
 import com.luisfagundes.foodlab.navigation.FoodlabNavHost
 import com.luisfagundes.foodlab.navigation.TopLevelDestination
+import timber.log.Timber
 
 @OptIn(
     ExperimentalMaterial3Api::class,

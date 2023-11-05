@@ -11,7 +11,7 @@ const val homeNavigationGraph = "homeGraph/"
 const val homeNavigationRoute = "home/"
 
 fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    navigate(homeNavigationGraph, navOptions)
+    navigate(homeNavigationRoute, navOptions)
 }
 
 fun NavGraphBuilder.homeGraph(

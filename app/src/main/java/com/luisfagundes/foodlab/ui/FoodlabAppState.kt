@@ -19,8 +19,8 @@ import com.luisfagundes.saved.navigation.navigateToSaved
 import com.luisfagundes.foodlab.navigation.TopLevelDestination
 import com.luisfagundes.home.navigation.homeNavigationRoute
 import com.luisfagundes.home.navigation.navigateToHome
-import com.luisfagundes.feature.pantry.navigation.navigateToPantry
-import com.luisfagundes.feature.pantry.navigation.pantryNavigationRoute
+import com.luisfagundes.pantry.navigation.navigateToPantry
+import com.luisfagundes.pantry.navigation.pantryNavigationRoute
 import com.luisfagundes.search.navigation.navigateToSearch
 import com.luisfagundes.search.navigation.searchNavigationRoute
 import kotlinx.coroutines.CoroutineScope
@@ -49,8 +49,7 @@ class FoodlabAppState(
         }
 
     val shouldShowBottomBar: Boolean
-        get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
-
+        @Composable get() = currentTopLevelDestination != null
 
     val isOffline = networkMonitor.isOnline
         .map(Boolean::not)

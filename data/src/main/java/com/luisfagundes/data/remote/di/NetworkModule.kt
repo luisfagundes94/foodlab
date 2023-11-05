@@ -1,6 +1,8 @@
 package com.luisfagundes.data.remote.di
 
+import android.content.Context
 import com.luisfagundes.data.BuildConfig
+import com.luisfagundes.data.remote.datasources.MockedRecipeDataSource
 import com.luisfagundes.data.remote.datasources.RemoteRecipeDataSource
 import com.luisfagundes.data.remote.interceptors.AuthInterceptor
 import com.luisfagundes.data.remote.provider.createApiService
@@ -11,6 +13,7 @@ import com.luisfagundes.framework.network.createOkHttpClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -54,15 +57,15 @@ object NetworkModule {
     @Singleton
     fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
 
-    @Provides
-    @Singleton
-    fun provideRemoteRecipeDataSource(
-        apiService: RecipeService
-    ): RecipeDataSource = RemoteRecipeDataSource(apiService)
-
 //    @Provides
 //    @Singleton
-//    fun provideMockedRecipeDataSource(
-//        @ApplicationContext appContext: Context
-//    ): RecipeDataSource = MockedRecipeDataSource(appContext)
+//    fun provideRemoteRecipeDataSource(
+//        apiService: RecipeService
+//    ): RecipeDataSource = RemoteRecipeDataSource(apiService)
+
+    @Provides
+    @Singleton
+    fun provideMockedRecipeDataSource(
+        @ApplicationContext appContext: Context
+    ): RecipeDataSource = MockedRecipeDataSource(appContext)
 }
