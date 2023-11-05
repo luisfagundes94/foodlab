@@ -29,6 +29,6 @@ fun NavGraphBuilder.savedGraph(
                 onRecipeClick = onRecipeClick
             )
         }
+        nestedGraphs()
     }
-    nestedGraphs()
 }
