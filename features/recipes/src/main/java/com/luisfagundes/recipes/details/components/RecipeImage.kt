@@ -9,7 +9,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
-import com.luisfagundes.common.components.R
+import com.luisfagundes.commons.components.R
 import com.luisfagundes.domain.models.Recipe
 
 private const val BOTTOM_CORNER_PERCENT = 5

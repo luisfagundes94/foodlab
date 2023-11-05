@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recipe_deleted_successfully">Recipe deleted successfully</string>
+    <string name="recipe_deleted_error">Error deleting recipe</string>
+</resources>

@@ -9,8 +9,8 @@ import com.luisfagundes.framework.network.Result
 interface RecipeRepository {
     fun getFlowRecipeList(params: GetFlowRecipeList.Params): PagingSource<Int, Recipe>
     fun getSavedRecipeList(): List<Recipe>
-    fun saveRecipe(recipe: Recipe)
-    fun deleteRecipe(recipe: Recipe)
+    fun saveRecipe(recipe: Recipe): Result<Unit>
+    fun deleteRecipe(recipe: Recipe): Result<Unit>
     suspend fun getRecipeList(params: GetRecipeList.Params): Result<List<Recipe>>
     suspend fun getRecipeDetails(id: Int): Result<Recipe>
     suspend fun searchRecipes(query: String): Result<List<Recipe>>

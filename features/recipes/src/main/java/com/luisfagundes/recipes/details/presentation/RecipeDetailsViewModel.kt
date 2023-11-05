@@ -1,7 +1,6 @@
 package com.luisfagundes.recipes.details.presentation
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.repositories.RecipeRepository
@@ -35,6 +34,9 @@ class RecipeDetailsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<RecipeDetailsUiState>(Idle)
     val uiState = _uiState.asStateFlow()
 
+    private val _savedRecipeSuccessfully = MutableStateFlow(false)
+    val savedRecipeSuccessfully = _savedRecipeSuccessfully.asStateFlow()
+
     fun refreshRecipeDetails() = viewModelScope.launch {
         val params = GetRecipeDetails.Params(recipeId.toInt())
         getRecipeDetails(params).collect { result ->
@@ -43,7 +45,13 @@ class RecipeDetailsViewModel @Inject constructor(
     }
 
     fun saveRecipe(recipe: Recipe?) = safeLaunch {
-        recipe?.let { repository.saveRecipe(recipe) } ?: Timber.e("recipe is null")
+        recipe?.let {
+            when (repository.saveRecipe(recipe)) {
+                is Result.Success -> _savedRecipeSuccessfully.value = true
+                is Result.Error -> _savedRecipeSuccessfully.value = false
+                else -> Unit
+            }
+        } ?: Timber.e("recipe is null")
     }
 
     private fun handleResult(result: Result<Recipe>) = when (result) {

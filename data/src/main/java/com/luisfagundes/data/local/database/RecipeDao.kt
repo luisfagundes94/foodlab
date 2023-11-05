@@ -18,6 +18,6 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(recipe: RecipeEntity): Long
 
-    @Delete
+    @Delete(entity = RecipeEntity::class)
     fun delete(recipe: RecipeEntity): Int
 }

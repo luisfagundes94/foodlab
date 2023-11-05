@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.luisfagundes.common.resources"
+    namespace = "com.luisfagundes.commons.resources"
     compileSdk = 34
 
     defaultConfig {

@@ -15,10 +15,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.RecipeItem
+import com.luisfagundes.components.showToast
 import com.luisfagundes.domain.models.Recipe
+import com.luisfagundes.features.saved.R
 import com.luisfagundes.resources.theme.spacing
 
 @Composable
@@ -28,10 +32,24 @@ internal fun SavedRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    val context = LocalContext.current
+    val successDeletingRecipeMsg = stringResource(R.string.recipe_deleted_successfully)
+    val errorDeletingRecipeMsg = stringResource(R.string.recipe_deleted_error)
+
+    LaunchedEffect(Unit) {
+        viewModel.deleteEvent.collect { deleted ->
+            showToast(
+                context = context,
+                message = if (deleted) successDeletingRecipeMsg else errorDeletingRecipeMsg,
+            )
+        }
+    }
+
     SavedScreen(
         modifier = Modifier.fillMaxSize(),
         uiState = uiState,
         onRecipeClick = onRecipeClick,
+        onDeleteClick = viewModel::deleteRecipe,
     )
 
     LaunchedEffect(Unit) {
@@ -43,7 +61,8 @@ internal fun SavedRoute(
 internal fun SavedScreen(
     modifier: Modifier = Modifier,
     uiState: SavedUiState,
-    onRecipeClick: (id: String) -> Unit = {}
+    onRecipeClick: (id: String) -> Unit = {},
+    onDeleteClick: (recipe: Recipe) -> Unit = {},
 ) {
     Column(
         modifier = modifier,
@@ -60,7 +79,8 @@ internal fun SavedScreen(
                     .fillMaxWidth()
                     .padding(MaterialTheme.spacing.default),
                 recipes = uiState.recipes,
-                onRecipeClick = onRecipeClick
+                onRecipeClick = onRecipeClick,
+                onDeleteClick = onDeleteClick,
             )
         }
     }
@@ -71,6 +91,7 @@ private fun SavedContent(
     modifier: Modifier = Modifier,
     recipes: List<Recipe>,
     onRecipeClick: (id: String) -> Unit,
+    onDeleteClick: (recipe: Recipe) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -81,9 +102,10 @@ private fun SavedContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onRecipeClick(recipe.id.toString()) },
+                showDeleteIcon = true,
                 title = recipe.title,
                 imageUrl = recipe.imageUrl,
-                onFavoriteClick = {},
+                onIconClick = { onDeleteClick(recipe) },
             )
         }
     }

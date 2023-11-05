@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BookmarkAdd
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -23,10 +26,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
-import com.luisfagundes.common.components.R
+import com.luisfagundes.commons.components.R
 import com.luisfagundes.resources.theme.spacing
-import com.luisfagundes.common.resources.R.drawable.placeholder as placeholder_dark
-import com.luisfagundes.common.resources.R.drawable.placeholder_white as placeholder_light
+import com.luisfagundes.commons.resources.R.drawable.placeholder as placeholder_dark
+import com.luisfagundes.commons.resources.R.drawable.placeholder_white as placeholder_light
 
 @Composable
 fun RecipeItem(
@@ -35,7 +38,7 @@ fun RecipeItem(
     titleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     showDeleteIcon: Boolean = false,
     imageUrl: String,
-    onFavoriteClick: () -> Unit,
+    onIconClick: () -> Unit = {},
 ) {
     val isPreview = LocalInspectionMode.current
     val placeholder = if (isSystemInDarkTheme()) placeholder_light else placeholder_dark
@@ -46,6 +49,9 @@ fun RecipeItem(
         Box(
             contentAlignment = Alignment.TopEnd
         ) {
+            val actionIcon = if (showDeleteIcon) Icons.Default.Delete
+            else Icons.Default.BookmarkAdd
+
             if (isPreview) {
                 Image(
                     painter = painterResource(id = R.drawable.recipe),
@@ -68,8 +74,8 @@ fun RecipeItem(
                         shape = CircleShape,
                     )
                     .padding(MaterialTheme.spacing.extraSmall)
-                    .clickable { onFavoriteClick() },
-                imageVector = Icons.Default.BookmarkAdd,
+                    .clickable { onIconClick() },
+                imageVector = actionIcon,
                 contentDescription = null,
             )
         }

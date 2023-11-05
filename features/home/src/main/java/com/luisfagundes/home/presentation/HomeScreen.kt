@@ -3,7 +3,6 @@ package com.luisfagundes.home.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -11,15 +10,18 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.HomeRecipeSection
-import com.luisfagundes.foodlab.features.home.R
+import com.luisfagundes.components.showToast
+import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.resources.theme.spacing
 
 @Composable
@@ -29,6 +31,19 @@ internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    val context = LocalContext.current
+    val successDeletingRecipeMsg = stringResource(R.string.recipe_deleted_successfully)
+    val errorDeletingRecipeMsg = stringResource(R.string.recipe_deleted_error)
+
+    LaunchedEffect(Unit) {
+        viewModel.deleteEvent.collect { deleted ->
+            showToast(
+                context = context,
+                message = if (deleted) successDeletingRecipeMsg else errorDeletingRecipeMsg,
+            )
+        }
+    }
 
     HomeScreen(
         uiState = uiState,
@@ -43,7 +58,7 @@ internal fun HomeScreen(
     uiState: HomeUiState,
     modifier: Modifier,
     onRecipeClick: (id: String) -> Unit,
-    onFavoriteClick: (id: Int) -> Unit,
+    onFavoriteClick: (recipe: Recipe) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -79,7 +94,7 @@ private fun HomeScreenContent(
     uiState: HomeUiState.Success,
     modifier: Modifier,
     onRecipeClick: (id: String) -> Unit,
-    onFavoriteClick: (id: Int) -> Unit,
+    onFavoriteClick: (recipe: Recipe) -> Unit,
 ) {
     val verticalSpacing = MaterialTheme.spacing.verySmall
 

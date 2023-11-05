@@ -7,6 +7,7 @@ import com.luisfagundes.data.remote.mappers.RecipeMapper.toEntityModel
 import com.luisfagundes.data.remote.paging.RecipePagingSource
 import com.luisfagundes.domain.datasources.RecipeDataSource
 import com.luisfagundes.domain.models.Recipe
+import com.luisfagundes.framework.network.Result
 import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.domain.usecases.GetFlowRecipeList
 import com.luisfagundes.domain.usecases.GetRecipeList
@@ -35,12 +36,18 @@ class RecipeRepositoryImpl @Inject constructor(
         return database.recipeDao().getAll().map { it.toDomainModel() }
     }
 
-    override fun saveRecipe(recipe: Recipe) {
-        database.recipeDao().insert(recipe.toEntityModel())
+    override fun saveRecipe(recipe: Recipe): Result<Unit> {
+        val result = database.recipeDao().insert(recipe.toEntityModel())
+        val exception = Exception("Error saving recipe")
+
+        return if (result > 0) Result.Success(Unit) else Result.Error(exception)
     }
 
-    override fun deleteRecipe(recipe: Recipe) {
-        database.recipeDao().delete(recipe.toEntityModel())
+    override fun deleteRecipe(recipe: Recipe): Result<Unit> {
+        val result = database.recipeDao().delete(recipe.toEntityModel())
+        val exception = Exception("Error deleting recipe")
+
+        return if (result == 1) Result.Success(Unit) else Result.Error(exception)
     }
 
     override suspend fun getRecipeList(
