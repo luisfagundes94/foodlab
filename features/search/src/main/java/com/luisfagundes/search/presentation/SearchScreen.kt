@@ -153,6 +153,7 @@ private fun SearchScreenContent(
             )
 
             is VideoGuideUiState.Error -> Text(
+                modifier = Modifier.padding(vertical = MaterialTheme.spacing.default),
                 text = stringResource(R.string.error)
             )
 
