@@ -33,6 +33,7 @@ fun RecipeItem(
     modifier: Modifier = Modifier,
     title: String,
     titleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    showDeleteIcon: Boolean = false,
     imageUrl: String,
     onFavoriteClick: () -> Unit,
 ) {

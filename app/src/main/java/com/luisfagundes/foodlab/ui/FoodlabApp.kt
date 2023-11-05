@@ -115,13 +115,7 @@ fun FoodlabApp(
                             onActionClick = {},
                         )
                     }
-                    FoodlabNavHost(appState = appState, onShowSnackbar = { message, action ->
-                        snackbarHostState.showSnackbar(
-                            message = message,
-                            actionLabel = action,
-                            duration = Short,
-                        ) == ActionPerformed
-                    })
+                    FoodlabNavHost(appState)
                 }
             }
         }

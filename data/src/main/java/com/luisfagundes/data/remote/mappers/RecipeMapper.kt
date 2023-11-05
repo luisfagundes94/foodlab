@@ -6,8 +6,10 @@ import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.framework.extension.empty
 import com.luisfagundes.data.remote.mappers.IngredientMapper.mapToDomain
 import com.luisfagundes.data.remote.mappers.IngredientMapper.toDomainModel
+import com.luisfagundes.data.remote.mappers.IngredientMapper.toEntityModel
 import com.luisfagundes.data.remote.mappers.InstructionMapper.mapToDomain
 import com.luisfagundes.data.remote.mappers.InstructionMapper.toDomainModel
+import com.luisfagundes.data.remote.mappers.InstructionMapper.toEntityModel
 
 object RecipeMapper {
     fun RecipeResponse.toDomainModel() =
@@ -60,6 +62,33 @@ object RecipeMapper {
             veryPopular = this.veryPopular,
             sustainable = this.sustainable,
             instructions = this.instructions?.map { it.toDomainModel() } ?: emptyList()
+        )
+    }
+
+    fun Recipe.toEntityModel(): RecipeEntity {
+        return RecipeEntity(
+            id = this.id,
+            title = this.title,
+            imageUrl = this.imageUrl,
+            serves = this.serves,
+            readyInMinutes = this.readyInMinutes,
+            sourceUrl = this.sourceUrl,
+            aggregateLikes = this.aggregateLikes,
+            spoonacularScore = this.spoonacularScore,
+            healthScore = this.healthScore,
+            cheap = this.cheap,
+            ingredients = this.ingredients?.map { it.toEntityModel()} ?: emptyList(),
+            vegetarian = this.vegetarian,
+            vegan = this.vegan,
+            dishTypes = this.dishTypes,
+            summary = this.summary,
+            sourceName = this.sourceName,
+            glutenFree = this.glutenFree,
+            dairyFree = this.dairyFree,
+            veryHealthy = this.veryHealthy,
+            veryPopular = this.veryPopular,
+            sustainable = this.sustainable,
+            instructions = this.instructions?.map { it.toEntityModel() } ?: emptyList()
         )
     }
 }

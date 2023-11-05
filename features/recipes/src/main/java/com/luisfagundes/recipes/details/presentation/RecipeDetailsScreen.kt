@@ -34,6 +34,7 @@ import com.luisfagundes.components.ErrorView
 import com.luisfagundes.components.FoodlabTopAppBar
 import com.luisfagundes.components.HtmlText
 import com.luisfagundes.domain.enums.IngredientUnit
+import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.features.recipes.R
 import com.luisfagundes.recipes.details.components.Ingredients
 import com.luisfagundes.recipes.details.components.RecipeFacts
@@ -55,6 +56,7 @@ fun RecipeDetailsRoute(
         modifier = modifier.fillMaxSize(),
         onBackClick = onBackClick,
         onRetryClick = viewModel::refreshRecipeDetails,
+        onTopBarActionClick = viewModel::saveRecipe,
     )
 
     LaunchedEffect(Unit) {
@@ -67,15 +69,19 @@ fun RecipeDetailsRoute(
 internal fun RecipeDetailsScreen(
     uiState: RecipeDetailsUiState,
     modifier: Modifier,
+    onTopBarActionClick: (recipe: Recipe?) -> Unit = {},
     onBackClick: () -> Unit,
     onRetryClick: () -> Unit = {},
 ) {
+
+    val recipe = (uiState as? RecipeDetailsUiState.Success)?.recipe
 
     FoodlabTopAppBar(
         titleRes = R.string.recipe_details_title,
         navigationIcon = Icons.Default.ArrowBack,
         navigationIconContentDescription = stringResource(R.string.back),
         actionIcon = Icons.Default.BookmarkAdd,
+        onActionClick = { onTopBarActionClick(recipe) },
         actionIconContentDescription = stringResource(R.string.save_recipe),
         onNavigationClick = onBackClick,
     ) {
@@ -179,14 +185,8 @@ internal fun RecipeDetailsScreenContent(
                 if (servings > 1) servings--
             },
         )
-        Text(
-            modifier = Modifier.padding(vertical = MaterialTheme.spacing.default),
-            text = stringResource(id = R.string.steps),
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-        )
         RecipeSteps(
-            steps = recipe.instructions.first().steps
+            steps = recipe.instructions?.first()?.steps ?: emptyList()
         )
     }
 }

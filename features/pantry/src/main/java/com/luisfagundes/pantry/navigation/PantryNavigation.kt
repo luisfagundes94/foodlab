@@ -12,7 +12,7 @@ fun NavController.navigateToPantry(navOptions: NavOptions? = null) {
     navigate(pantryNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.pantryScreen() {
+fun NavGraphBuilder.pantryGraph() {
     composable(
         route = pantryNavigationRoute,
     ) {

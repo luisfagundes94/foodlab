@@ -4,7 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luisfagundes.domain.models.Recipe
+import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.domain.usecases.GetRecipeDetails
+import com.luisfagundes.framework.base.mvvm.BaseViewModel
 import com.luisfagundes.framework.decoder.StringDecoder
 import com.luisfagundes.framework.network.Result
 import com.luisfagundes.recipes.details.navigation.RecipeDetailsArg
@@ -16,14 +18,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class RecipeDetailsViewModel @Inject constructor(
     private val getRecipeDetails: GetRecipeDetails,
+    private val repository: RecipeRepository,
     stringDecoder: StringDecoder,
     savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val recipeDetailsArg = RecipeDetailsArg(savedStateHandle, stringDecoder)
     private val recipeId = recipeDetailsArg.recipeId
@@ -36,6 +40,10 @@ class RecipeDetailsViewModel @Inject constructor(
         getRecipeDetails(params).collect { result ->
             _uiState.value = handleResult(result)
         }
+    }
+
+    fun saveRecipe(recipe: Recipe?) = safeLaunch {
+        recipe?.let { repository.saveRecipe(recipe) } ?: Timber.e("recipe is null")
     }
 
     private fun handleResult(result: Result<Recipe>) = when (result) {

@@ -1,5 +1,8 @@
 package com.luisfagundes.domain.models
 
+import javax.annotation.concurrent.Immutable
+
+@Immutable
 data class Recipe(
     val id: Int,
     val title: String,
@@ -22,5 +25,5 @@ data class Recipe(
     val veryHealthy: Boolean?,
     val veryPopular: Boolean?,
     val sustainable: Boolean?,
-    val instructions: List<Instruction>
+    val instructions: List<Instruction>?
 )

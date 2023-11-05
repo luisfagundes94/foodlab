@@ -12,7 +12,7 @@ fun NavController.navigateToSearch(navOptions: NavOptions? = null) {
     navigate(searchNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.searchScreen(
+fun NavGraphBuilder.searchGraph(
     onRecipeClick: (id: Int) -> Unit
 ) {
     composable(

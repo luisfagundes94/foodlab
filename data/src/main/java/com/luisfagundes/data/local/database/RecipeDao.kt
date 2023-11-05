@@ -12,6 +12,9 @@ interface RecipeDao {
     @Query("SELECT * FROM recipes")
     fun getAll(): List<RecipeEntity>
 
+    @Query("SELECT * FROM recipes WHERE id = :id")
+    fun getById(id: Int): RecipeEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(recipe: RecipeEntity): Long
 

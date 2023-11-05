@@ -3,6 +3,7 @@ package com.luisfagundes.recipes
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.luisfagundes.domain.factory.FakeRecipeFactory
+import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.framework.decoder.StringDecoder
 import com.luisfagundes.recipes.details.presentation.RecipeDetailsViewModel
@@ -24,6 +25,7 @@ private const val FAKE_ID = "1"
 @ExperimentalCoroutinesApi
 class RecipeDetailsViewModelTest {
 
+    private val repository: RecipeRepository = mockk()
     private val getRecipeDetails: GetRecipeDetails = mockk()
     private val stringDecoder: StringDecoder = mockk()
     private val savedStateHandle: SavedStateHandle = mockk()
@@ -44,6 +46,7 @@ class RecipeDetailsViewModelTest {
             getRecipeDetails = getRecipeDetails,
             stringDecoder = stringDecoder,
             savedStateHandle = savedStateHandle,
+            repository = repository
         )
     }
 

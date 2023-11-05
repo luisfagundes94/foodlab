@@ -6,6 +6,7 @@ import com.luisfagundes.data.remote.models.InstructionResponse
 import com.luisfagundes.data.remote.models.StepResponse
 import com.luisfagundes.domain.models.Instruction
 import com.luisfagundes.domain.models.Step
+import java.util.UUID
 
 object InstructionMapper {
     @JvmName("mapToDomainInstructionResponse")
@@ -14,29 +15,40 @@ object InstructionMapper {
 
     fun InstructionEntity.toDomainModel(): Instruction {
         return Instruction(
+            id = this.id,
             name = this.name,
-            steps = this.steps.mapToDomain()
+            steps = this.steps.map { it.toDomain() }
+        )
+    }
+
+    fun Instruction.toEntityModel(): InstructionEntity {
+        return InstructionEntity(
+            id = this.id,
+            name = this.name,
+            steps = this.steps.map { it.toEntity() }
         )
     }
 
     private fun InstructionResponse.toDomain() = Instruction(
+        id = UUID.randomUUID().hashCode(),
         name = this.name,
-        steps = this.steps.mapToDomain()
+        steps = this.steps.map { it.toDomain() }
     )
 
-    @JvmName("mapToDomainStepResponse")
-    private fun List<StepResponse>.mapToDomain(): List<Step> =
-        this.map { it.toDomain() }
-
-    private fun List<StepEntity>.mapToDomain(): List<Step> =
-        this.map { it.toDomain() }
+    private fun Step.toEntity() = StepEntity(
+        id = this.id,
+        step = this.step,
+        number = this.number
+    )
 
     private fun StepResponse.toDomain() = Step(
+        id = UUID.randomUUID().hashCode(),
         step = this.step,
         number = this.number
     )
 
     private fun StepEntity.toDomain() = Step(
+        id = this.id,
         step = this.step,
         number = this.number
     )

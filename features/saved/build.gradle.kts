@@ -46,6 +46,7 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.framework)
     implementation(projects.commons.resources)
+    implementation(projects.commons.components)
 
     // Compose
     implementation(libs.bundles.compose)

@@ -22,7 +22,9 @@ fun NavGraphBuilder.homeGraph(
         route = homeNavigationGraph,
         startDestination = homeNavigationRoute,
     ) {
-        composable(route = homeNavigationRoute) {
+        composable(
+            route = homeNavigationRoute
+        ) {
             HomeRoute(
                 onRecipeClick = onRecipeClick
             )

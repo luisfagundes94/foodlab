@@ -3,6 +3,7 @@ package com.luisfagundes.data.repositories
 import androidx.paging.PagingSource
 import com.luisfagundes.data.local.database.FoodlabDatabase
 import com.luisfagundes.data.remote.mappers.RecipeMapper.toDomainModel
+import com.luisfagundes.data.remote.mappers.RecipeMapper.toEntityModel
 import com.luisfagundes.data.remote.paging.RecipePagingSource
 import com.luisfagundes.domain.datasources.RecipeDataSource
 import com.luisfagundes.domain.models.Recipe
@@ -34,6 +35,14 @@ class RecipeRepositoryImpl @Inject constructor(
         return database.recipeDao().getAll().map { it.toDomainModel() }
     }
 
+    override fun saveRecipe(recipe: Recipe) {
+        database.recipeDao().insert(recipe.toEntityModel())
+    }
+
+    override fun deleteRecipe(recipe: Recipe) {
+        database.recipeDao().delete(recipe.toEntityModel())
+    }
+
     override suspend fun getRecipeList(
         params: GetRecipeList.Params
     ) = safeApiCall {
@@ -46,7 +55,8 @@ class RecipeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getRecipeDetails(id: Int) = safeApiCall {
-        dataSource.fetchRecipeDetails(id)
+        val recipeEntity = database.recipeDao().getById(id)
+        recipeEntity?.toDomainModel() ?: dataSource.fetchRecipeDetails(id)
     }
 
     override suspend fun searchRecipes(query: String) = safeApiCall {

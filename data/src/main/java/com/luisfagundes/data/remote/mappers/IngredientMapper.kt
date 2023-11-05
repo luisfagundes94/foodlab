@@ -10,6 +10,7 @@ import com.luisfagundes.domain.models.Ingredient
 import com.luisfagundes.domain.models.Measure
 import com.luisfagundes.domain.models.Measures
 import com.luisfagundes.framework.extension.empty
+import java.util.UUID
 
 private const val BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/"
 
@@ -40,8 +41,37 @@ object IngredientMapper {
         )
     }
 
+    fun Ingredient.toEntityModel(): IngredientEntity {
+        return IngredientEntity(
+            id = this.id,
+            name = this.name,
+            amount = this.amount,
+            imageUrl = this.imageUrl,
+            measures = this.measures.mapToEntity(),
+            originalMeasure = this.originalMeasure
+        )
+    }
+
+    private fun Measures.mapToEntity(): MeasuresEntity {
+        return MeasuresEntity(
+            id = this.id,
+            metric = this.metric.mapToEntity(),
+            us = this.us.mapToEntity()
+        )
+    }
+
+    private fun Measure.mapToEntity(): MeasureEntity {
+        return MeasureEntity(
+            id = this.id,
+            amount = this.amount,
+            unitLong = this.unitLong,
+            unitShort = this.unitShort
+        )
+    }
+
     private fun MeasuresResponse.mapToDomain(): Measures {
         return Measures(
+            id = UUID.randomUUID().hashCode(),
             metric = this.metric.toDomain(),
             us = this.us.toDomain()
         )
@@ -49,6 +79,7 @@ object IngredientMapper {
 
     private fun MeasuresEntity.mapToDomain(): Measures {
         return Measures(
+            id = this.id,
             metric = this.metric.toDomain(),
             us = this.us.toDomain()
         )
@@ -56,6 +87,7 @@ object IngredientMapper {
 
     private fun MeasureResponse.toDomain(): Measure {
         return Measure(
+            id = UUID.randomUUID().hashCode(),
             amount = this.amount,
             unitLong = this.unitLong,
             unitShort = this.unitShort
@@ -64,6 +96,7 @@ object IngredientMapper {
 
     private fun MeasureEntity.toDomain(): Measure {
         return Measure(
+            id = this.id,
             amount = this.amount,
             unitLong = this.unitLong,
             unitShort = this.unitShort

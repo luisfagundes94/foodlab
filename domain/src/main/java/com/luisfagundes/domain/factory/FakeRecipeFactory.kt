@@ -10,6 +10,7 @@ import com.luisfagundes.domain.models.Step
 import com.luisfagundes.recipe.domain.models.RecipeListBody
 
 private const val RANDOM_NUMBER = 1
+private const val ID = 123123
 private const val TITLE = "Omelete de Queijo"
 private const val IMAGE = "IMAGE"
 
@@ -27,17 +28,20 @@ object FakeRecipeFactory {
         cheap = false,
         ingredients = listOf(
             Ingredient(
-                id = RANDOM_NUMBER,
+                id = ID,
                 name = "Ovo",
                 imageUrl = IMAGE,
                 amount = 1.0f,
                 measures = Measures(
+                    id = ID,
                     metric = Measure(
+                        id = ID,
                         amount = 1.0f,
                         unitLong = "unidade",
                         unitShort = "un",
                     ),
                     us = Measure(
+                        id = ID,
                         amount = 1.0f,
                         unitLong = "unidade",
                         unitShort = "un",
@@ -46,17 +50,20 @@ object FakeRecipeFactory {
                 originalMeasure = "1",
             ),
             Ingredient(
-                id = RANDOM_NUMBER,
+                id = ID,
                 name = "Ovo",
                 imageUrl = IMAGE,
                 amount = 1.0f,
                 measures = Measures(
+                    id = ID,
                     metric = Measure(
+                        id = ID,
                         amount = 1.0f,
                         unitLong = "unidade",
                         unitShort = "un",
                     ),
                     us = Measure(
+                        id = ID,
                         amount = 1.0f,
                         unitLong = "unidade",
                         unitShort = "un",
@@ -84,9 +91,11 @@ object FakeRecipeFactory {
         sustainable = true,
         instructions = listOf(
             Instruction(
+                id = ID,
                 name = "Instruction",
                 steps = listOf(
                     Step(
+                        id = ID,
                         number = RANDOM_NUMBER,
                         step = "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
                             " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +

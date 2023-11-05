@@ -11,11 +11,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.luisfagundes.domain.models.Step
+import com.luisfagundes.features.recipes.R
 import com.luisfagundes.resources.theme.spacing
 
 @Composable
 fun RecipeSteps(steps: List<Step>) {
+    if (steps.isEmpty()) return
+
+    Text(
+        modifier = Modifier.padding(vertical = MaterialTheme.spacing.default),
+        text = stringResource(id = R.string.steps),
+        style = MaterialTheme.typography.titleLarge,
+        fontWeight = FontWeight.Bold,
+    )
     steps.forEach { step ->
         Step(step)
     }
