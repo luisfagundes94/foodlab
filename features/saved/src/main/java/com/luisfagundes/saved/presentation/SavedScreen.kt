@@ -22,8 +22,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.RecipeItem
 import com.luisfagundes.components.showToast
 import com.luisfagundes.domain.models.Recipe
-import com.luisfagundes.features.saved.R
 import com.luisfagundes.resources.theme.spacing
+import com.luisfagundes.commons.resources.R as CommonsRes
 
 @Composable
 internal fun SavedRoute(
@@ -33,8 +33,8 @@ internal fun SavedRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
-    val successDeletingRecipeMsg = stringResource(R.string.recipe_deleted_successfully)
-    val errorDeletingRecipeMsg = stringResource(R.string.recipe_deleted_error)
+    val successDeletingRecipeMsg = stringResource(CommonsRes.string.recipe_deleted_successfully)
+    val errorDeletingRecipeMsg = stringResource(CommonsRes.string.recipe_deleted_error)
 
     LaunchedEffect(Unit) {
         viewModel.deleteEvent.collect { deleted ->

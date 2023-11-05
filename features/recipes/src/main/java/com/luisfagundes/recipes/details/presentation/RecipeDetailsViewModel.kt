@@ -14,7 +14,9 @@ import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Idle
 import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Loading
 import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -34,8 +36,8 @@ class RecipeDetailsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<RecipeDetailsUiState>(Idle)
     val uiState = _uiState.asStateFlow()
 
-    private val _savedRecipeSuccessfully = MutableStateFlow(false)
-    val savedRecipeSuccessfully = _savedRecipeSuccessfully.asStateFlow()
+    private val _saveRecipeEvent = MutableSharedFlow<Boolean>()
+    val saveRecipeEvent = _saveRecipeEvent.asSharedFlow()
 
     fun refreshRecipeDetails() = viewModelScope.launch {
         val params = GetRecipeDetails.Params(recipeId.toInt())
@@ -47,8 +49,8 @@ class RecipeDetailsViewModel @Inject constructor(
     fun saveRecipe(recipe: Recipe?) = safeLaunch {
         recipe?.let {
             when (repository.saveRecipe(recipe)) {
-                is Result.Success -> _savedRecipeSuccessfully.value = true
-                is Result.Error -> _savedRecipeSuccessfully.value = false
+                is Result.Success -> _saveRecipeEvent.emit(true)
+                is Result.Error -> _saveRecipeEvent.emit(false)
                 else -> Unit
             }
         } ?: Timber.e("recipe is null")

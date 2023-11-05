@@ -8,10 +8,8 @@ import com.luisfagundes.domain.usecases.GetRecipeSections
 import com.luisfagundes.framework.base.mvvm.BaseViewModel
 import com.luisfagundes.framework.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.delay
@@ -34,8 +32,8 @@ class HomeViewModel @Inject constructor(
                 initialValue = HomeUiState.Loading
             )
 
-    private val _deleteEvent = MutableSharedFlow<Boolean>()
-    val deleteEvent = _deleteEvent.asSharedFlow()
+    private val _saveRecipeEvent = MutableSharedFlow<Boolean>()
+    val saveRecipeEvent = _saveRecipeEvent.asSharedFlow()
 
     private fun handleResult(result: Result<RecipeSections>) = when (result) {
         is Result.Success -> HomeUiState.Success(result.data)
@@ -45,8 +43,8 @@ class HomeViewModel @Inject constructor(
 
     fun saveRecipe(recipe: Recipe) = safeLaunch {
         when (repository.saveRecipe(recipe)) {
-            is Result.Success -> _deleteEvent.emit(true)
-            is Result.Error -> _deleteEvent.emit(false)
+            is Result.Success -> _saveRecipeEvent.emit(true)
+            is Result.Error -> _saveRecipeEvent.emit(false)
             else -> Unit
         }
         delay(1000)

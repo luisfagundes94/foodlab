@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.luisfagundes.commons.resources.R
 import com.luisfagundes.foodlab.ui.theme.Typography
 
 
@@ -117,6 +118,8 @@ fun FoodlabTheme(
             )
         }
     }
+
+    LocalContext.current.getString(R.string.recipe_deleted_successfully)
 
     CompositionLocalProvider(
         LocalBackgroundTheme provides defaultBackgroundTheme,
