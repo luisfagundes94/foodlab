@@ -15,16 +15,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.luisfagundes.components.RecipeDeletionToast
+import com.luisfagundes.components.DeletingRecipeToast
 import com.luisfagundes.components.RecipeItem
-import com.luisfagundes.components.showToast
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.resources.theme.spacing
-import com.luisfagundes.commons.resources.R as CommonsRes
 
 @Composable
 internal fun SavedRoute(
@@ -33,7 +29,7 @@ internal fun SavedRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    RecipeDeletionToast(viewModel.deleteEvent)
+    DeletingRecipeToast(viewModel.deleteEvent)
 
     SavedScreen(
         modifier = Modifier.fillMaxSize(),

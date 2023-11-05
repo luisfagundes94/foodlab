@@ -8,7 +8,7 @@ import com.luisfagundes.commons.resources.R
 import kotlinx.coroutines.flow.SharedFlow
 
 @Composable
-fun RecipeDeletionToast(saveRecipeEvent: SharedFlow<Boolean>) {
+fun DeletingRecipeToast(saveRecipeEvent: SharedFlow<Boolean>) {
     val context = LocalContext.current
     val successDeletingRecipeMsg = stringResource(R.string.recipe_deleted_successfully)
     val errorDeletingRecipeMsg = stringResource(R.string.recipe_deleted_error)
@@ -24,7 +24,7 @@ fun RecipeDeletionToast(saveRecipeEvent: SharedFlow<Boolean>) {
 }
 
 @Composable
-fun RecipeSavingToast(saveRecipeEvent: SharedFlow<Boolean>) {
+fun SavingRecipeToast(saveRecipeEvent: SharedFlow<Boolean>) {
     val context = LocalContext.current
     val successSavingRecipeMsg = stringResource(R.string.recipe_saved_successfully)
     val errorSavingRecipeMsg = stringResource(R.string.error_saving_recipe)

@@ -3,7 +3,6 @@ package com.luisfagundes.home.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -19,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.HomeRecipeSection
-import com.luisfagundes.components.RecipeSavingToast
+import com.luisfagundes.components.SavingRecipeToast
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.foodlab.features.home.R
 import com.luisfagundes.resources.theme.spacing
@@ -32,7 +31,7 @@ internal fun HomeRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    RecipeSavingToast(viewModel.saveRecipeEvent)
+    SavingRecipeToast(viewModel.saveRecipeEvent)
 
     HomeScreen(
         uiState = uiState,

@@ -24,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,8 +33,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.ErrorView
 import com.luisfagundes.components.FoodlabTopAppBar
 import com.luisfagundes.components.HtmlText
-import com.luisfagundes.components.RecipeSavingToast
-import com.luisfagundes.components.showToast
+import com.luisfagundes.components.SavingRecipeToast
 import com.luisfagundes.domain.enums.IngredientUnit
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.features.recipes.R
@@ -45,7 +43,6 @@ import com.luisfagundes.recipes.details.components.RecipeImage
 import com.luisfagundes.recipes.details.components.RecipeSteps
 import com.luisfagundes.recipes.details.components.SpanWithLink
 import com.luisfagundes.resources.theme.spacing
-import com.luisfagundes.commons.resources.R as CommonsRes
 
 @Composable
 fun RecipeDetailsRoute(
@@ -55,7 +52,7 @@ fun RecipeDetailsRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    RecipeSavingToast(viewModel.saveRecipeEvent)
+    SavingRecipeToast(viewModel.saveRecipeEvent)
 
     RecipeDetailsScreen(
         uiState = uiState,
