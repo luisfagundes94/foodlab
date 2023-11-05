@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.luisfagundes.framework.decoder.StringDecoder
 import com.luisfagundes.recipes.details.presentation.RecipeDetailsRoute
 import org.jetbrains.annotations.VisibleForTesting
+import timber.log.Timber
 
 @VisibleForTesting
 internal const val recipeIdArg = "recipeId"
@@ -26,6 +27,7 @@ fun NavController.navigateToRecipeDetails(recipeId: String) {
     this.navigate("recipeDetailsRoute/$encodedId") {
         launchSingleTop = true
     }
+    Timber.d("RecipeDetailsRoute: ${this.currentDestination?.route}")
 }
 
 fun NavGraphBuilder.recipeDetailsScreen(
