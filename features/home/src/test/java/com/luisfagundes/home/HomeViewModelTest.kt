@@ -46,13 +46,17 @@ class HomeViewModelTest {
     @Test
     fun `uiState emits Error when result is Error`() = runTest {
         // Given
-        coEvery { getRecipeSections.invoke() } returns flowOf(Result.Error(Exception()))
+        coEvery { getRecipeSections.invoke() } returns flowOf(
+            Result.Loading,
+            Result.Error(Exception())
+        )
 
         // When
         viewModel = HomeViewModel(getRecipeSections, repository)
 
         // Then
         viewModel.uiState.test {
+            assertEquals(awaitItem(), HomeUiState.Loading)
             assertEquals(awaitItem(), HomeUiState.Error)
             expectNoEvents()
             cancelAndIgnoreRemainingEvents()
@@ -63,15 +67,18 @@ class HomeViewModelTest {
     fun `uiState emits Success when result is Success`() = runTest {
         // Given
         val recipeSections = FakeRecipeFactory.sections
-        coEvery { getRecipeSections.invoke() } returns flowOf(Result.Success(recipeSections))
+        coEvery { getRecipeSections.invoke() } returns flowOf(
+            Result.Loading,
+            Result.Success(recipeSections)
+        )
 
         // When
         viewModel = HomeViewModel(getRecipeSections, repository)
 
         // Then
         viewModel.uiState.test {
+            assertEquals(awaitItem(), HomeUiState.Loading)
             assertEquals(awaitItem(), HomeUiState.Success(recipeSections))
-            expectNoEvents()
             cancelAndIgnoreRemainingEvents()
         }
     }

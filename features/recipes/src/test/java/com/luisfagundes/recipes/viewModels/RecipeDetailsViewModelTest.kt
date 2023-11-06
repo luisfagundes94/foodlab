@@ -1,4 +1,4 @@
-package com.luisfagundes.recipes
+package com.luisfagundes.recipes.viewModels
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
@@ -6,15 +6,17 @@ import com.luisfagundes.domain.factory.FakeRecipeFactory
 import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.framework.decoder.StringDecoder
+import com.luisfagundes.framework.network.Result
+import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState
 import com.luisfagundes.recipes.details.presentation.RecipeDetailsViewModel
 import com.luisfagundes.testing.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.mockk
-import com.luisfagundes.framework.network.Result
-import com.luisfagundes.recipes.details.presentation.RecipeDetailsUiState
+import junit.framework.TestCase
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -55,13 +57,15 @@ class RecipeDetailsViewModelTest {
         // Given
         coEvery { getRecipeDetails.invoke(params) } returns flowOf(Result.Loading)
 
-        // When
-        viewModel.refreshRecipeDetails()
-
         // Then
         viewModel.uiState.test {
+            assertEquals(awaitItem(), RecipeDetailsUiState.Idle)
+
+            // When
+            viewModel.refreshRecipeDetails()
+
             assertEquals(awaitItem(), RecipeDetailsUiState.Loading)
-            expectNoEvents()
+
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -69,15 +73,23 @@ class RecipeDetailsViewModelTest {
     @Test
     fun `uiState emits Error when result is Error`() = runTest {
         // Given
-        coEvery { getRecipeDetails.invoke(params) } returns flowOf(Result.Error(Exception()))
+        val exception = Exception("Test Exception")
 
-        // When
-        viewModel.refreshRecipeDetails()
+        coEvery { getRecipeDetails.invoke(params) } returns flowOf(
+            Result.Loading,
+            Result.Error(exception)
+        )
 
         // Then
         viewModel.uiState.test {
+            assertEquals(awaitItem(), RecipeDetailsUiState.Idle)
+
+            // When
+            viewModel.refreshRecipeDetails()
+
+            assertEquals(awaitItem(), RecipeDetailsUiState.Loading)
             assertEquals(awaitItem(), RecipeDetailsUiState.Error)
-            expectNoEvents()
+
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -86,15 +98,22 @@ class RecipeDetailsViewModelTest {
     fun `uiState emits Success when result is Success`() = runTest {
         // Given
         val recipe = FakeRecipeFactory.recipe
-        coEvery { getRecipeDetails.invoke(params) } returns flowOf(Result.Success(recipe))
 
-        // When
-        viewModel.refreshRecipeDetails()
+        coEvery { getRecipeDetails.invoke(params) } returns flowOf(
+            Result.Loading,
+            Result.Success(recipe)
+        )
 
         // Then
         viewModel.uiState.test {
+            assertEquals(awaitItem(), RecipeDetailsUiState.Idle)
+
+            // When
+            viewModel.refreshRecipeDetails()
+
+            assertEquals(awaitItem(), RecipeDetailsUiState.Loading)
             assertEquals(awaitItem(), RecipeDetailsUiState.Success(recipe))
-            expectNoEvents()
+
             cancelAndIgnoreRemainingEvents()
         }
     }
