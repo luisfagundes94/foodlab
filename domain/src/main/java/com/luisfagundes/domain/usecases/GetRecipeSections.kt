@@ -1,5 +1,6 @@
 package com.luisfagundes.domain.usecases
 
+import com.luisfagundes.domain.enums.MealType
 import com.luisfagundes.domain.enums.RecipeSortingOptions
 import com.luisfagundes.domain.models.RecipeSections
 import com.luisfagundes.domain.repositories.RecipeRepository
@@ -47,5 +48,6 @@ class GetRecipeSections @Inject constructor(
 
     private fun createGetRecipeListParams(sort: String) = GetRecipeList.Params(
         sort = sort,
+        type = MealType.MAIN_COURSE.type
     )
 }

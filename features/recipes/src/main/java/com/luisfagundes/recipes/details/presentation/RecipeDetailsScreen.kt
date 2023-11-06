@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.BookmarkAdd
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -81,8 +81,8 @@ internal fun RecipeDetailsScreen(
 
     FoodlabTopAppBar(
         titleRes = R.string.recipe_details_title,
-        navigationIcon = Icons.Default.ArrowBack,
-        navigationIconContentDescription = stringResource(R.string.back),
+        navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
+        navigationIconDescription = stringResource(R.string.back),
         actionIcon = Icons.Default.BookmarkAdd,
         onActionClick = { onTopBarActionClick(recipe) },
         actionIconContentDescription = stringResource(R.string.save_recipe),

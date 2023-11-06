@@ -57,6 +57,7 @@ class RecipeRepositoryImpl @Inject constructor(
             params = mapOf(
                 NUMBER to DEFAULT_PAGE_SIZE.toString(),
                 SORT to params.sort,
+                TYPE to params.type,
             )
         ).results
     }
@@ -81,5 +82,6 @@ class RecipeRepositoryImpl @Inject constructor(
         const val INSTRUCTIONS_REQUIRED = "instructionsRequired"
         const val SORT = "sort"
         const val QUERY = "query"
+        const val TYPE = "type"
     }
 }

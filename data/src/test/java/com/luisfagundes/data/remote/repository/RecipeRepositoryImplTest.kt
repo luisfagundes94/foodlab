@@ -2,6 +2,7 @@ package com.luisfagundes.data.remote.repository
 
 import androidx.paging.PagingConfig
 import com.luisfagundes.data.local.database.FoodlabDatabase
+import com.luisfagundes.data.remote.mappers.RecipeMapper.toEntityModel
 import com.luisfagundes.data.remote.paging.RecipePagingSource
 import com.luisfagundes.data.repositories.RecipeRepositoryImpl
 import com.luisfagundes.domain.datasources.RecipeDataSource
@@ -59,11 +60,12 @@ class RecipeRepositoryImplTest {
     }
 
     @Test
-    fun `test getRecipeDetails returns expected result`() = runTest {
+    fun `test getRecipeDetails returns remote data WHEN local data is null`() = runTest {
         // Given
         val expectedRecipe = FakeRecipeFactory.recipe
         val recipeId = 1
 
+        coEvery { database.recipeDao().getById(any()) } returns null
         coEvery { dataSource.fetchRecipeDetails(recipeId) } returns expectedRecipe
 
         // When
@@ -73,6 +75,23 @@ class RecipeRepositoryImplTest {
         assertTrue(result is Result.Success)
         assertEquals(expectedRecipe, (result as Result.Success).data)
         coVerify { dataSource.fetchRecipeDetails(recipeId) }
+    }
+
+    @Test
+    fun `test getRecipeDetails returns local data WHEN is available locally`() = runTest {
+        // Given
+        val expectedRecipe = FakeRecipeFactory.recipe
+        val recipeId = 1
+
+        coEvery { database.recipeDao().getById(any()) } returns expectedRecipe.toEntityModel()
+
+        // When
+        val result = recipeRepository.getRecipeDetails(recipeId)
+
+        // Then
+        assertTrue(result is Result.Success)
+        assertEquals(expectedRecipe, (result as Result.Success).data)
+        coVerify(exactly = 0) { dataSource.fetchRecipeDetails(recipeId) }
     }
 
     @Test

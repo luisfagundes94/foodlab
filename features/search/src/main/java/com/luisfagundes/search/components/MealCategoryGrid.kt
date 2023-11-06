@@ -20,7 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import com.luisfagundes.domain.models.MealCategory
+import com.luisfagundes.domain.enums.MealType
 import com.luisfagundes.features.search.R
 import com.luisfagundes.resources.theme.spacing
 import com.luisfagundes.search.mapper.MealCategoryMapper.mapToUiModel
@@ -30,8 +30,8 @@ private const val MEAL_CATEGORY_GRID_COLUMNS = 2
 
 @Composable
 fun MealCategoryGrid(
-    mealCategories: List<MealCategory>,
-    onClick: () -> Unit
+    mealTypes: List<MealType>,
+    onClick: (MealType) -> Unit
 ) {
     Text(
         modifier = Modifier.padding(top = MaterialTheme.spacing.default),
@@ -39,7 +39,7 @@ fun MealCategoryGrid(
         fontWeight = FontWeight.Bold,
         style = MaterialTheme.typography.titleLarge
     )
-    val rows = mealCategories.chunked(MEAL_CATEGORY_GRID_COLUMNS)
+    val rows = mealTypes.chunked(MEAL_CATEGORY_GRID_COLUMNS)
     Column {
         rows.forEach { rowCategories ->
             Row(
@@ -55,7 +55,7 @@ fun MealCategoryGrid(
                     MealCategory(
                         modifier = Modifier.weight(1f),
                         uiModel = category.mapToUiModel(),
-                        onClick = onClick
+                        onClick = { onClick(category) }
                     )
                 }
             }

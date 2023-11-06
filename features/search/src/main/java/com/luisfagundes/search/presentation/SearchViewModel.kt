@@ -2,8 +2,9 @@ package com.luisfagundes.search.presentation
 
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.domain.models.VideoGuide
-import com.luisfagundes.domain.repositories.RecipeRepository
+import com.luisfagundes.domain.usecases.GetRecipeList
 import com.luisfagundes.domain.usecases.GetVideoGuides
+import com.luisfagundes.domain.usecases.SearchRecipe
 import com.luisfagundes.framework.base.mvvm.BaseViewModel
 import com.luisfagundes.framework.network.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val getVideoGuides: GetVideoGuides,
-    private val repository: RecipeRepository,
+    private val searchRecipe: SearchRecipe,
 ) : BaseViewModel() {
 
     private val _searchUiState = MutableStateFlow<SearchUiState>(SearchUiState.NotSearching)
@@ -33,7 +34,9 @@ class SearchViewModel @Inject constructor(
         if (query.length < 2) return@safeLaunch
 
         _searchUiState.update { SearchUiState.Searching }
-        val result = repository.searchRecipes(query)
+
+        val params = SearchRecipe.Params(query)
+        val result = searchRecipe.invoke(params)
         handleSearchResults(result)
     }
 

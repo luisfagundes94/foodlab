@@ -10,6 +10,8 @@ import com.luisfagundes.pantry.navigation.pantryGraph
 import com.luisfagundes.home.navigation.homeNavigationGraph
 import com.luisfagundes.recipes.details.navigation.navigateToRecipeDetails
 import com.luisfagundes.recipes.details.navigation.recipeDetailsScreen
+import com.luisfagundes.recipes.list.navigation.navigateToRecipeList
+import com.luisfagundes.recipes.list.navigation.recipeListScreen
 import com.luisfagundes.search.navigation.searchGraph
 
 @Composable
@@ -34,7 +36,10 @@ fun FoodlabNavHost(
             }
         )
         searchGraph(
-            onRecipeClick = {}
+            onRecipeClick = navController::navigateToRecipeDetails,
+            onMealTypeClick = {
+                navController.navigateToRecipeList(it.type)
+            }
         )
         savedGraph(
             onRecipeClick = navController::navigateToRecipeDetails,
@@ -45,5 +50,9 @@ fun FoodlabNavHost(
             }
         )
         pantryGraph()
+        recipeListScreen(
+            onBackClick = navController::popBackStack,
+            onRecipeClick = navController::navigateToRecipeDetails,
+        )
     }
 }

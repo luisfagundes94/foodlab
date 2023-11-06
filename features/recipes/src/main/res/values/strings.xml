@@ -13,4 +13,6 @@
     <string name="min">min</string>
     <string name="health">healthy</string>
     <string name="steps">Steps</string>
+    <string name="error_loading_recipes">Error loading recipes</string>
+    <string name="recipe_list_title">Recipes</string>
 </resources>
