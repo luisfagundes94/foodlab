@@ -1,5 +1,5 @@
 # Foodlab (WIP)
-An Android application for browsing recipes.
+An Android application for browsing recipes given ingredients.
 
 Features:
 - Search recipes by ingredients
