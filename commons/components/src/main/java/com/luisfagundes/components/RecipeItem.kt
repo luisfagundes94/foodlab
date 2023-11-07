@@ -11,8 +11,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BookmarkAdd
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -36,12 +34,12 @@ fun RecipeItem(
     modifier: Modifier = Modifier,
     title: String,
     titleStyle: TextStyle = MaterialTheme.typography.bodyMedium,
+    showActionIcon: Boolean = true,
     showDeleteIcon: Boolean = false,
     imageUrl: String,
     onIconClick: () -> Unit = {},
 ) {
     val isPreview = LocalInspectionMode.current
-    val placeholder = if (isSystemInDarkTheme()) placeholder_light else placeholder_dark
 
     ElevatedCard(
         modifier = modifier,
@@ -61,23 +59,24 @@ fun RecipeItem(
                 AsyncImage(
                     modifier = Modifier.fillMaxWidth(),
                     model = imageUrl,
-                    placeholder = painterResource(id = placeholder),
                     contentDescription = title,
                     contentScale = ContentScale.Crop,
                 )
             }
-            Icon(
-                modifier = Modifier
-                    .padding(MaterialTheme.spacing.extraSmall)
-                    .background(
-                        color = MaterialTheme.colorScheme.surface.copy(alpha = .8f),
-                        shape = CircleShape,
-                    )
-                    .padding(MaterialTheme.spacing.extraSmall)
-                    .clickable { onIconClick() },
-                imageVector = actionIcon,
-                contentDescription = null,
-            )
+            if (showActionIcon) {
+                Icon(
+                    modifier = Modifier
+                        .padding(MaterialTheme.spacing.extraSmall)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = .8f),
+                            shape = CircleShape,
+                        )
+                        .padding(MaterialTheme.spacing.extraSmall)
+                        .clickable { onIconClick() },
+                    imageVector = actionIcon,
+                    contentDescription = null,
+                )
+            }
         }
         Text(
             modifier = Modifier.padding(MaterialTheme.spacing.verySmall),

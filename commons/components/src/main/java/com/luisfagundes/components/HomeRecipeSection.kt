@@ -59,6 +59,7 @@ fun HomeRecipeSection(
                         .clickable { onRecipeClick(recipe.id.toString()) },
                     title = recipe.title,
                     imageUrl = recipe.imageUrl,
+                    showActionIcon = false,
                 )
             }
         }

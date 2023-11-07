@@ -29,7 +29,7 @@ internal fun SavedRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    BookmarkToastEvent(viewModel.deleteEvent)
+    BookmarkToastEvent(viewModel.recipeBookmarkEvent)
 
     SavedScreen(
         modifier = Modifier.fillMaxSize(),
