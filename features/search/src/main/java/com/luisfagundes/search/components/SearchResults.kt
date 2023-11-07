@@ -20,7 +20,6 @@ internal fun SearchResults(
     modifier: Modifier = Modifier,
     recipes: List<Recipe>,
     onRecipeClick: (id: String) -> Unit,
-    onFavoriteClick: (id: Int) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier,
@@ -38,7 +37,7 @@ internal fun SearchResults(
                 title = recipe.title,
                 titleStyle = MaterialTheme.typography.titleLarge,
                 imageUrl = recipe.imageUrl,
-                onIconClick = { onFavoriteClick(recipe.id) },
+                showActionIcon = false,
             )
         }
     }

@@ -98,7 +98,6 @@ internal fun SearchScreen(
                     .padding(top = MaterialTheme.spacing.default),
                 recipes = searchUiState.recipes,
                 onRecipeClick = onRecipeClick,
-                onFavoriteClick = {},
             )
 
             is SearchUiState.Loading -> LoadingView(
