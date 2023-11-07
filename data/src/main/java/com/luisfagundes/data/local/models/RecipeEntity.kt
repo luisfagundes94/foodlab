@@ -27,5 +27,6 @@ data class RecipeEntity(
     @ColumnInfo(name = "very_healthy") val veryHealthy: Boolean?,
     @ColumnInfo(name = "very_popular") val veryPopular: Boolean?,
     @ColumnInfo(name = "sustainable") val sustainable: Boolean?,
-    @ColumnInfo(name = "instructions") val instructions: List<InstructionEntity>?
+    @ColumnInfo(name = "instructions") val instructions: List<InstructionEntity>?,
+    @ColumnInfo(name = "isSaved") val bookmarked: Boolean = true,
 )

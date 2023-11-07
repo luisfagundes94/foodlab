@@ -2,11 +2,14 @@ package com.luisfagundes.recipes.details.presentation
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BookmarkAdd
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.luisfagundes.domain.factory.FakeRecipeFactory
+import com.luisfagundes.recipes.details.components.RecipeDetailsScreenContent
 import com.luisfagundes.resources.theme.FoodlabTheme
 import com.luisfagundes.resources.theme.FoodlabThemePreview
 import com.luisfagundes.resources.theme.spacing
@@ -44,6 +47,9 @@ internal fun RecipeDetailsError() {
                 modifier = modifier,
                 uiState = uiState,
                 onBackClick = {},
+                onRetryClick = {},
+                isBookmarked = true,
+                onBookmarkToggle = {},
             )
         }
     }
@@ -63,6 +69,9 @@ internal fun RecipeDetailsLoading() {
                 modifier = modifier,
                 uiState = uiState,
                 onBackClick = {},
+                onRetryClick = {},
+                isBookmarked = true,
+                onBookmarkToggle = {},
             )
         }
     }

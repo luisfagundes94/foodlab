@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.HomeRecipeSection
-import com.luisfagundes.components.SavingRecipeToast
+import com.luisfagundes.components.HandleSavedRecipeEvent
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.foodlab.features.home.R
 import com.luisfagundes.resources.theme.spacing
@@ -31,7 +31,7 @@ internal fun HomeRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    SavingRecipeToast(viewModel.saveRecipeEvent)
+    HandleSavedRecipeEvent(viewModel.saveRecipeEvent)
 
     HomeScreen(
         uiState = uiState,

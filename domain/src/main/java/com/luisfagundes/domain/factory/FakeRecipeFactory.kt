@@ -108,7 +108,8 @@ object FakeRecipeFactory {
                     )
                 )
             )
-        )
+        ),
+        bookmarked = false,
     )
 
     val sections = RecipeSections(

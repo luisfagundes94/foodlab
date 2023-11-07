@@ -35,7 +35,8 @@ object RecipeMapper {
             veryHealthy = this.veryHealthy,
             veryPopular = this.veryPopular,
             sustainable = this.sustainable,
-            instructions = this.analyzedInstructions?.mapToDomain() ?: emptyList()
+            instructions = this.analyzedInstructions?.mapToDomain() ?: emptyList(),
+            bookmarked = false,
         )
 
     fun RecipeEntity.toDomainModel(): Recipe {
@@ -61,7 +62,8 @@ object RecipeMapper {
             veryHealthy = this.veryHealthy,
             veryPopular = this.veryPopular,
             sustainable = this.sustainable,
-            instructions = this.instructions?.map { it.toDomainModel() } ?: emptyList()
+            instructions = this.instructions?.map { it.toDomainModel() } ?: emptyList(),
+            bookmarked = true
         )
     }
 
@@ -88,7 +90,8 @@ object RecipeMapper {
             veryHealthy = this.veryHealthy,
             veryPopular = this.veryPopular,
             sustainable = this.sustainable,
-            instructions = this.instructions?.map { it.toEntityModel() } ?: emptyList()
+            instructions = this.instructions?.map { it.toEntityModel() } ?: emptyList(),
+            bookmarked = true,
         )
     }
 }
