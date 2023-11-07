@@ -15,17 +15,15 @@ class ToggleRecipeBookmarkStatus @Inject constructor(
 ) {
     data class Params(
         val recipe: Recipe?,
-        val isBookmarked: Boolean,
     )
     suspend operator fun invoke(params: Params): Result<Unit> = withContext(dispatcher) {
         val recipe = params.recipe
-        val isBookmarked = params.isBookmarked
 
         if (recipe == null) {
             Timber.e("Attempted to bookmark a null recipe.")
             return@withContext Result.Error(NullPointerException("Recipe must not be null"))
         }
-        return@withContext if (isBookmarked) {
+        return@withContext if (recipe.bookmarked) {
             repository.deleteRecipe(recipe)
         } else {
             repository.saveRecipe(recipe)

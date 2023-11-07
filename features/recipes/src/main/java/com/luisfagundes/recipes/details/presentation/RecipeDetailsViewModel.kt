@@ -1,9 +1,7 @@
 package com.luisfagundes.recipes.details.presentation
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.luisfagundes.domain.models.Recipe
-import com.luisfagundes.domain.repositories.RecipeRepository
 import com.luisfagundes.domain.usecases.GetRecipeDetails
 import com.luisfagundes.domain.usecases.ToggleRecipeBookmarkStatus
 import com.luisfagundes.framework.base.mvvm.BaseViewModel
@@ -17,9 +15,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -64,7 +59,7 @@ class RecipeDetailsViewModel @Inject constructor(
         }
 
     fun toggleBookmarkStatus(recipe: Recipe?) = safeLaunch {
-        val params = ToggleRecipeBookmarkStatus.Params(recipe, _isBookmarked.value)
+        val params = ToggleRecipeBookmarkStatus.Params(recipe?.copy(bookmarked = _isBookmarked.value))
         val result = toggleRecipeBookmarkStatus.invoke(params)
         handleBookmarkResult(result)
     }
