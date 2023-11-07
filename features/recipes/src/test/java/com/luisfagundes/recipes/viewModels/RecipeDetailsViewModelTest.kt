@@ -42,7 +42,7 @@ class RecipeDetailsViewModelTest {
 
     @Before
     fun setUp() {
-        coEvery { stringDecoder.decode(any()) } returns "1"
+        coEvery { stringDecoder.decode(any()) } returns FAKE_ID
         coEvery { savedStateHandle.get<String>(any()) } returns FAKE_ID
 
         viewModel = RecipeDetailsViewModel(

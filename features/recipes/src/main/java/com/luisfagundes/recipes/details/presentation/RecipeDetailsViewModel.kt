@@ -42,11 +42,7 @@ class RecipeDetailsViewModel @Inject constructor(
     private val _isBookmarked = MutableStateFlow(false)
     val isBookmarked: StateFlow<Boolean> = _isBookmarked.asStateFlow()
 
-    init {
-        refreshRecipeDetails()
-    }
-
-    fun refreshRecipeDetails() = viewModelScope.launch {
+    fun refreshRecipeDetails() = safeLaunch {
         _uiState.emit(RecipeDetailsUiState.Loading)
 
         val params = GetRecipeDetails.Params(recipeId)
