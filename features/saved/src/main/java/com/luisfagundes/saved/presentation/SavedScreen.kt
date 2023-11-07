@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.luisfagundes.components.HandleDeletedRecipeEvent
+import com.luisfagundes.components.BookmarkToastEvent
 import com.luisfagundes.components.RecipeItem
 import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.resources.theme.spacing
@@ -29,7 +29,7 @@ internal fun SavedRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    HandleDeletedRecipeEvent(viewModel.deleteEvent)
+    BookmarkToastEvent(viewModel.deleteEvent)
 
     SavedScreen(
         modifier = Modifier.fillMaxSize(),

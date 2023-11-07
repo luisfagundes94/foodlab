@@ -9,27 +9,20 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.BookmarkAdd
-import androidx.compose.material.icons.filled.BookmarkRemove
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.luisfagundes.components.BookmarkToastEvent
 import com.luisfagundes.components.ErrorView
 import com.luisfagundes.components.FoodlabTopAppBar
-import com.luisfagundes.components.HandleDeletedRecipeEvent
-import com.luisfagundes.components.HandleSavedRecipeEvent
 import com.luisfagundes.features.recipes.R
 import com.luisfagundes.recipes.details.components.RecipeDetailsScreenContent
 import com.luisfagundes.resources.theme.spacing
@@ -44,8 +37,10 @@ fun RecipeDetailsRoute(
     val isBookmarked by viewModel.isBookmarked.collectAsStateWithLifecycle()
     val recipe = (uiState as? RecipeDetailsUiState.Success)?.recipe
 
-    HandleSavedRecipeEvent(viewModel.saveRecipeEvent)
-    HandleDeletedRecipeEvent(viewModel.deleteRecipeEvent) { onBackClick.invoke() }
+    BookmarkToastEvent(
+        bookmarkEvent = viewModel.recipeBookmarkEvent,
+        onBookmarkRemoved = onBackClick,
+    )
 
     RecipeDetailsScreen(
         uiState = uiState,
@@ -53,12 +48,8 @@ fun RecipeDetailsRoute(
         onBackClick = onBackClick,
         onRetryClick = viewModel::refreshRecipeDetails,
         isBookmarked = isBookmarked,
-        onBookmarkToggle = { viewModel.handleRecipeEvent(isBookmarked, recipe) }
+        onBookmarkToggle = { viewModel.toggleBookmarkStatus(recipe) }
     )
-
-    LaunchedEffect(Unit) {
-        viewModel.refreshRecipeDetails()
-    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -71,9 +62,6 @@ internal fun RecipeDetailsScreen(
     onBackClick: () -> Unit,
     onRetryClick: () -> Unit = {},
 ) {
-    var bookmarked by remember { mutableStateOf<Boolean?>(null) }
-    var icon by remember { mutableStateOf<ImageVector?>(null) }
-
     FoodlabTopAppBar(
         titleRes = R.string.recipe_details_title,
         navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,

@@ -21,7 +21,6 @@ import org.junit.Test
 class HomeViewModelTest {
 
     private val getRecipeSections: GetRecipeSections = mockk()
-    private val repository: RecipeRepository = mockk()
     private lateinit var viewModel: HomeViewModel
 
     @get:Rule
@@ -33,7 +32,7 @@ class HomeViewModelTest {
         coEvery { getRecipeSections.invoke() } returns flowOf(Result.Loading)
 
         // When
-        viewModel = HomeViewModel(getRecipeSections, repository)
+        viewModel = HomeViewModel(getRecipeSections)
 
         // Then
         viewModel.uiState.test {
@@ -52,7 +51,7 @@ class HomeViewModelTest {
         )
 
         // When
-        viewModel = HomeViewModel(getRecipeSections, repository)
+        viewModel = HomeViewModel(getRecipeSections)
 
         // Then
         viewModel.uiState.test {
@@ -73,7 +72,7 @@ class HomeViewModelTest {
         )
 
         // When
-        viewModel = HomeViewModel(getRecipeSections, repository)
+        viewModel = HomeViewModel(getRecipeSections)
 
         // Then
         viewModel.uiState.test {

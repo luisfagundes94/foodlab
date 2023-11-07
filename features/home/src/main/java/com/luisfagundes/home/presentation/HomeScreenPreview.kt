@@ -16,7 +16,6 @@ fun HomeScreenPreview() {
                 uiState = uiState,
                 modifier = Modifier,
                 onRecipeClick = {},
-                onFavoriteClick = {},
             )
         }
     }

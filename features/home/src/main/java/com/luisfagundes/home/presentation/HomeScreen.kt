@@ -18,8 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.HomeRecipeSection
-import com.luisfagundes.components.HandleSavedRecipeEvent
-import com.luisfagundes.domain.models.Recipe
 import com.luisfagundes.foodlab.features.home.R
 import com.luisfagundes.resources.theme.spacing
 
@@ -31,13 +29,10 @@ internal fun HomeRoute(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    HandleSavedRecipeEvent(viewModel.saveRecipeEvent)
-
     HomeScreen(
         uiState = uiState,
         modifier = modifier,
         onRecipeClick = onRecipeClick,
-        onFavoriteClick = viewModel::saveRecipe
     )
 }
 
@@ -46,7 +41,6 @@ internal fun HomeScreen(
     uiState: HomeUiState,
     modifier: Modifier,
     onRecipeClick: (id: String) -> Unit,
-    onFavoriteClick: (recipe: Recipe) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -64,7 +58,6 @@ internal fun HomeScreen(
                 uiState = uiState,
                 modifier = modifier,
                 onRecipeClick = onRecipeClick,
-                onFavoriteClick = onFavoriteClick,
             )
         }
     }
@@ -86,7 +79,6 @@ private fun HomeScreenContent(
     uiState: HomeUiState.Success,
     modifier: Modifier,
     onRecipeClick: (id: String) -> Unit,
-    onFavoriteClick: (recipe: Recipe) -> Unit,
 ) {
     val verticalSpacing = MaterialTheme.spacing.verySmall
 
@@ -97,21 +89,18 @@ private fun HomeScreenContent(
             modifier = Modifier.padding(bottom = verticalSpacing),
             sectionTitle = stringResource(R.string.home_screen_popular_recipes),
             recipes = uiState.recipeSections.popularRecipes,
-            onFavoriteClick = onFavoriteClick,
             onRecipeClick = onRecipeClick,
         )
         HomeRecipeSection(
             modifier = Modifier.padding(vertical = verticalSpacing),
             sectionTitle = stringResource(R.string.home_screen_healthy_recipes),
             recipes = uiState.recipeSections.healthyRecipes,
-            onFavoriteClick = onFavoriteClick,
             onRecipeClick = onRecipeClick,
         )
         HomeRecipeSection(
             modifier = Modifier.padding(vertical = verticalSpacing),
             sectionTitle = stringResource(R.string.home_screen_quick_recipes),
             recipes = uiState.recipeSections.quickRecipes,
-            onFavoriteClick = onFavoriteClick,
             onRecipeClick = onRecipeClick,
         )
     }

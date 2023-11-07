@@ -19,8 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    getRecipeSections: GetRecipeSections,
-    private val repository: RecipeRepository,
+    getRecipeSections: GetRecipeSections
 ) : BaseViewModel() {
 
     val uiState: StateFlow<HomeUiState> =
@@ -32,22 +31,9 @@ class HomeViewModel @Inject constructor(
                 initialValue = HomeUiState.Loading
             )
 
-    private val _saveRecipeEvent = MutableSharedFlow<Boolean>()
-    val saveRecipeEvent = _saveRecipeEvent.asSharedFlow()
-
     private fun handleResult(result: Result<RecipeSections>) = when (result) {
         is Result.Success -> HomeUiState.Success(result.data)
         is Result.Error -> HomeUiState.Error
         is Result.Loading -> HomeUiState.Loading
-    }
-
-    fun saveRecipe(recipe: Recipe) = safeLaunch {
-        when (repository.saveRecipe(recipe)) {
-            is Result.Success -> _saveRecipeEvent.emit(true)
-            is Result.Error -> _saveRecipeEvent.emit(false)
-            else -> Unit
-        }
-        delay(1000)
-
     }
 }
