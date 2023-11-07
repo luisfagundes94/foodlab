@@ -27,7 +27,7 @@ fun FoodlabTopAppBar(
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
     actionIcon: ImageVector? = null,
     actionIconContentDescription: String? = null,
-    navigationIcon: ImageVector = Icons.AutoMirrored.Filled.ArrowBack,
+    navigationIcon: ImageVector? = null,
     navigationIconDescription: String = stringResource(R.string.back),
     onActionClick: () -> Unit = {},
     onNavigationClick: () -> Unit = {},
@@ -43,16 +43,18 @@ fun FoodlabTopAppBar(
             colors = colors,
             modifier = modifier.testTag("FoodlabTopAppBar"),
             navigationIcon = {
-                IconButton(
-                    onClick = onNavigationClick,
-                    content = {
-                        Icon(
-                            imageVector = navigationIcon,
-                            contentDescription = navigationIconDescription,
-                            tint = MaterialTheme.colorScheme.onSurface,
-                        )
-                    }
-                )
+                navigationIcon?.let { icon ->
+                    IconButton(
+                        onClick = onNavigationClick,
+                        content = {
+                            Icon(
+                                imageVector = icon,
+                                contentDescription = navigationIconDescription,
+                                tint = MaterialTheme.colorScheme.onSurface,
+                            )
+                        }
+                    )
+                }
             },
             actions = {
                 actionIcon?.let {
