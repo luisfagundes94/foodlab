@@ -1,0 +1,7 @@
+package com.luisfagundes.domain.datasources
+
+import com.luisfagundes.domain.models.PantryCategory
+
+interface PantryDataSource {
+    suspend fun fetchPantryCategories(): List<PantryCategory>
+}

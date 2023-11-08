@@ -2,12 +2,13 @@ package com.luisfagundes.data.remote.di
 
 import android.content.Context
 import com.luisfagundes.data.BuildConfig
-import com.luisfagundes.data.remote.datasources.MockedRecipeDataSource
+import com.luisfagundes.data.local.datasource.PantryDataSourceImpl
 import com.luisfagundes.data.remote.datasources.RemoteRecipeDataSource
 import com.luisfagundes.data.remote.interceptors.AuthInterceptor
 import com.luisfagundes.data.remote.provider.createApiService
 import com.luisfagundes.data.remote.provider.createRetrofit
 import com.luisfagundes.data.remote.service.RecipeService
+import com.luisfagundes.domain.datasources.PantryDataSource
 import com.luisfagundes.domain.datasources.RecipeDataSource
 import com.luisfagundes.framework.network.createOkHttpClient
 import dagger.Module
@@ -56,6 +57,12 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
+
+    @Provides
+    @Singleton
+    fun providePantryDataSource(
+        @ApplicationContext appContext: Context
+    ): PantryDataSource = PantryDataSourceImpl(appContext)
 
     @Provides
     @Singleton

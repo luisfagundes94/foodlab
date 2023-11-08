@@ -49,6 +49,8 @@ dependencies {
 
     // Compose
     implementation(libs.bundles.compose)
+    implementation(libs.compose.coil)
+    implementation(libs.compose.material.extended.icons)
 
     // Testing
     testImplementation(libs.junit)
@@ -59,6 +61,9 @@ dependencies {
     implementation(libs.hilt.library)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
+
+    // Lifecycle
+    implementation(libs.lifecycle.runtime.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

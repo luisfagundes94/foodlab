@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="pantry">Pantry</string>
+    <string name="pantry_headline">Find recipes you can make by adding ingredients you have at home!</string>
+    <string name="btn_find_recipes">Find recipes</string>
+    <string name="desc_add_ingredient">add ingredient</string>
+    <string name="error_loading_pantry_items">Error loading pantry items</string>
 </resources>

@@ -17,6 +17,6 @@ class SearchRecipe @Inject constructor(
     )
 
     suspend operator fun invoke(params: Params) = withContext(dispatcher) {
-        repository.searchRecipes(params.query)
+        repository.searchRecipeList(params.query)
     }
 }

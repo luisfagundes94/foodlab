@@ -67,7 +67,7 @@ class RecipeRepositoryImpl @Inject constructor(
         recipeEntity?.toDomainModel() ?: dataSource.fetchRecipeDetails(id)
     }
 
-    override suspend fun searchRecipes(query: String) = safeApiCall {
+    override suspend fun searchRecipeList(query: String) = safeApiCall {
         dataSource.fetchRecipes(
             params = mapOf(
             )

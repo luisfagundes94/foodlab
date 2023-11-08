@@ -27,12 +27,12 @@ internal fun RecipeFacts(
             value = recipe.readyInMinutes.toString(),
         )
         Item(
-            title = stringResource(id = R.string.health),
-            value = "${recipe.healthScore}%",
-        )
-        Item(
             title = stringResource(R.string.serves),
             value = "${recipe.serves}",
+        )
+        Item(
+            title = stringResource(id = R.string.health),
+            value = "${recipe.healthScore}%",
         )
         Item(
             title = stringResource(R.string.likes),
