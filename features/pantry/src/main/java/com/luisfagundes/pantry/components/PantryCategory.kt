@@ -99,7 +99,7 @@ fun PantryCategory(
                     .weight(1f)
             ) {
                 FlowRow(
-                    modifier = Modifier.padding(vertical = 0.dp),
+                    modifier = Modifier.padding(vertical = MaterialTheme.spacing.verySmall),
                     horizontalArrangement = Arrangement.spacedBy(
                         space = MaterialTheme.spacing.extraSmall,
                         alignment = Alignment.Start
