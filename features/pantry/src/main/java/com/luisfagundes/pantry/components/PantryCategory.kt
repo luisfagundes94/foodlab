@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,6 +29,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -97,14 +99,19 @@ fun PantryCategory(
                     .weight(1f)
             ) {
                 FlowRow(
+                    modifier = Modifier.padding(vertical = 0.dp),
                     horizontalArrangement = Arrangement.spacedBy(
                         space = MaterialTheme.spacing.extraSmall,
                         alignment = Alignment.Start
                     ),
+                    verticalArrangement = Arrangement.spacedBy(
+                        space = MaterialTheme.spacing.extraSmall,
+                        alignment = Alignment.Top
+                    ),
                 ) {
                     category.items.forEach { item ->
                         PantryItem(
-                            modifier = Modifier,
+                            modifier = Modifier.height(AssistChipDefaults.Height),
                             item = item,
                             onDeleteItem = onDeleteItem
                         )
@@ -125,7 +132,7 @@ private fun PantryItem(
     AssistChip(
         modifier = modifier,
         onClick = { onDeleteItem(item) },
-        label = { Text(item.name.capitalize(Locale.current)) }
+        label = { Text(item.name.capitalize(Locale.current)) },
     )
 }
 
