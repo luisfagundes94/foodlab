@@ -17,10 +17,10 @@ class PantryViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<PantryUiState>(PantryUiState.Idle)
     val uiState: StateFlow<PantryUiState> = _uiState.asStateFlow()
 
-    fun fetchPantryCategories() = safeLaunch {
+    fun fetchCommonPantryItems() = safeLaunch {
         _uiState.value = PantryUiState.Loading
 
-        val result = repository.fetchPantryCategories()
+        val result = repository.fetchCommonPantryItems()
 
         _uiState.value = when (result) {
             is Result.Success -> PantryUiState.Success(result.data)

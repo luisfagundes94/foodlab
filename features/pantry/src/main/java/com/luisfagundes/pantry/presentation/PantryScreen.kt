@@ -26,7 +26,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.domain.factory.FakePantryFactory
 import com.luisfagundes.domain.models.PantryCategory
-import com.luisfagundes.domain.models.PantryItem
 import com.luisfagundes.features.pantry.R
 import com.luisfagundes.pantry.components.PantryCategory
 import com.luisfagundes.resources.theme.FoodlabTheme
@@ -47,7 +46,7 @@ internal fun PantryRoute(
     )
 
     LaunchedEffect(Unit) {
-        viewModel.fetchPantryCategories()
+        viewModel.fetchCommonPantryItems()
     }
 }
 

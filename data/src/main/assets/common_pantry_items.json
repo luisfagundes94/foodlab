@@ -1,0 +1,140 @@
+[
+  {
+    "id": "8870598486032760539",
+    "name": "Baking",
+    "items": [
+      {
+        "id": "20081",
+        "name": "flour",
+        "imageUrl": ""
+      },
+      {
+        "id": "93740",
+        "name": "almond flour",
+        "imageUrl": ""
+      },
+      {
+        "id": "18064",
+        "name": "bread",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "1422906660773921992",
+    "name": "Canned and Jarred",
+    "items": [
+      {
+        "id": "4053",
+        "name": "olive oil",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "5436122916633469458",
+    "name": "Meat",
+    "items": [
+      {
+        "id": "23572",
+        "name": "beef",
+        "imageUrl": ""
+      },
+      {
+        "id": "5062",
+        "name": "chicken breasts",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "6342743277523144399",
+    "name": "Milk, Eggs, Other Dairy",
+    "items": [
+      {
+        "id": "1001",
+        "name": "butter",
+        "imageUrl": ""
+      },
+      {
+        "id": "1041009",
+        "name": "cheese",
+        "imageUrl": ""
+      },
+      {
+        "id": "1077",
+        "name": "milk",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "1704409047953503068",
+    "name": "Oil, Vinegar, Salad Dressing",
+    "items": [
+      {
+        "id": "4513",
+        "name": "vegetable oil",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "6354694768031009071",
+    "name": "Other",
+    "items": [
+      {
+        "id": "19335",
+        "name": "sugar",
+        "imageUrl": ""
+      },
+      {
+        "id": "2047",
+        "name": "salt",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "6958726478051804951",
+    "name": "Pasta and Rice",
+    "items": [
+      {
+        "id": "20420",
+        "name": "pasta",
+        "imageUrl": ""
+      },
+      {
+        "id": "20444",
+        "name": "rice",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": "3455314123414",
+    "name": "Vegetables",
+    "items": [
+      {
+        "id": "11124",
+        "name": "carrots",
+        "imageUrl": ""
+      },
+      {
+        "id": "11215",
+        "name": "garlic",
+        "imageUrl": ""
+      },
+      {
+        "id": "11362",
+        "name": "potatoes",
+        "imageUrl": ""
+      },
+      {
+        "id": "11529",
+        "name": "tomatoes",
+        "imageUrl": ""
+      }
+    ]
+  }
+]
