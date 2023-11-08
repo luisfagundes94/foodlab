@@ -66,8 +66,9 @@ This project uses many of the popular libraries, plugins and tools of the androi
 ### Testing
 - [JUnit4](https://junit.org/junit4/) - JUnit is a simple framework to write repeatable tests.
 - [Mockk](https://mockk.io/) - A modern Mockk library for UnitTest.
+- [Turbine](https://github.com/cashapp/turbine) - Small testing library for kotlinx.coroutines Flow
 - [Coroutine-Test](https://github.com/Kotlin/kotlinx.coroutines/tree/master/kotlinx-coroutines-test) - Provides testing utilities for effectively testing coroutines.
 
 ### Plugin
 - [GradleVersionCatalog](https://docs.gradle.org/current/userguide/platforms.html) - Gradle's support for declaring and using dependencies.
-- [Kapt](https://kotlinlang.org/docs/kapt.html) - Kapt compiler plugin
+- [KSP](https://github.com/google/ksp) - Kotlin Symbol Processing (KSP) is an API that you can use to develop lightweight compiler plugins.
