@@ -9,8 +9,10 @@ Features:
 
 ## Screenshots
 <p float="left">
-  <img src="https://github.com/luisfagundes94/foodlab/blob/master/screenshots/screenshot2.jpg" width="200" /> 
-  <img src="https://github.com/luisfagundes94/foodlab/blob/master/screenshots/screenshot1.jpg" width="200" />
+  <img src="https://github.com/luisfagundes94/foodlab/blob/master/screenshots/screenshot1.jpg" width="200" /> 
+  <img src="https://github.com/luisfagundes94/foodlab/blob/master/screenshots/screenshot2.jpg" width="200" />
+  <img src="https://github.com/luisfagundes94/foodlab/blob/master/screenshots/screenshot3.jpg" width="200" />
+  <img src="https://github.com/luisfagundes94/foodlab/blob/master/screenshots/screenshot4.jpg" width="200" />
 </p>
 
 ## Architecture
