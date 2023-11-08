@@ -5,4 +5,7 @@
     <string name="btn_find_recipes">Find recipes</string>
     <string name="desc_add_ingredient">add ingredient</string>
     <string name="error_loading_pantry_items">Error loading pantry items</string>
+    <string name="search_to_add_ingredients">Search to add ingredients</string>
+    <string name="add_ingredient_title">Add Ingredients</string>
+    <string name="error_fetching_ingredients">Error fetching ingredients</string>
 </resources>

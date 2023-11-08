@@ -34,7 +34,8 @@ import com.luisfagundes.resources.theme.spacing
 
 @Composable
 internal fun PantryRoute(
-    viewModel: PantryViewModel = hiltViewModel()
+    viewModel: PantryViewModel = hiltViewModel(),
+    onAddIngredientClick: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -43,6 +44,7 @@ internal fun PantryRoute(
             .fillMaxWidth()
             .padding(MaterialTheme.spacing.default),
         uiState = uiState,
+        onAddIngredientClick = onAddIngredientClick,
     )
 
     LaunchedEffect(Unit) {
@@ -54,12 +56,13 @@ internal fun PantryRoute(
 internal fun PantryScreen(
     modifier: Modifier = Modifier,
     uiState: PantryUiState,
+    onAddIngredientClick: () -> Unit = {},
 ) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.absoluteOffset(y = -MaterialTheme.spacing.default),
-                onClick = { /*TODO*/ }
+                onClick = { onAddIngredientClick() }
             ) {
                 Icon(
                     modifier = Modifier.padding(MaterialTheme.spacing.verySmall),

@@ -8,6 +8,8 @@ import com.luisfagundes.foodlab.ui.FoodlabAppState
 import com.luisfagundes.home.navigation.homeGraph
 import com.luisfagundes.pantry.navigation.pantryGraph
 import com.luisfagundes.home.navigation.homeNavigationGraph
+import com.luisfagundes.ingredients.navigation.addIngredientScreen
+import com.luisfagundes.ingredients.navigation.navigateToAddIngredient
 import com.luisfagundes.recipes.details.navigation.navigateToRecipeDetails
 import com.luisfagundes.recipes.details.navigation.recipeDetailsScreen
 import com.luisfagundes.recipes.list.navigation.navigateToRecipeList
@@ -49,7 +51,14 @@ fun FoodlabNavHost(
                 )
             }
         )
-        pantryGraph()
+        pantryGraph(
+            onAddIngredientClick = navController::navigateToAddIngredient,
+            nestedGraphs = {
+                addIngredientScreen(
+                    onBackClick = navController::popBackStack,
+                )
+            }
+        )
         recipeListScreen(
             onBackClick = navController::popBackStack,
             onRecipeClick = navController::navigateToRecipeDetails,

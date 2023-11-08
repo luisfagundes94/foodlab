@@ -17,4 +17,8 @@ class LocalPantryRepository @Inject constructor(
     override suspend fun fetchCommonPantryItems() = safeApiCall {
         dataSource.fetchCommonPantryItems()
     }
+
+    override suspend fun fetchPantryCategoryNames() = safeApiCall {
+        dataSource.fetchPantryCategoryNames()
+    }
 }

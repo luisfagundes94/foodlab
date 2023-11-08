@@ -9,12 +9,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.luisfagundes.commons.components.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FoodlabSearchBar(
+    modifier: Modifier = Modifier,
     query: String = "",
     searching: Boolean = false,
     placeholderHint: String,
@@ -23,6 +25,7 @@ fun FoodlabSearchBar(
     onSearch: (String) -> Unit = {}
 ) {
     DockedSearchBar(
+        modifier = modifier,
         query = query,
         onQueryChange = onQueryChange,
         placeholder = { Text(placeholderHint) },

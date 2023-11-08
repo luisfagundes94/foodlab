@@ -16,15 +16,25 @@ class PantryDataSourceImpl @Inject constructor(
 ): PantryDataSource {
     override suspend fun fetchPantryCategories(): List<PantryCategory> {
         val jsonFile = getJsonDataFromAsset(appContext, PANTRY_JSON)
-        val gson = Gson()
-        val listType = object : TypeToken<List<PantryCategory>>() {}.type
-        return gson.fromJson(jsonFile, listType)
+        return fetchListFromJson(jsonFile)
     }
 
     override suspend fun fetchCommonPantryItems(): List<PantryCategory> {
         val jsonFile = getJsonDataFromAsset(appContext, COMMON_PANTRY_JSON)
+        return fetchListFromJson(jsonFile)
+    }
+
+    override suspend fun fetchPantryCategoryNames(): List<String> {
+        val jsonFile = getJsonDataFromAsset(appContext, PANTRY_JSON)
+        val categoryNames = fetchListFromJson<List<PantryCategory>>(jsonFile).flatMap { categories ->
+            categories.map { it.name }
+        }
+        return categoryNames
+    }
+
+    private inline fun <reified T> fetchListFromJson(jsonFile: String?): List<T> {
         val gson = Gson()
-        val listType = object : TypeToken<List<PantryCategory>>() {}.type
+        val listType = object : TypeToken<List<T>>() {}.type
         return gson.fromJson(jsonFile, listType)
     }
 }
