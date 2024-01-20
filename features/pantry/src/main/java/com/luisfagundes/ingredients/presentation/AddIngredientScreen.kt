@@ -3,17 +3,16 @@ package com.luisfagundes.ingredients.presentation
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,9 +26,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luisfagundes.components.FoodlabSearchBar
 import com.luisfagundes.components.FoodlabTopAppBar
-import com.luisfagundes.domain.models.PantryCategory
 import com.luisfagundes.domain.models.PantryItem
 import com.luisfagundes.features.pantry.R
+import com.luisfagundes.framework.extension.empty
 import com.luisfagundes.ingredients.components.AddIngredientContent
 import com.luisfagundes.resources.theme.spacing
 
@@ -39,13 +38,17 @@ fun AddIngredientRoute(
     onBackClick: () -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val selectedIngredients by viewModel.selectedIngredients.collectAsStateWithLifecycle()
 
     AddIngredientScreen(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = MaterialTheme.spacing.default),
         uiState = uiState,
+        selectedIngredients = selectedIngredients,
         onBackClick = onBackClick,
+        onSelectedIngredient = viewModel::addIngredientToList,
+        onDeselectedIngredient = viewModel::removeIngredientFromList,
     )
 
     LaunchedEffect(Unit) {
@@ -58,8 +61,11 @@ fun AddIngredientRoute(
 internal fun AddIngredientScreen(
     modifier: Modifier = Modifier,
     uiState: AddIngredientUiState,
+    selectedIngredients: List<PantryItem>,
     onBackClick: () -> Unit = {},
     onSearch: (query: String) -> Unit = {},
+    onSelectedIngredient: (ingredient: PantryItem) -> Unit = {},
+    onDeselectedIngredient: (ingredient: PantryItem) -> Unit = {},
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     var showClearButton by rememberSaveable { mutableStateOf(false) }
@@ -69,31 +75,45 @@ internal fun AddIngredientScreen(
         navigationIcon = Icons.AutoMirrored.Filled.ArrowBack,
         onNavigationClick = onBackClick,
     ) {
-        Column(
-            modifier = modifier,
-        ) {
-            FoodlabSearchBar(
-                modifier = Modifier.fillMaxWidth(),
-                placeholderHint = stringResource(R.string.search_to_add_ingredients),
-                query = query,
-                onQueryChange = {
-                    query = it
-                    showClearButton = it.isNotEmpty()
-                },
-                onClear = {
-                    query = ""
-                    showClearButton = false
-                },
-                onSearch = onSearch,
-            )
-            when (uiState) {
-                is AddIngredientUiState.Loading -> CircularProgressIndicator()
-                is AddIngredientUiState.Error -> Text(stringResource(R.string.error_fetching_ingredients))
-                is AddIngredientUiState.Success -> AddIngredientContent(
-                    modifier = Modifier.verticalScroll(rememberScrollState()),
-                    uiState.categories
+        Scaffold(
+            floatingActionButton = {
+                Button(
+                    enabled = selectedIngredients.isNotEmpty(),
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text("Confirm Selection")
+                }
+            },
+            floatingActionButtonPosition = FabPosition.Center,
+        ) { paddingValues ->
+            Column(
+                modifier = modifier.padding(paddingValues),
+            ) {
+                FoodlabSearchBar(
+                    modifier = Modifier.fillMaxWidth(),
+                    placeholderHint = stringResource(R.string.search_to_add_ingredients),
+                    query = query,
+                    onQueryChange = { currentQuery ->
+                        query = currentQuery
+                        showClearButton = currentQuery.isNotEmpty()
+                    },
+                    onClear = {
+                        query = String.empty()
+                        showClearButton = false
+                    },
+                    onSearch = onSearch,
                 )
-                else -> Unit
+                when (uiState) {
+                    is AddIngredientUiState.Loading -> CircularProgressIndicator()
+                    is AddIngredientUiState.Error -> Text(stringResource(R.string.error_fetching_ingredients))
+                    is AddIngredientUiState.Success -> AddIngredientContent(
+                        modifier = Modifier.verticalScroll(rememberScrollState()),
+                        categories = uiState.categories,
+                        selectedIngredients = selectedIngredients,
+                        onSelectedIngredient = onSelectedIngredient,
+                        onDeselectedIngredient = onDeselectedIngredient,
+                    )
+                }
             }
         }
     }

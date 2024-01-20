@@ -19,6 +19,9 @@ class AddIngredientViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<AddIngredientUiState>(AddIngredientUiState.Idle)
     val uiState = _uiState.asStateFlow()
 
+    private val _selectedIngredients = MutableStateFlow<List<PantryItem>>(emptyList())
+    val selectedIngredients = _selectedIngredients.asStateFlow()
+
     fun getPantryCategories() = safeLaunch {
         _uiState.update { AddIngredientUiState.Loading }
         val result = repository.fetchPantryCategories()
@@ -32,7 +35,19 @@ class AddIngredientViewModel @Inject constructor(
             else -> Unit
         }
     }
-    fun addIngredient(ingredients: List<PantryItem>) = safeLaunch {
-        _uiState.update { AddIngredientUiState.Loading }
+    fun addIngredientToList(ingredient: PantryItem) {
+        _selectedIngredients.update { selectedIngredients ->
+            selectedIngredients + ingredient
+        }
+    }
+
+    fun removeIngredientFromList(ingredient: PantryItem) {
+        _selectedIngredients.update { selectedIngredients ->
+            selectedIngredients - ingredient
+        }
+    }
+
+    fun saveIngredients() = safeLaunch {
+        //TODO("implement saveIngredients")
     }
 }

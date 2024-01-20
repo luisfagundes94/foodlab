@@ -5,16 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -28,8 +22,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
+import com.luisfagundes.components.FilterChipItem
 import com.luisfagundes.domain.models.PantryCategory
+import com.luisfagundes.domain.models.PantryItem
 import com.luisfagundes.resources.theme.spacing
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
@@ -37,6 +32,9 @@ import com.luisfagundes.resources.theme.spacing
 internal fun AddIngredientContent(
     modifier: Modifier = Modifier,
     categories: List<PantryCategory>,
+    selectedIngredients: List<PantryItem>,
+    onSelectedIngredient: (ingredient: PantryItem) -> Unit = {},
+    onDeselectedIngredient: (ingredient: PantryItem) -> Unit = {},
 ) {
     val categoryNames = categories.map { it.name }
     var selectedCategoryName by rememberSaveable { mutableStateOf(categoryNames.first()) }
@@ -81,9 +79,12 @@ internal fun AddIngredientContent(
             categories.filter { it.name == selectedCategoryName }
                 .flatMap { it.items }
                 .forEach { item ->
-                    PantryItemChip(
+                    FilterChipItem(
                         modifier = Modifier.height(FilterChipDefaults.Height.plus(MaterialTheme.spacing.extraSmall)),
-                        item = item
+                        item = item,
+                        selected = selectedIngredients.contains(item),
+                        onSelected = onSelectedIngredient,
+                        onDeselected = onDeselectedIngredient,
                     )
                 }
         }
