@@ -23,7 +23,7 @@ object FakeRecipeFactory {
         readyInMinutes = RANDOM_NUMBER,
         sourceUrl = "",
         aggregateLikes = RANDOM_NUMBER,
-        spoonacularScore = RANDOM_NUMBER,
+        spoonacularScore = RANDOM_NUMBER.toFloat(),
         healthScore = RANDOM_NUMBER,
         cheap = false,
         ingredients = listOf(

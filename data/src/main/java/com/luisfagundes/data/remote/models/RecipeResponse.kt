@@ -8,7 +8,7 @@ data class RecipeResponse(
     val readyInMinutes: Int,
     val sourceUrl: String?,
     val aggregateLikes: Int,
-    val spoonacularScore: Int,
+    val spoonacularScore: Float,
     val sourceName: String?,
     val healthScore: Int,
     val cheap: Boolean,

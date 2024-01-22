@@ -13,7 +13,7 @@ data class RecipeEntity(
     @ColumnInfo(name = "ready_in_minutes") val readyInMinutes: Int,
     @ColumnInfo(name = "source_url") val sourceUrl: String?,
     @ColumnInfo(name = "aggregate_likes") val aggregateLikes: Int,
-    @ColumnInfo(name = "spoonacular_score") val spoonacularScore: Int,
+    @ColumnInfo(name = "spoonacular_score") val spoonacularScore: Float,
     @ColumnInfo(name = "health_score") val healthScore: Int,
     @ColumnInfo(name = "cheap") val cheap: Boolean,
     @ColumnInfo(name = "ingredients") val ingredients: List<IngredientEntity>?,

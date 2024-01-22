@@ -11,7 +11,7 @@ data class Recipe(
     val readyInMinutes: Int,
     val sourceUrl: String?,
     val aggregateLikes: Int,
-    val spoonacularScore: Int,
+    val spoonacularScore: Float,
     val healthScore: Int,
     val cheap: Boolean,
     val ingredients: List<Ingredient>?,
